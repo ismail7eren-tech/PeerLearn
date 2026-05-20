@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+
+            <div class="mb-4">
+                <div class="input-group shadow-sm rounded-4 overflow-hidden" style="border: 1px solid var(--border-light); background: var(--bg-surface);">
+                    <span class="input-group-text bg-transparent border-0"><i class="fas fa-search text-muted"></i></span>
+                    <input type="text" id="dmSearch" class="form-control border-0 shadow-none" placeholder="Kişi ara... (örn: ali, ahmet)" style="background: transparent; font-weight: 600; color: var(--text-dark);">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3 class="fw-bolder mb-1" style="color: var(--text-dark);">
+                        <i class="fa-regular fa-paper-plane text-primary me-2"></i> PeerMesaj
+                    </h3>
+                    <p class="text-muted mb-0" style="font-weight: 600;">Bağlantılarınla etkileşime geç.</p>
+                </div>
+            </div>
+
+            <ul class="nav nav-pills mb-4 p-1 bg-white rounded-pill shadow-sm border d-inline-flex" id="dmTabs">
+                <li class="nav-item">
+                    <button class="nav-link active rounded-pill px-4 fw-bold" data-bs-toggle="pill" data-bs-target="#aktifSohbetler">Aktif Sohbetler</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link rounded-pill px-4 fw-bold text-success" data-bs-toggle="pill" data-bs-target="#arkadaslar">Arkadaşlar <i class="fas fa-handshake ms-1"></i></button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link rounded-pill px-4 fw-bold text-warning" data-bs-toggle="pill" data-bs-target="#digerleri">Diğerleri</button>
+                </li>
+            </ul>
+
+            <div class="card border-0 rounded-5 overflow-hidden shadow-premium bg-transparent">
+                <div class="card-body p-0">
+                    <div class="tab-content">
+                        
+                        <div class="tab-pane fade show active" id="aktifSohbetler">
+                            {% if conversations %}
+                                <div class="d-flex flex-column gap-3">
+                                    {% for conv in conversations %}
+                                        {% for participant in conv.participants.all %}
+                                            {% if participant != request.user %}
+                                            <a href="{% url 'sohbet_odasi' participant.username %}" class="dm-premium-box d-flex align-items-center gap-3 p-4 text-decoration-none message-row">
+                                                <div class="position-relative">
+                                                    {% if participant.profile.profil_resmi %}
+                                                        <img src="{{ participant.profile.profil_resmi.url }}" class="rounded-circle object-fit-cover shadow-sm border border-2 border-white" width="56" height="56">
+                                                    {% else %}
+                                                        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center border" style="width: 56px; height: 56px;"><i class="fas fa-user text-muted fs-4"></i></div>
+                                                    {% endif %}
+                                                    <span class="online-dot"></span>
+                                                </div>
+                                                
+                                                <div class="flex-grow-1 min-vw-0">
+                                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                                        <h6 class="mb-0 fw-bold text-truncate user-name-text">@{{ participant.username }}</h6>
+                                                        <small class="text-muted small-time-text">{{ conv.updated_at|timesince }} önce</small>
+                                                    </div>
+                                                    
+                                                    {% with last_msg=conv.messages.last %}
+                                                        {% if last_msg %}
+                                                            <p class="mb-0 text-truncate small last-message-text {% if not last_msg.is_read and last_msg.sender != request.user %}unread-bold-text{% endif %}">
+                                                                {% if last_msg.sender == request.user %}
+                                                                    <span class="text-primary fw-bold">Sen:</span>
+                                                                {% endif %}
+                                                                {% if last_msg.shared_note %}
+                                                                    <i class="fas fa-link text-danger me-1"></i> Bir not fırlattı...
+                                                                {% else %}
+                                                                    {{ last_msg.content }}
+                                                                {% endif %}
+                                                            </p>
+                                                        {% else %}
+                                                            <p class="mb-0 text-muted small fst-italic">Henüz mesaj yok, sohbete başla.</p>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                
+                                                <div class="d-flex align-items-center justify-content-center ms-2">
+                                                    {% with last_msg=conv.messages.last %}
+                                                        {% if last_msg and not last_msg.is_read and last_msg.sender != request.user %}
+                                                            <span class="badge bg-danger rounded-pill px-2 py-1 animate__animated animate__heartBeat animate__infinite" style="font-size: 10px; font-weight: 800; letter-spacing: 0.5px;">YENİ</span>
+                                                        {% else %}
+                                                            <i class="fa-solid fa-chevron-right text-muted opacity-50 fs-6"></i>
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                            </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="text-center py-5 px-4 bg-white rounded-5 border">
+                                    <div class="empty-icon mx-auto mb-3"><i class="fa-regular fa-comments"></i></div>
+                                    <h5 class="fw-bold mb-2" style="color: var(--text-dark);">Kutun Bomboş</h5>
+                                    <p class="text-muted">Arkadaşlar sekmesinden yeni bir sohbet başlat!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="tab-pane fade" id="arkadaslar">
+                            <div class="d-flex flex-column gap-3">
+                                {% for arkadas in arkadaslar %}
+                                <div class="dm-premium-box d-flex align-items-center justify-content-between p-4 message-row">
+                                    <div class="d-flex align-items-center gap-3">
+                                        {% if arkadas.profile.profil_resmi %}
+                                            <img src="{{ arkadas.profile.profil_resmi.url }}" class="rounded-circle object-fit-cover shadow-sm border border-2 border-white" width="56" height="56">
+                                        {% else %}
+                                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center border" style="width: 56px; height: 56px;"><i class="fas fa-user text-muted fs-4"></i></div>
+                                        {% endif %}
+                                        <div>
+                                            <h6 class="mb-0 fw-bold user-name-text">@{{ arkadas.username }}</h6>
+                                            <small class="text-success fw-bold"><i class="fas fa-handshake me-1"></i> Karşılıklı Takip</small>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'sohbet_odasi' arkadas.username %}" class="btn btn-sm btn-success rounded-pill px-4 fw-bold text-white shadow-sm" style="font-size: 13px;">Mesaj At</a>
+                                </div>
+                                {% empty %}
+                                <div class="text-center bg-white rounded-5 border py-5">
+                                    <p class="text-muted mb-0 fw-bold">Henüz karşılıklı takipleştiğin bir arkadaşın yok.</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="digerleri">
+                            <div class="d-flex flex-column gap-3">
+                                {% for diger in digerleri %}
+                                <div class="dm-premium-box d-flex align-items-center justify-content-between p-4 message-row">
+                                    <div class="d-flex align-items-center gap-3">
+                                        {% if diger.profile.profil_resmi %}
+                                            <img src="{{ diger.profile.profil_resmi.url }}" class="rounded-circle object-fit-cover shadow-sm border border-2 border-white" width="56" height="56">
+                                        {% else %}
+                                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center border" style="width: 56px; height: 56px;"><i class="fas fa-user text-muted fs-4"></i></div>
+                                        {% endif %}
+                                        <div>
+                                            <h6 class="mb-0 fw-bold user-name-text">@{{ diger.username }}</h6>
+                                            <small class="text-muted fw-semibold">Bağlantı</small>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'sohbet_odasi' diger.username %}" class="btn btn-sm btn-outline-primary rounded-pill px-4 fw-bold shadow-sm" style="font-size: 13px;">Mesaj At</a>
+                                </div>
+                                {% empty %}
+                                <div class="text-center bg-white rounded-5 border py-5">
+                                    <p class="text-muted mb-0 fw-bold">Burada kimse yok.</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* ==========================================================
+       👑 PEERMESAJ GLASSMORPHISM ULTRALUX DESIGN
+    ========================================================== */
+    .dm-premium-box {
+        background: rgba(255, 255, 255, 0.75) !important;
+        backdrop-filter: blur(15px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        border-radius: 24px !important;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.04) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    /* Temalara göre dinamik renk eşitlemesi */
+    body.tema-mars .dm-premium-box {
+        background: rgba(40, 15, 10, 0.8) !important;
+        border: 1px solid rgba(255, 77, 0, 0.15) !important;
+    }
+    body.tema-ocean .dm-premium-box {
+        background: rgba(0, 25, 50, 0.75) !important;
+        border: 1px solid rgba(0, 102, 255, 0.15) !important;
+    }
+
+    .message-row:hover {
+        background: var(--bg-surface) !important;
+        border-color: var(--brand-peer) !important;
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 12px 40px rgba(0, 102, 255, 0.08) !important;
+    }
+
+    .user-name-text {
+        color: var(--text-dark) !important;
+        font-size: 1.05rem;
+    }
+
+    .last-message-text {
+        color: var(--text-muted) !important;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .unread-bold-text {
+        color: var(--text-dark) !important;
+        font-weight: 800 !important;
+    }
+
+    .small-time-text {
+        color: var(--text-muted) !important;
+        opacity: 0.8;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .online-dot {
+        position: absolute;
+        bottom: 1px;
+        right: 1px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #00d084;
+        border: 2.5px solid white;
+        box-shadow: 0 0 12px rgba(0, 208, 132, 0.6);
+    }
+    
+    body.tema-mars .online-dot, body.tema-ocean .online-dot {
+        border-color: #1e1e1e;
+    }
+
+    .nav-pills .nav-link { color: var(--text-muted); }
+    .nav-pills .nav-link.active { background: #6366f1 !important; color: white !important; box-shadow: 0 4px 15px rgba(99,102,241,0.3); }
+    .empty-icon { width: 90px; height: 90px; border-radius: 24px; display: flex; align-items: center; justify-content: center; background: rgba(0, 102, 255, 0.08); border: 1px solid rgba(0, 102, 255, 0.15); font-size: 2.4rem; color: #0066ff; }
+    .object-fit-cover { object-fit: cover; }
+</style>
+
+<script>
+document.getElementById("dmSearch").addEventListener("keyup", function () {
+    let value = this.value.toLowerCase();
+    let rows = document.querySelectorAll(".message-row");
+    rows.forEach(row => {
+        let username = row.querySelector("h6").innerText.toLowerCase();
+        row.style.display = username.includes(value) ? "flex" : "none";
+    });
+});
+</script>
+{% endblock %}

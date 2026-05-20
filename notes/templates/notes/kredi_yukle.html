@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    
+    <div class="text-center mb-5">
+        <h2 class="fw-black display-5 mb-2" style="font-weight: 900; background: linear-gradient(135deg, #6366f1, #a855f7, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            Kredi Yükleme Merkezi <span style="filter: drop-shadow(0 2px 6px rgba(245,158,11,0.4));">🪙</span>
+        </h2>
+        <p class="text-muted fs-5 fw-medium">Bakiyeni yükselt, PeerMarket'in kapılarını sonuna kadar aç!</p>
+        <div class="badge p-3 rounded-pill border shadow-sm balance-badge bg-white">
+            <span class="text-secondary fw-bold" style="font-size: 14px;">Mevcut Bakiyeniz:</span> 
+            <span class="text-warning fw-black fs-5 ms-1" style="font-weight: 900;">
+                {{ user.kredi }} <i class="fas fa-coins ms-1"></i>
+            </span>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center align-items-stretch">
+            
+            <div class="col">
+                <div class="card h-100 border-0 shadow-premium p-4 text-center pack-card card-bronz bg-white">
+                    <div class="pack-icon-wrapper text-warning bronze-icon-bg">
+                        <i class="fas fa-shield-alt fa-3x"></i>
+                    </div>
+                    <h4 class="fw-extrabold text-dark mt-3">Bronz</h4>
+                    <div class="display-5 my-3 fw-black text-bronz-color">30 <small class="fs-6 opacity-75">Kredi</small></div>
+                    <p class="text-muted fw-bold mb-4 bg-light py-2 rounded-pill">Fiyat: ₺10</p>
+                    <button type="submit" name="paket" value="bronz" class="btn btn-bronz rounded-pill w-100 fw-black py-2 shadow-sm">YÜKLE</button>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-lg p-4 text-center pack-card card-gumus bg-white position-relative">
+                    <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-gradient-purple px-4 py-2 text-white shadow animate__animated animate__pulse animate__infinite" style="font-size: 11px; font-weight: 800; letter-spacing: 1px;">
+                        EN POPÜLER 🔥
+                    </span>
+                    <div class="pack-icon-wrapper text-info silver-icon-bg mt-2">
+                        <i class="fas fa-gem fa-3x"></i>
+                    </div>
+                    <h4 class="fw-extrabold text-dark mt-3">Gümüş</h4>
+                    <div class="display-5 my-3 fw-black text-gumus-color">60 <small class="fs-6 opacity-75">Kredi</small></div>
+                    <p class="text-muted fw-bold mb-4 py-2 rounded-pill" style="background: rgba(99, 102, 241, 0.08); color: #4f46e5;">Fiyat: ₺20</p>
+                    <button type="submit" name="paket" value="gumus" class="btn btn-gumus rounded-pill w-100 fw-black py-2 shadow">YÜKLE</button>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 border-0 shadow-premium p-4 text-center pack-card card-altin bg-white">
+                    <div class="pack-icon-wrapper text-danger gold-icon-bg">
+                        <i class="fas fa-crown fa-3x"></i>
+                    </div>
+                    <h4 class="fw-extrabold text-dark mt-3">Altın</h4>
+                    <div class="display-5 my-3 fw-black text-altin-color">90 <small class="fs-6 opacity-75">Kredi</small></div>
+                    <p class="text-muted fw-bold mb-4 bg-light py-2 rounded-pill">Fiyat: ₺30</p>
+                    <button type="submit" name="paket" value="altin" class="btn btn-altin rounded-pill w-100 fw-black py-2 shadow-sm">YÜKLE</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mt-4 justify-content-center">
+            
+            <div class="col">
+                <div class="card border-0 shadow-sm rounded-4 p-3 text-center pack-card-sm bg-white line-blue">
+                    <div class="small-pack-header mb-2"><i class="fas fa-medal text-primary"></i> Platin</div>
+                    <div class="h3 fw-black text-dark mb-3">120 <i class="fas fa-coins text-warning small"></i></div>
+                    <button type="submit" name="paket" value="platin" class="btn btn-sm btn-dark-modern rounded-pill w-100">₺40 - YÜKLE</button>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card border-0 shadow-sm rounded-4 p-3 text-center pack-card-sm bg-white line-cyan">
+                    <div class="small-pack-header mb-2"><i class="fas fa-sketch text-info"></i> Elmas</div>
+                    <div class="h3 fw-black text-dark mb-3">240 <i class="fas fa-coins text-warning small"></i></div>
+                    <button type="submit" name="paket" value="elmas" class="btn btn-sm btn-dark-modern rounded-pill w-100">₺80 - YÜKLE</button>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card border-0 shadow-sm rounded-4 p-3 text-center pack-card-sm bg-white line-purple">
+                    <div class="small-pack-header mb-2"><i class="fas fa-star text-warning"></i> Peer Pro</div>
+                    <div class="h3 fw-black text-dark mb-3">300 <i class="fas fa-coins text-warning small"></i></div>
+                    <button type="submit" name="paket" value="peer_pro" class="btn btn-sm btn-purple-modern rounded-pill w-100">₺100 - YÜKLE</button>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card border-0 shadow-sm rounded-4 p-3 text-center pack-card-sm bg-white line-pink">
+                    <div class="small-pack-header mb-2"><i class="fas fa-rocket text-danger"></i> Peer Ultra</div>
+                    <div class="h3 fw-black text-dark mb-3">600 <i class="fas fa-coins text-warning small"></i></div>
+                    <button type="submit" name="paket" value="peer_ultra" class="btn btn-sm btn-pink-modern rounded-pill w-100">₺200 - YÜKLE</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<style>
+    /* Arka planı projenin kendi orijinal açık gri/beyaz rengine çektik kral */
+    body { background: #f8fafc !important; }
+    
+    .fw-black { font-weight: 900 !important; }
+    .fw-extrabold { font-weight: 800 !important; }
+    
+    .pack-card {
+        border-radius: 24px !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(0,0,0,0.06) !important;
+    }
+    .pack-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(99, 102, 241, 0.1) !important;
+    }
+    
+    .pack-icon-wrapper {
+        width: 74px;
+        height: 74px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+    }
+    
+    /* Bronz Paket */
+    .card-bronz { border-top: 4px solid #f97316 !important; }
+    .bronze-icon-bg { background: rgba(249, 115, 22, 0.08); color: #f97316; }
+    .text-bronz-color { color: #f97316; font-weight: 900; }
+    .btn-bronz { background: #f97316; color: white; transition: 0.2s; border: none; }
+    .btn-bronz:hover { background: #ea580c; color: white; }
+
+    /* Gümüş Paket */
+    .card-gumus { border: 2px solid #6366f1 !important; box-shadow: 0 10px 25px rgba(99,102,241,0.08) !important; }
+    .silver-icon-bg { background: rgba(99, 102, 241, 0.08); color: #6366f1; }
+    .text-gumus-color { color: #6366f1; font-weight: 900; }
+    .btn-gumus { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; border: none; transition: 0.2s; }
+    .btn-gumus:hover { opacity: 0.95; box-shadow: 0 4px 12px rgba(99,102,241,0.3); }
+    .bg-gradient-purple { background: linear-gradient(135deg, #6366f1, #a855f7); }
+
+    /* Altın Paket */
+    .card-altin { border-top: 4px solid #eab308 !important; }
+    .gold-icon-bg { background: rgba(234, 179, 8, 0.08); color: #eab308; }
+    .text-altin-color { color: #eab308; font-weight: 900; }
+    .btn-altin { background: #eab308; color: white; transition: 0.2s; border: none; }
+    .btn-altin:hover { background: #ca8a04; color: white; }
+
+    /* Küçük Paket Stilleri */
+    .pack-card-sm { border-radius: 20px !important; border: 1px solid rgba(0,0,0,0.06) !important; transition: 0.2s; }
+    .pack-card-sm:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.04) !important; }
+    .small-pack-header { font-size: 11px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .line-blue { border-top: 3px solid #3b82f6 !important; }
+    .btn-dark-modern { background: #1e293b; color: white; font-weight: 700; border: none; }
+    .btn-dark-modern:hover { background: #0f172a; }
+    
+    .line-cyan { border-top: 3px solid #06b6d4 !important; }
+    
+    .line-purple { border-top: 3px solid #a855f7 !important; }
+    .btn-purple-modern { background: #a855f7; color: white; font-weight: 700; border: none; }
+    .btn-purple-modern:hover { background: #9333ea; }
+    
+    .line-pink { border-top: 3px solid #ec4899 !important; }
+    .btn-pink-modern { background: #ec4899; color: white; font-weight: 700; border: none; }
+    .btn-pink-modern:hover { background: #db2777; }
+</style>
+{% endblock %}

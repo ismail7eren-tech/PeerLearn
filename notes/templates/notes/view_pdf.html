@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary"><i class="fas fa-file-pdf me-2"></i>{{ not.baslik }}</h2>
+        <a href="{% url 'not_detay' not.pk %}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0" style="height: 85vh;">
+        <div class="card-body p-0">
+            {% if not.dosya %}
+                <embed src="{{ not.dosya.url }}#toolbar=0" type="application/pdf" width="100%" height="100%" />
+            {% else %}
+                <div class="text-center p-5">
+                    <p class="text-muted">Bu notun PDF dosyası bulunamadı.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

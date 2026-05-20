@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4 animate__animated animate__fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-8">
+            
+            <div class="card border-0 shadow-premium rounded-4 overflow-hidden bg-white" style="height: 80vh; display: flex; flex-direction: column;">
+                
+                <div class="card-header bg-white border-bottom p-3 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-3">
+                        <a href="{% url 'mesaj_kutusu' %}" class="btn btn-sm btn-light rounded-circle text-muted"><i class="fas fa-arrow-left"></i></a>
+                        <div class="position-relative">
+                            {% if diger_kullanici.profile.profil_resmi %}
+                                <img src="{{ diger_kullanici.profile.profil_resmi.url }}" class="rounded-circle object-fit-cover shadow-sm" width="45" height="45">
+                            {% else %}
+                                <div class="bg-light rounded-circle d-flex align-items-center justify-content-center border" style="width: 45px; height: 45px;"><i class="fas fa-user text-muted"></i></div>
+                            {% endif %}
+                            <span class="online-dot"></span>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 fw-bold text-dark">@{{ diger_kullanici.username }}</h6>
+                            <small class="text-muted" style="font-size: 0.75rem;">PeerLearn Üyesi</small>
+                        </div>
+                    </div>
+                    <a href="{% url 'profil' diger_kullanici.pk %}" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold shadow-sm">Profili Gör</a>
+                </div>
+
+                <div class="card-body p-4 chat-box" id="chatBox" style="overflow-y: auto; flex-grow: 1; background: #f8fafc;">
+                    {% for msg in mesajlar %}
+                        <div class="d-flex mb-3 {% if msg.sender == request.user %}justify-content-end{% else %}justify-content-start{% endif %}">
+                            <div class="message-bubble shadow-sm p-3 rounded-4 {% if msg.sender == request.user %}bg-primary text-white ms-5{% else %}bg-white text-dark border me-5{% endif %}" style="max-width: 75%; {% if msg.sender == request.user %}border-bottom-right-radius: 4px;{% else %}border-bottom-left-radius: 4px;{% endif %}">
+                                
+                                {% if msg.shared_note %}
+                                    <div class="shared-note-card p-2 rounded-3 mb-2 {% if msg.sender == request.user %}bg-white text-dark{% else %}bg-light{% endif %} shadow-sm border">
+                                        <div class="d-flex gap-2 align-items-center">
+                                            <div class="bg-danger text-white rounded p-2"><i class="fas fa-file-pdf fs-5"></i></div>
+                                            <div>
+                                                <h6 class="mb-0 fw-bold fs-6">{{ msg.shared_note.baslik|truncatechars:20 }}</h6>
+                                                <small class="opacity-75">Paylaşılan Not 🚀</small>
+                                            </div>
+                                        </div>
+                                        <a href="{% url 'not_detay' msg.shared_note.pk %}" class="btn btn-sm w-100 mt-2 fw-bold {% if msg.sender == request.user %}btn-primary{% else %}btn-outline-primary{% endif %}">İncele</a>
+                                    </div>
+                                {% endif %}
+
+                                {% if msg.content %}
+                                    <p class="mb-0" style="line-height: 1.4;">{{ msg.content|linebreaksbr }}</p>
+                                {% endif %}
+                                
+                                <div class="text-end mt-1">
+                                    <small class="{% if msg.sender == request.user %}text-white-50{% else %}text-muted{% endif %}" style="font-size: 0.65rem;">
+                                        {{ msg.created_at|date:"H:i" }} 
+                                        {% if msg.sender == request.user %}<i class="fas fa-check-double {% if msg.is_read %}text-info{% endif %} ms-1"></i>{% endif %}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="text-center text-muted my-5" id="emptyChatPlaceholder">
+                            <i class="fas fa-hand-sparkles fa-3x mb-3 text-warning"></i>
+                            <p>İlk mesajı veya notu göndererek sohbete başla!</p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="card-footer bg-white border-top p-3">
+                    <form id="ajaxChatForm" method="post" class="d-flex align-items-center gap-2">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-light rounded-circle shadow-sm border text-danger" style="width: 42px; height: 42px;" data-bs-toggle="modal" data-bs-target="#reelsModal" title="Not Fırlat">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        
+                        <div class="input-group rounded-pill overflow-hidden border shadow-sm p-1 bg-light flex-grow-1">
+                            <input type="text" id="msgContentInput" name="content" class="form-control border-0 bg-transparent shadow-none px-3" placeholder="Mesaj yaz..." required autocomplete="off" autofocus>
+                            <button type="submit" class="btn btn-primary rounded-circle" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reelsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0 pb-0">
+                <h6 class="fw-bold mb-0 text-dark"><i class="fas fa-rocket text-danger me-2"></i> Not Fırlat (Kütüphanen)</h6>
+                <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-2">
+                <div class="list-group list-group-flush" style="max-height: 400px; overflow-y: auto;">
+                    {% for not_obj in kutuphanem %}
+                        <div class="list-group-item border-0 border-bottom p-3 d-flex justify-content-between align-items-center hover-bg">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-danger text-white rounded p-2"><i class="fas fa-file-pdf"></i></div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold text-dark">{{ not_obj.baslik|truncatechars:25 }}</h6>
+                                    <small class="text-muted">Sayfa: {{ not_obj.sayfa_sayisi }}</small>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger rounded-pill fw-bold px-3 shadow-sm" onclick="firlatNot('{{ not_obj.id }}')">
+                                Fırlat <i class="fas fa-paper-plane ms-1"></i>
+                            </button>
+                        </div>
+                    {% empty %}
+                        <p class="text-center text-muted py-4 fw-bold">Kütüphanende henüz hiç not yok.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .shadow-premium { box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .object-fit-cover { object-fit: cover; }
+    .online-dot { position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background: #10b981; border: 2px solid white; }
+    .chat-box::-webkit-scrollbar { width: 5px; }
+    .chat-box::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+    .hover-bg:hover { background-color: #f8fafc; transition: 0.2s; }
+</style>
+
+<script>
+    const chatBox = document.getElementById("chatBox");
+    function scrollToBottom() { if(chatBox) { chatBox.scrollTop = chatBox.scrollHeight; } }
+    scrollToBottom();
+
+    // 🔥 INSTAGRAM STİLİ AJAX MESAJ GÖNDERME MOTORU
+    document.getElementById("ajaxChatForm").addEventListener("submit", function(e) {
+        e.preventDefault(); // Sayfa yenilenmesini bodoslama durdur!
+        
+        const inputField = document.getElementById("msgContentInput");
+        const messageText = inputField.value.strip ? inputField.value.strip() : inputField.value.trim();
+        if(!messageText) return;
+
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        const formData = new URLSearchParams();
+        formData.append("content", messageText);
+
+        // Input kutusunu temizle ve odağı kaybetme
+        inputField.value = "";
+
+        fetch(window.location.href, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrftoken,
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Requested-With": "XMLHttpRequest" # Django'ya bunun bir AJAX isteği olduğunu söyleyen anahtar
+            },
+            body: formData.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                // Placeholder temizliği
+                const placeholder = document.getElementById("emptyChatPlaceholder");
+                if(placeholder) placeholder.remove();
+
+                // Ekrana anında yeni mesaj balonunu ekle (Sayfa yenilenmeden!)
+                const newMsgHtml = `
+                    <div class="d-flex mb-3 justify-content-end">
+                        <div class="message-bubble shadow-sm p-3 rounded-4 bg-primary text-white ms-5" style="max-width: 75%; border-bottom-right-radius: 4px;">
+                            <p class="mb-0" style="line-height: 1.4;">${data.message}</p>
+                            <div class="text-end mt-1">
+                                <small class="text-white-50" style="font-size: 0.65rem;">
+                                    ${data.time} <i class="fas fa-check-double ms-1"></i>
+                                </small>
+                            </div>
+                        </div>
+                    </div>`;
+                chatBox.insertAdjacentHTML('beforeend', newMsgHtml);
+                scrollToBottom();
+            }
+        })
+        .catch(err => console.error("Mesaj iletilemedi:", err));
+    });
+
+    // Reels Not Fırlatma AJAX Motoru
+    function firlatNot(notId) {
+        const aliciUsername = "{{ diger_kullanici.username }}";
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        event.target.innerHTML = '<i class="fas fa-spinner fa-spin"></i>...';
+        
+        const formData = new URLSearchParams();
+        formData.append("not_id", notId);
+        formData.append("alici_username", aliciUsername);
+
+        fetch("{% url 'not_paylas_ajax' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrftoken,
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: formData.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'ok') { window.location.reload(); }
+        });
+    }
+</script>
+{% endblock %}

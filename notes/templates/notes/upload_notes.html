@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-white">
+                <div class="bg-indigo p-4 text-center text-white">
+                    <h2 class="fw-bold mb-0"><i class="fas fa-file-upload me-2"></i> Yeni Not Paylaş</h2>
+                    <p class="opacity-75 mb-0 small">Notlarını yükle, kredileri toplamaya başla!</p>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <form method="post" enctype="multipart/form-data" id="uploadForm">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger rounded-4 shadow-sm mb-4">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <label class="form-label fw-bold text-dark mb-1 small"><i class="fas fa-heading text-indigo me-1"></i> Not Başlığı</label>
+                                {{ form.baslik }}
+                                {{ form.baslik.errors }}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark mb-1 small"><i class="fas fa-tag text-indigo me-1"></i> Ders / Kategori</label>
+                                {{ form.ders_kategorisi }}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark mb-1 small"><i class="fas fa-coins text-warning me-1"></i> Belirlediğiniz Kredi</label>
+                                {{ form.fiyat }}
+                                {{ form.fiyat.errors }}
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label fw-bold text-dark mb-1 small"><i class="fas fa-align-left text-indigo me-1"></i> İçerik Açıklaması</label>
+                                {{ form.aciklama }}
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark mb-1 small"><i class="fas fa-file-pdf text-danger me-1"></i> Not Dosyası (PDF/Word)</label>
+                                {{ form.dosya }}
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold text-dark mb-1 small"><i class="fas fa-image text-success me-1"></i> Kapak Resmi (Opsiyonel)</label>
+                                {{ form.kapak_resmi }}
+                            </div>
+
+                            <div class="col-12">
+                                <div class="p-4 rounded-4 border-indigo-dashed bg-indigo-light shadow-sm">
+                                    <label class="form-label fw-bold text-indigo mb-2 d-block">
+                                        <i class="fas fa-cut me-2"></i> Önizleme Sayfalarını Belirle
+                                    </label>
+                                    {{ form.onizleme_sayfalari }}
+                                    
+                                    <div class="mt-3 d-flex align-items-start gap-3 bg-white p-3 rounded-4 shadow-sm border border-light">
+                                        <div class="bg-warning-light p-2 rounded-circle">
+                                            <i class="fas fa-info-circle text-warning"></i>
+                                        </div>
+                                        <div>
+                                            <span class="d-block fw-bold small text-dark">Denetimli Önizleme Protokolü:</span>
+                                            <small class="text-muted">
+                                                Platform standartları gereği, kullanıcı güvenliğini sağlamak adına önizleme kapsamı kısıtlanmıştır.<b>Belirlediğiniz sayfalar, doküman toplamının %15 ile %25 aralığında </b>olmalıdır. 
+                                                <br><span class="text-indigo">Örnek Yazım: 1, 3, 5</span>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-check form-switch p-3 border rounded-4 bg-light d-flex align-items-center justify-content-between px-4">
+                                    <div>
+                                        <label class="form-check-label fw-bold text-dark mb-0" style="cursor:pointer;">
+                                            <i class="fas fa-crown text-warning me-2"></i> {{ form.is_nadir.label }}
+                                        </label>
+                                        <small class="text-muted d-block mt-1">Nadir içerikler 17 kredi sınırını aşabilir.</small>
+                                    </div>
+                                    <div style="margin-right: 25px;">
+                                        {{ form.is_nadir }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-indigo btn-lg w-100 mt-5 shadow-lg rounded-pill fw-bold" style="letter-spacing: 1px;">
+                            NOTU SİSTEME YÜKLE VE YAYINLA <i class="fas fa-paper-plane ms-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Premium Indigo Renkleri */
+    .bg-indigo { background-color: #6610f2 !important; }
+    .bg-indigo-light { background-color: #f8f7ff !important; }
+    .bg-warning-light { background-color: #fffdf0; }
+    .text-indigo { color: #6610f2 !important; }
+    .border-indigo-dashed { border: 2px dashed #6610f2 !important; }
+    .btn-indigo { background-color: #6610f2 !important; color: white !important; transition: all 0.3s ease; }
+    .btn-indigo:hover { background-color: #520dc2 !important; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(102, 16, 242, 0.3) !important; }
+    
+    /* Input Makyajı */
+    .pro-input {
+        border-radius: 12px !important;
+        padding: 10px 15px !important;
+        border: 2px solid #f1f1f1 !important;
+        transition: all 0.3s ease;
+    }
+    .pro-input:focus {
+        border-color: #6610f2 !important;
+        box-shadow: 0 0 0 4px rgba(102, 16, 242, 0.1) !important;
+        outline: none;
+    }
+    .form-switch .form-check-input { width: 3em; height: 1.5em; cursor: pointer; }
+</style>
+{% endblock %}

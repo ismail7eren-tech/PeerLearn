@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center py-5">
+    <div class="col-md-6 col-lg-5">
+        <div class="card pro-card shadow-lg p-4">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold">Aramıza Katıl</h3>
+                <p class="text-muted small">PeerLearn ile akademik dünyanı genişlet.</p>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">{{ field.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary w-100 btn-lg rounded-pill shadow-sm mt-3">Kayıt İşlemini Tamamla</button>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="small text-muted">Zaten üye misin? <a href="{% url 'login' %}" class="text-decoration-none fw-bold">Giriş Yap</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<style>input, select, textarea { display: block; width: 100%; padding: .375rem .75rem; font-size: 1rem; border: 1px solid #dee2e6; border-radius: .8rem; }</style>
+{% endblock %}

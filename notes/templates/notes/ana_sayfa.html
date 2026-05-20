@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 gap-3">
+        <div>
+            <h2 class="fw-bold mb-1">Akademik Keşfet</h2>
+            <p class="text-muted small">En kaliteli notları ve özel paketleri keşfet.</p>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a href="{% url 'not_ekle' %}" class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center pro-btn">
+                <i class="fas fa-plus me-2"></i>Yeni Not Paylaş
+            </a>
+            <a href="{% url 'paket_olustur' %}" class="btn btn-indigo rounded-pill px-4 fw-bold shadow-sm d-flex align-items-center justify-content-center pro-btn">
+                <i class="fas fa-boxes me-2"></i>Hibrit Paket Oluştur
+            </a>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mb-5">
+        <div class="bg-white p-2 rounded-pill shadow-sm border d-flex gap-1">
+            <a href="?filtre=all" class="btn btn-sm rounded-pill px-4 {% if current_filter == 'all' or not current_filter %}btn-dark{% else %}btn-light{% endif %}">Hepsi</a>
+            <a href="?filtre=tekil" class="btn btn-sm rounded-pill px-4 {% if current_filter == 'tekil' %}btn-primary{% else %}btn-light{% endif %}">Tekil Notlar</a>
+            <a href="?filtre=paket" class="btn btn-sm rounded-pill px-4 {% if current_filter == 'paket' %}btn-indigo{% else %}btn-light{% endif %}">Özel Paketler</a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        {% for n in icerikler %}
+            <div class="col-md-4 col-lg-3">
+                {% if n.olusturan %}
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden pro-card paket-card">
+                    <div class="position-relative">
+                        <span class="position-absolute top-0 start-0 m-2 badge bg-indigo shadow-sm">
+                            <i class="fas fa-box-open me-1"></i> PAKET SET
+                        </span>
+                        
+                        {% if n.kapak_resmi %}
+                            <img src="{{ n.kapak_resmi.url }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-indigo-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                                <i class="fas fa-boxes fa-3x text-indigo opacity-50"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <span class="position-absolute top-0 end-0 m-2 badge bg-dark rounded-pill">
+                            {{ n.fiyat }} Kredi
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="fw-bold text-truncate mb-1">{{ n.baslik }}</h6>
+                        <p class="text-indigo small mb-3 fw-semibold">
+                            <i class="fas fa-clone me-1"></i>{{ n.notlar.count }} Not İçeriyor
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mt-auto">
+                            <div class="small text-secondary">
+                                <i class="fas fa-user-circle me-1"></i> {{ n.olusturan.username }}
+                            </div>
+                            <a href="{% url 'paket_detay' n.pk %}" class="btn btn-sm btn-indigo rounded-pill px-3 shadow-sm">Paketi İncele</a>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden pro-card {% if n.is_nadir %}nadir-border{% endif %}">
+                    <div class="position-relative">
+                        {% if n.is_nadir %}
+                            <span class="position-absolute top-0 start-0 m-2 badge bg-warning text-dark shadow-sm">
+                                <i class="fas fa-star me-1"></i> NADİR ESER
+                            </span>
+                        {% endif %}
+                        
+                        {% if n.kapak_resmi %}
+                            <img src="{{ n.kapak_resmi.url }}" class="card-img-top" style="height: 180px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 180px;">
+                                <i class="fas fa-file-alt fa-3x text-secondary opacity-25"></i>
+                            </div>
+                        {% endif %}
+                        
+                        <span class="position-absolute top-0 end-0 m-2 badge {% if n.is_nadir %}bg-warning text-dark{% else %}bg-dark{% endif %} rounded-pill">
+                            {{ n.fiyat }} Kredi
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="fw-bold text-truncate mb-1">{{ n.baslik }}</h6>
+                        <p class="text-muted small mb-3 text-truncate">{{ n.ders_kategorisi }}</p>
+                        <div class="d-flex align-items-center justify-content-between mt-auto">
+                            <div class="small text-secondary">
+                                <i class="fas fa-user-edit me-1"></i> {{ n.yukleyen.username }}
+                            </div>
+                            <a href="{% url 'not_detay' n.pk %}" class="btn btn-sm btn-outline-primary rounded-pill px-3">Görüntüle</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-search fa-3x text-light mb-3"></i>
+                <p class="text-muted">Aradığın kriterlerde içerik bulunamadı.</p>
+                <a href="{% url 'ana_sayfa' %}" class="btn btn-link">Tümünü Gör</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    /* RENK TANIMLAMALARI */
+    .btn-indigo { background-color: #6610f2; color: white; border: none; }
+    .btn-indigo:hover { background-color: #520dc2; color: white; transform: translateY(-2px); }
+    .bg-indigo { background-color: #6610f2; color: white; }
+    .bg-indigo-light { background-color: #f1f0ff; }
+    .text-indigo { color: #6610f2; }
+    
+    /* ÖZEL TASARIM */
+    .pro-btn { transition: all 0.3s ease; height: 45px; }
+    .pro-card { transition: all 0.3s ease; cursor: pointer; }
+    .pro-card:hover { transform: translateY(-8px); shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    
+    .paket-card { border-top: 5px solid #6610f2 !important; }
+    .nadir-border { border: 2px solid #ffc107 !important; box-shadow: 0 0 15px rgba(255, 193, 7, 0.2) !important; }
+
+    /* Responsive ayar */
+    @media (max-width: 768px) {
+        .pro-btn { width: 100%; }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-8">
+            <h1 class="fw-900 text-dark mb-1 peer-title">
+                Peer<span class="text-primary">Market</span>
+            </h1>
+            <p class="text-muted mb-0 peer-subtitle">
+                Tarzını konuştur, kredilerinle fark yarat.
+            </p>
+        </div>
+        
+        <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+            <div class="credit-box shadow-sm">
+                <span class="credit-label">Kullanılabilir Bakiye</span>
+                <div class="d-flex align-items-center justify-content-lg-end gap-2 mt-1">
+                    <span class="credit-count">{{ request.user.kredi }}</span>
+                    <i class="fas fa-coins text-warning fs-3 glow-gold"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center g-4 animate__animated animate__fadeInUp">
+        
+        <div class="col-md-6 col-lg-4">
+            <a href="{% url 'shop_category' 'tema' %}" class="category-card theme-bg">
+                <div class="icon-wrapper"><i class="fas fa-palette"></i></div>
+                <h3>Temalar</h3>
+                <p>Sayfanın havasını değiştir.</p>
+            </a>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+            <a href="{% url 'kredi_yukle' %}" class="category-card frame-bg">
+                <div class="icon-wrapper"><i class="fas fa-wallet"></i></div>
+                <h3>Kredi Yükle</h3>
+                <p>Bakiyeni yükselt, dükkanın kapılarını aç!</p>
+            </a>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+            <a href="{% url 'shop_category' 'avatar' %}" class="category-card avatar-bg position-relative">
+                <div class="icon-wrapper"><i class="fas fa-user-astronaut"></i></div>
+                <h3>Avatarlar</h3>
+                <p>Kahramanını seç, yansıt.</p>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+<style>
+    /* GENEL DEĞİŞKENLER VE TİPOGRAFİ */
+    :root {
+        --peer-primary: #0061ff;
+    }
+    .fw-900 { font-weight: 900; }
+    .peer-title {
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+        font-family: 'Public Sans', sans-serif;
+    }
+    .peer-subtitle { font-size: 1.15rem; font-weight: 500; }
+
+    /* KREDİ KARTI (BAKİYE) TASARIMI */
+    .credit-box {
+        display: inline-block;
+        padding: 16px 24px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0,0,0,0.05);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        backdrop-filter: blur(10px);
+        text-align: right;
+    }
+    .credit-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(0,0,0,0.45);
+        display: block;
+    }
+    .credit-count {
+        font-size: 32px;
+        font-weight: 900;
+        color: #f59e0b; /* Altın Sarısı */
+        line-height: 1;
+        letter-spacing: -1px;
+    }
+    .glow-gold { filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.5)); }
+
+    /* VİTRİN KARTLARI (CAM VE GÖLGE EFEKTLİ) */
+    .category-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        min-height: 240px;
+        padding: 2rem 1.5rem;
+        border-radius: 28px;
+        text-decoration: none !important;
+        color: white !important;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-align: center;
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .category-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 100%);
+        pointer-events: none;
+    }
+
+    .category-card:hover { 
+        transform: translateY(-10px) scale(1.02); 
+        box-shadow: 0 25px 50px rgba(0,0,0,0.15); 
+    }
+
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        backdrop-filter: blur(5px);
+        transition: transform 0.3s ease;
+    }
+    .category-card:hover .icon-wrapper { transform: scale(1.1) rotate(5deg); }
+    .icon-wrapper i { font-size: 2.5rem; }
+
+    .category-card h3 { font-weight: 800; font-size: 1.4rem; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+    .category-card p { opacity: 0.9; font-size: 0.95rem; font-weight: 500; margin: 0; }
+
+    /* RENK GRADYANLARI (Premium Pastel) */
+    .theme-bg { background: linear-gradient(135deg, #6366f1, #8b5cf6); box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2); }
+    .frame-bg { background: linear-gradient(135deg, #0ea5e9, #14b8a6); box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2); }
+    .avatar-bg { background: linear-gradient(135deg, #ec4899, #f43f5e); box-shadow: 0 10px 20px rgba(236, 72, 153, 0.2); }
+
+    /* YENİ ETİKETİ */
+    .badge-new {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: #ffffff;
+        color: #ec4899;
+        font-size: 11px;
+        font-weight: 900;
+        padding: 6px 12px;
+        border-radius: 100px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        animation: pulse-badge 2s infinite;
+    }
+    @keyframes pulse-badge {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.08); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
+        100% { transform: scale(1); }
+    }
+</style>
+{% endblock %}

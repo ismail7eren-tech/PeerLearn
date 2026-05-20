@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-8">
+            <h1 class="fw-900 text-dark mb-1 peer-title">
+                Peer<span class="text-primary">Envanter</span>
+            </h1>
+            <p class="text-muted mb-0 peer-subtitle">
+                Koleksiyonun burada, tarzını mühürle.
+            </p>
+        </div>
+
+        <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+            <div class="collection-box shadow-sm">
+                <span class="collection-label">Koleksiyon Gücü:</span>
+                <span class="collection-count">{{ envanterim|length }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-bar mb-5">
+        <div class="row align-items-center g-4">
+            <div class="col-md-5 col-lg-4">
+                <label class="filter-label">Kategori Seç</label>
+                <select id="kategoriFilter" class="form-select filter-select">
+                    <option value="all">Tümünü Göster</option>
+                    <option value="theme">🎨 Temalar</option>
+                    <option value="frame">🖼️ Çerçeveler</option>
+                    <option value="effect">✨ Efektler</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 col-lg-3">
+                <label class="filter-label">Durum</label>
+                <select id="durumFilter" class="form-select filter-select">
+                    <option value="all">Tümü</option>
+                    <option value="active">Kullanımda</option>
+                    <option value="inactive">Kullanımda Değil</option>
+                </select>
+            </div>
+
+            <div class="col-md-3 col-lg-5 text-md-end align-self-end">
+                <div class="filter-info">
+                    <span id="gosterilenSayi" class="fw-900 text-primary fs-5">0</span>
+                    <span class="text-muted fw-500">ürün listeleniyor</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4" id="envanterGrid">
+        {% for inv in envanterim %}
+        <div class="col-md-6 col-lg-4 col-xl-3 envanter-item"
+             data-kategori="{{ inv.item.kategori }}"
+             data-active="{% if inv.is_active %}active{% else %}inactive{% endif %}">
+            
+            <div class="card h-100 peer-card {% if inv.is_active %}active-premium{% endif %}">
+                
+                <div class="preview-zone">
+                    <div class="kategori-badge">
+                        {% if inv.item.kategori == "theme" %}
+                            🎨 Tema
+                        {% elif inv.item.kategori == "frame" %}
+                            🖼️ Çerçeve
+                        {% else %}
+                            ✨ Efekt
+                        {% endif %}
+                    </div>
+
+                    {% if inv.item.preview_image %}
+                        <img src="{{ inv.item.preview_image.url }}" class="preview-img">
+                    {% else %}
+                        <div class="placeholder-icon">
+                            <i class="fas {% if inv.item.kategori == 'theme' %}fa-palette{% elif inv.item.kategori == 'frame' %}fa-id-badge{% else %}fa-magic{% endif %}"></i>
+                        </div>
+                    {% endif %}
+                    
+                    {% if inv.is_active %}
+                    <div class="active-status">
+                        <span class="pulse-dot"></span> KULLANIMDA
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-body p-4 d-flex flex-column">
+                    <div class="mb-3">
+                        <h5 class="fw-800 text-dark mb-1 item-title">{{ inv.item.isim }}</h5>
+                        <p class="text-muted small mb-0 item-category">{{ inv.item.get_kategori_display }}</p>
+                    </div>
+                    
+                    <div class="d-grid mt-auto">
+                        {% if inv.is_active %}
+                            <a href="{% url 'envanter_sifirla' inv.item.kategori %}" class="btn btn-light-danger btn-pill">
+                                <i class="fas fa-minus-circle me-2"></i>Devre Dışı Bırak
+                            </a>
+                        {% else %}
+                            <a href="{% url 'envanter_aktif_et' inv.id %}" class="btn btn-primary btn-pill shadow-blue">
+                                <i class="fas fa-bolt me-2"></i>Şimdi Kuşan
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="empty-state-card p-5 mx-auto" style="max-width: 600px;">
+                <i class="fas fa-ghost fa-4x text-primary mb-4 opacity-50"></i>
+                <h2 class="fw-900 text-dark">Burası Çok Issız...</h2>
+                <p class="text-muted mb-4 fs-5">
+                    Görünüşe göre koleksiyonun henüz boş. Mağazadaki efsane ürünlerle tanışmaya ne dersin?
+                </p>
+                <a href="{% url 'magaza' %}" class="btn btn-primary btn-pill btn-lg px-5 shadow-blue">
+                    peerMarket'e Göz At
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<style>
+    :root {
+        --peer-primary: #0061ff;
+        --peer-danger: #ff4b5c;
+        --peer-bg: #f4f6f9; /* Biraz daha premium gri arka plan */
+        --peer-card-border: rgba(0,0,0,0.04);
+        --peer-soft-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    }
+
+    body { background: var(--peer-bg); }
+
+    .fw-900 { font-weight: 900; }
+    .fw-800 { font-weight: 800; }
+    .fw-500 { font-weight: 500; }
+
+    /* HEADER & TEXT */
+    .peer-title {
+        font-size: 1.75rem;
+        letter-spacing: -0.5px;
+        font-family: 'Public Sans', sans-serif;
+    }
+    .peer-subtitle { font-size: 1.1rem; font-weight: 400; }
+
+    /* STATS BOX */
+    .collection-box {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 20px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(12px);
+    }
+    .collection-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(0,0,0,0.5);
+    }
+    .collection-count { font-size: 26px; font-weight: 900; color: var(--peer-primary); line-height: 1; }
+
+    /* FILTER BAR */
+    .filter-bar {
+        padding: 20px 24px;
+        border-radius: 24px;
+        background: rgba(255,255,255,0.7);
+        border: 1px solid rgba(255,255,255,0.8);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        backdrop-filter: blur(15px);
+    }
+    .filter-label {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgba(0,0,0,0.5);
+        margin-bottom: 8px;
+        display: block;
+    }
+    .filter-select {
+        border-radius: 14px;
+        padding: 12px 16px;
+        font-weight: 600;
+        font-size: 14px;
+        border: 1px solid rgba(0,0,0,0.08);
+        background-color: white;
+        transition: all 0.2s ease;
+    }
+    .filter-select:focus {
+        border-color: var(--peer-primary);
+        box-shadow: 0 0 0 4px rgba(0,97,255,0.1) !important;
+    }
+
+    /* CARD DESIGN */
+    .peer-card {
+        border: 1px solid var(--peer-card-border);
+        border-radius: 24px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        background: white;
+    }
+    .peer-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--peer-soft-shadow);
+        border-color: rgba(0,97,255,0.15);
+    }
+    .active-premium {
+        border: 2px solid var(--peer-primary) !important;
+        background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
+        box-shadow: 0 15px 35px rgba(0, 97, 255, 0.1);
+    }
+
+    /* PREVIEW ZONE */
+    .preview-zone {
+        height: 190px;
+        margin: 12px;
+        border-radius: 18px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, rgba(0,97,255,0.05), rgba(0,0,0,0.02));
+    }
+    .preview-img {
+        max-width: 85%;
+        max-height: 85%;
+        object-fit: contain;
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
+        z-index: 2;
+    }
+    .peer-card:hover .preview-img { transform: scale(1.08) rotate(-1deg); }
+    .placeholder-icon { font-size: 48px; color: rgba(0,0,0,0.15); z-index: 2; }
+
+    /* BADGES */
+    .kategori-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: rgba(255,255,255,0.9);
+        padding: 6px 12px;
+        border-radius: 100px;
+        font-size: 11px;
+        font-weight: 800;
+        color: rgba(0,0,0,0.7);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        backdrop-filter: blur(5px);
+        z-index: 6;
+    }
+    .active-status {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: white;
+        padding: 6px 12px;
+        border-radius: 100px;
+        font-size: 10px;
+        font-weight: 800;
+        color: var(--peer-primary);
+        box-shadow: 0 4px 12px rgba(0,97,255,0.15);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        z-index: 6;
+    }
+    .pulse-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--peer-primary);
+        border-radius: 50%;
+        animation: pulse-blue 2s infinite;
+    }
+    @keyframes pulse-blue {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 97, 255, 0.5); }
+        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 97, 255, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 97, 255, 0); }
+    }
+
+    /* TYPOGRAPHY */
+    .item-title { font-size: 16px; letter-spacing: -0.3px; }
+    .item-category { font-size: 13px; opacity: 0.8; }
+
+    /* BUTTONS */
+    .btn-pill {
+        border-radius: 100px;
+        padding: 10px 0;
+        font-weight: 800;
+        font-size: 13px;
+        transition: all 0.3s ease;
+    }
+    .btn-primary { background: var(--peer-primary); border: none; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 97, 255, 0.3); }
+    .btn-light-danger { background: #fff1f2; color: var(--peer-danger); border: none; }
+    .btn-light-danger:hover { background: var(--peer-danger); color: white; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255, 75, 92, 0.2); }
+
+    /* EMPTY STATE */
+    .empty-state-card {
+        background: white;
+        border-radius: 30px;
+        border: 2px dashed rgba(0,0,0,0.08);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+</style>
+
+<script>
+// Filtreleme motoru mermi gibi, aynen bıraktım.
+document.addEventListener("DOMContentLoaded", function () {
+    const kategoriFilter = document.getElementById("kategoriFilter");
+    const durumFilter = document.getElementById("durumFilter");
+    const items = document.querySelectorAll(".envanter-item");
+    const gosterilenSayi = document.getElementById("gosterilenSayi");
+
+    function filtrele() {
+        let kategori = kategoriFilter.value;
+        let durum = durumFilter.value;
+        let count = 0;
+
+        items.forEach(item => {
+            const itemKategori = item.getAttribute("data-kategori");
+            const itemDurum = item.getAttribute("data-active");
+
+            let kategoriUygun = (kategori === "all" || itemKategori === kategori);
+            let durumUygun = (durum === "all" || itemDurum === durum);
+
+            if (kategoriUygun && durumUygun) {
+                item.style.display = "block";
+                count++;
+            } else {
+                item.style.display = "none";
+            }
+        });
+
+        gosterilenSayi.innerText = count;
+    }
+
+    filtrele();
+    kategoriFilter.addEventListener("change", filtrele);
+    durumFilter.addEventListener("change", filtrele);
+});
+</script>
+
+{% endblock %}

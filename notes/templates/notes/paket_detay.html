@@ -1,0 +1,330 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeIn">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-5 position-relative bg-white">
+                
+                {% if request.user == paket.olusturan %}
+                <form action="{% url 'paket_sil' paket.pk %}" method="post" class="position-absolute" style="top: 15px; right: 15px; z-index: 10;" onsubmit="return confirm('Bu paketi silmek istediğinize emin misiniz? (Pakete özel yüklenen dosyalar da silinecektir.)');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm fw-bold">
+                        <i class="fas fa-trash-alt me-1"></i> Paketi Sil
+                    </button>
+                </form>
+                {% endif %}
+
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        {% if paket.kapak_resmi %}
+                            <img src="{{ paket.kapak_resmi.url }}" class="img-fluid h-100 w-100" style="object-fit: cover; min-height: 350px;">
+                        {% else %}
+                            <div class="bg-indigo-light h-100 d-flex align-items-center justify-content-center" style="min-height: 350px;">
+                                <i class="fas fa-boxes fa-5x text-indigo opacity-25"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <div class="card-body p-4 p-md-5">
+                            <span class="badge bg-indigo mb-3 px-3 py-2 rounded-pill">💎 ÖZEL PAKET İÇERİĞİ</span>
+                            <h2 class="fw-bolder text-dark mb-3">{{ paket.baslik }}</h2>
+                            <p class="text-muted fs-6 mb-4" style="line-height: 1.6;">{{ paket.aciklama }}</p>
+                            
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="bg-light p-3 rounded-circle me-3">
+                                    <i class="fas fa-user-circle text-secondary fs-4"></i>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">Oluşturan</small>
+                                    <span class="fw-bold text-dark">@{{ paket.olusturan.username }}</span>
+                                </div>
+                            </div>
+
+                            <hr class="border-light my-4">
+
+                            <div class="d-grid gap-3">
+                                {% if request.user == paket.olusturan %}
+                                    <a href="{% url 'paket_duzenle' paket.pk %}" class="btn btn-warning btn-lg rounded-pill px-4 shadow-sm fw-bold text-dark">
+                                        <i class="fas fa-edit me-2"></i> Paketi Düzenle
+                                    </a>
+                                {% elif has_package_access %}
+                                    <div class="alert alert-success rounded-4 text-center fw-bold py-3 mb-0 shadow-sm border-0 d-flex align-items-center justify-content-center gap-2">
+                                        <i class="fas fa-check-circle fs-5"></i> BU PAKETE ERİŞİMİNİZ VAR
+                                    </div>
+                                {% else %}
+                                    <button type="button" class="btn btn-indigo btn-lg rounded-pill shadow-sm py-3 fw-bold" data-bs-toggle="modal" data-bs-target="#confirmPackagePurchase">
+                                        <i class="fas fa-shopping-bag me-2"></i> KALICI SATIN AL ({{ paket.fiyat }} Kredi)
+                                    </button>
+                                    
+                                    {% if paket.kira_fiyati %}
+                                    <button type="button" class="btn btn-outline-indigo btn-lg rounded-pill shadow-sm py-3 fw-bold bg-white" data-bs-toggle="modal" data-bs-target="#confirmPackageRent">
+                                        <i class="fas fa-stopwatch me-2"></i> 24 SAAT KİRALA ({{ paket.kira_fiyati }} Kredi)
+                                    </button>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav nav-pills mb-4 gap-2 premium-tabs-nav justify-content-center" id="paketTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active rounded-pill px-4 fw-bold" id="content-tab" data-bs-toggle="pill" data-bs-target="#content" type="button" role="tab">
+                        <i class="fas fa-list-ul me-1"></i> Paket İçeriği ({{ notlar.count }})
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4 fw-bold" id="reviews-tab" data-bs-toggle="pill" data-bs-target="#reviews" type="button" role="tab">
+                        <i class="fas fa-star me-1 text-warning"></i> Değerlendirmeler ({{ reviews.count }})
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link rounded-pill px-4 fw-bold" id="qa-tab" data-bs-toggle="pill" data-bs-target="#qa" type="button" role="tab">
+                        <i class="fas fa-comments me-1 text-info"></i> Soru & Cevap ({{ questions.count }})
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="paketTabsContent">
+                
+                <div class="tab-pane fade show active" id="content" role="tabpanel">
+                    <div class="row g-3">
+                        {% for n in notlar %}
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-4 p-3 pro-card border-start border-indigo border-5 bg-white">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="bg-indigo-light p-3 rounded-circle">
+                                            <i class="fas fa-file-pdf text-indigo fs-4"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-0 text-dark">{{ n.baslik }}</h6>
+                                            <small class="text-muted">{{ n.ders_kategorisi }}</small>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'not_detay' n.pk %}" class="btn btn-light rounded-pill px-4 btn-sm fw-bold shadow-sm">
+                                        <i class="fas fa-eye me-1"></i> İçeriğe Git
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12 text-center py-5 bg-white rounded-4 shadow-sm border-0">
+                            <div class="bg-light d-inline-block p-4 rounded-circle mb-3">
+                                <i class="fas fa-folder-open fa-3x text-muted opacity-50"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark">Bu Paket Boş</h5>
+                            <p class="text-muted">Bu pakete henüz bir not veya dosya eklenmemiş.</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+                        <h4 class="fw-bold mb-4 text-dark">Paket Değerlendirmeleri</h4>
+                        
+                        {% if request.user.is_authenticated %}
+                            {% if request.user == paket.olusturan %}
+                            <div class="alert bg-indigo-light border-indigo text-indigo rounded-4 mb-5 p-4 shadow-sm">
+                                <i class="fas fa-star me-2 fs-5 align-middle"></i> 
+                                <span class="fw-bold align-middle fs-5">Bu paket senin eserin!</span> 
+                                <p class="mb-0 mt-2 text-dark">Kendi paketini değerlendiremezsin. Kullanıcıların yaptığı değerlendirmeleri aşağıdan takip edebilirsin.</p>
+                            </div>
+                            {% else %}
+                            <form method="post" class="mb-5 bg-light p-4 rounded-4 border">
+                                {% csrf_token %}
+                                <input type="hidden" name="submit_package_review" value="1">
+                                <div class="row mb-3">
+                                    <div class="col-md-4">
+                                        <label class="fw-bold small text-indigo mb-2">PUANINIZ</label>
+                                        <select name="point" class="form-select rounded-pill border-0 shadow-sm" required>
+                                            <option value="5">⭐⭐⭐⭐⭐ Mükemmel</option>
+                                            <option value="4">⭐⭐⭐⭐ Çok İyi</option>
+                                            <option value="3">⭐⭐⭐ İyi</option>
+                                            <option value="2">⭐⭐ Geliştirilmeli</option>
+                                            <option value="1">⭐ Kötü</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="fw-bold small text-indigo mb-2">YORUMUNUZ</label>
+                                    <textarea name="comment" class="form-control rounded-4 border-0 shadow-sm" rows="3" placeholder="Bu paket hakkında ne düşünüyorsunuz?" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-indigo rounded-pill px-4 fw-bold">Yorumu Yayınla <i class="fas fa-paper-plane ms-1"></i></button>
+                            </form>
+                            {% endif %}
+                        {% else %}
+                        <div class="alert alert-info rounded-4 mb-5">Yorum yapabilmek için <a href="{% url 'login' %}" class="fw-bold text-info text-decoration-none">giriş yapmalısınız.</a></div>
+                        {% endif %}
+
+                        <div class="reviews-list">
+                            {% for r in reviews %}
+                            <div class="review-item mb-4 pb-4 border-bottom">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-indigo-light rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                            <i class="fas fa-user text-indigo"></i>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-0 text-dark">@{{ r.user.username }}</h6>
+                                            <small class="text-muted" style="font-size: 11px;">{{ r.created_at|date:"d M Y" }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="bg-light px-3 py-1 rounded-pill fw-bold text-warning shadow-sm">
+                                        {{ r.point }} <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="mb-0 text-secondary mt-2 ms-5 ps-2 border-start border-2 border-light">{{ r.comment }}</p>
+                            </div>
+                            {% empty %}
+                            <div class="text-center py-4">
+                                <i class="far fa-star fa-3x text-muted opacity-25 mb-3"></i>
+                                <p class="text-muted">Bu pakete henüz yorum yapılmamış. İlk yorumu sen yap!</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="qa" role="tabpanel">
+                    <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+                        <h4 class="fw-bold mb-4 text-dark">Soru & Cevap</h4>
+                        
+                        {% if request.user.is_authenticated %}
+                        <form method="post" class="mb-5 bg-light p-4 rounded-4 border">
+                            {% csrf_token %}
+                            <input type="hidden" name="submit_package_question" value="1">
+                            <div class="mb-3">
+                                <label class="fw-bold small text-indigo mb-2">SORUNUZ</label>
+                                <textarea name="question_text" class="form-control rounded-4 border-0 shadow-sm" rows="3" placeholder="Paketi oluşturan kişiye içerikle ilgili soru sorabilirsiniz..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-indigo rounded-pill px-4 fw-bold">Soruyu Gönder <i class="fas fa-question-circle ms-1"></i></button>
+                        </form>
+                        {% else %}
+                        <div class="alert alert-info rounded-4 mb-5">Soru sorabilmek için <a href="{% url 'login' %}" class="fw-bold text-info text-decoration-none">giriş yapmalısınız.</a></div>
+                        {% endif %}
+
+                        <div class="questions-list">
+                            {% for q in questions %}
+                            <div class="question-item mb-4">
+                                <div class="p-4 rounded-4 bg-light border-start border-4 border-primary shadow-sm">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-bold text-primary"><i class="fas fa-user-circle me-1"></i> @{{ q.user.username }} soruyor:</span>
+                                        <small class="text-muted">{{ q.created_at|date:"d M Y" }}</small>
+                                    </div>
+                                    <p class="mb-0 text-dark">{{ q.text }}</p>
+                                </div>
+                                
+                                {% if q.answer %}
+                                <div class="p-4 ms-5 mt-2 rounded-4 bg-white border border-start border-4 border-success shadow-sm position-relative">
+                                    <div class="position-absolute" style="top: -15px; left: 20px;">
+                                        <i class="fas fa-reply fa-rotate-180 text-success bg-white px-1"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-bold text-success"><i class="fas fa-check-circle me-1"></i> Paket Sahibi (@{{ paket.olusturan.username }}) cevapladı:</span>
+                                    </div>
+                                    <p class="mb-0 text-dark">{{ q.answer }}</p>
+                                </div>
+                                {% else %}
+                                    {% if request.user == paket.olusturan %}
+                                    <form method="post" class="ms-5 mt-2 d-flex">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="submit_package_answer" value="1">
+                                        <input type="hidden" name="question_id" value="{{ q.id }}">
+                                        <input type="text" name="answer_text" class="form-control rounded-start-pill shadow-sm" placeholder="Kullanıcıya cevap yazın..." required>
+                                        <button type="submit" class="btn btn-success rounded-end-pill px-4 shadow-sm fw-bold">Cevapla <i class="fas fa-paper-plane ms-1"></i></button>
+                                    </form>
+                                    {% else %}
+                                    <div class="ms-5 mt-2">
+                                        <small class="text-muted fst-italic"><i class="fas fa-clock me-1"></i> Henüz cevaplanmadı...</small>
+                                    </div>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            {% empty %}
+                            <div class="text-center py-4">
+                                <i class="far fa-comments fa-3x text-muted opacity-25 mb-3"></i>
+                                <p class="text-muted">Henüz soru sorulmamış. İçerik hakkında aklına takılanları sorabilirsin!</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmPackagePurchase" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-5 overflow-hidden p-4 text-center">
+            <div class="bg-indigo-light text-indigo rounded-circle mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-shopping-bag fa-2x"></i>
+            </div>
+            <h5 class="fw-bold text-dark">Kalıcı Satın Alma</h5>
+            <p class="text-muted small">Bakiyenizden <b>{{ paket.fiyat }} kredi</b> düşülecek ve paketin tüm içeriğine sınırsız erişim sağlayacaksınız.</p>
+            <div class="d-grid gap-2 mt-4">
+                <a href="{% url 'paket_satin_al' paket.pk %}" class="btn btn-indigo rounded-pill py-2 fw-bold text-white text-decoration-none">EVET, SATIN AL</a>
+                <button type="button" class="btn btn-light rounded-pill py-2 fw-bold text-muted" data-bs-dismiss="modal">İPTAL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmPackageRent" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-4 text-center">
+            <div class="bg-primary-soft text-primary rounded-circle mx-auto mb-3" style="width: 70px; height: 70px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-stopwatch fa-2x"></i>
+            </div>
+            <h5 class="fw-bold">Paket Kiralama</h5>
+            <p class="text-muted small">Paket içeriğine <b class="text-danger">24 saat</b> erişim için <b>{{ paket.kira_fiyati }} kredi</b> kullanılacak.</p>
+            <div class="d-grid gap-2 mt-4">
+                <a href="{% url 'paket_kirala' paket.pk %}" class="btn btn-primary rounded-pill py-2 fw-bold text-white text-decoration-none">ONAYLA VE KİRALA</a>
+                <button type="button" class="btn btn-light rounded-pill py-2 fw-bold text-muted" data-bs-dismiss="modal">İPTAL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Premium Tab Tasarımı */
+    .premium-tabs-nav .nav-link {
+        color: #6c757d;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        transition: all 0.3s ease;
+    }
+    .premium-tabs-nav .nav-link:hover {
+        background: #f8f9fa;
+        color: #6610f2;
+    }
+    .premium-tabs-nav .nav-link.active {
+        background: #6610f2 !important;
+        color: #fff !important;
+        border-color: #6610f2;
+        box-shadow: 0 4px 15px rgba(102, 16, 242, 0.3);
+    }
+    
+    /* İndigo / Mor Renk Paleti */
+    .bg-indigo-light { background-color: #f1f0ff; }
+    .bg-primary-soft { background-color: rgba(13, 110, 253, 0.1); }
+    .text-indigo { color: #6610f2; }
+    .bg-indigo { background-color: #6610f2; color: white; }
+    .btn-indigo { background-color: #6610f2; color: white; transition: all 0.3s; }
+    .btn-indigo:hover { background-color: #520dc2; color: white; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 16, 242, 0.2); }
+    .border-indigo { border-color: #6610f2 !important; }
+    
+    .btn-outline-indigo { color: #6610f2; border: 2px solid #6610f2; background: transparent; transition: all 0.3s;}
+    .btn-outline-indigo:hover { background: #f1f0ff; color: #520dc2;}
+    
+    /* Kart Hover Efekti */
+    .pro-card { transition: all 0.2s; }
+    .pro-card:hover { transform: translateX(5px); background-color: #fafafa !important; }
+</style>
+{% endblock %}

@@ -1,0 +1,1496 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+
+<div class="page-wrapper premium-bg">
+    <div class="container py-5 animate__animated animate__fadeIn">
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+                <div class="profile-card-premium shadow-premium rounded-5 overflow-hidden bg-white border-0 h-100 pb-2">
+
+                    <div class="profile-cover-premium"></div>
+
+                    <div class="profile-body text-center px-4 pb-4">
+
+                        <div class="profile-image-wrapper mb-4" style="position: relative; display: inline-block; margin-top: -80px; z-index: 2;">
+
+                            {% if user.aktif_cerceve %}
+                                <img src="{{ user.aktif_cerceve.preview_image.url }}"
+                                     style="position: absolute; top: -12px; left: -12px; width: calc(100% + 24px); height: calc(100% + 24px); z-index: 10; pointer-events: none;">
+                            {% endif %}
+
+                            <div class="main-avatar-container bg-white"
+                                 style="width: 160px; height: 160px; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.15); border: 5px solid white;">
+
+                               {% if user.profile.profil_resmi %}
+                                    <img src="{{ user.profile.profil_resmi.url }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% else %}
+                                    <div class="bg-light w-100 h-100 d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-user fa-4x text-muted opacity-20"></i>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            {% if request.user == user %}
+                            <button type="button"
+                                    class="btn btn-primary btn-sm rounded-circle position-absolute"
+                                    style="bottom: 5px; right: 5px; z-index: 9999; width: 35px; height: 35px; border: 3px solid white;"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#profileImageModal">
+                                <i class="fas fa-pen fa-xs"></i>
+                            </button>
+                            {% endif %}
+                        </div>
+
+                        <h4 class="fw-bold mt-3 mb-1 text-dark">{{ user.get_full_name|default:user.username }}</h4>
+                        <p class="text-muted small mb-4">@{{ user.username }}</p>
+                        
+                        {% if request.user != user %}
+                        <div class="d-flex justify-content-center mb-3">
+                            <button id="followBtn"
+                                    onclick="takipSistemi('{{ user.id }}')"
+                                    class="btn {% if is_following %}btn-outline-secondary{% else %}btn-purple{% endif %} rounded-pill px-4 fw-bold">
+                                {% if is_following %} Takibi Bırak {% else %} Takip Et {% endif %}
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-flex justify-content-center align-items-center gap-2 mb-4 flex-wrap">
+                            <div class="pill-premium">
+                                <small class="fw-bold text-muted" style="font-size: 10px;">ID:</small>
+                                <span id="userPeerID" class="fw-bolder text-dark small">#{{ user.profile.peer_id }}</span>
+                                <i class="far fa-copy text-primary" onclick="copyPeerID()" style="font-size: 12px; cursor:pointer;" title="Kopyala"></i>
+                            </div>
+
+                            <div class="pill-premium warning-pill">
+                                <i class="fas fa-coins text-warning"></i>
+                                <span class="fw-bolder text-dark small">{{ user.kredi }}</span>
+                                <small class="text-muted fw-bold" style="font-size: 11px;">Kredi</small>
+                            </div>
+                            
+                            {% if user != request.user %}
+                            <div class="d-flex justify-content-center w-100 mt-2">
+                                <button type="button" class="btn btn-success text-white rounded-pill px-4 fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#krediGonderModal" style="font-size: 13px;">
+                                    <i class="fas fa-paper-plane me-2"></i> Kredi Gönder
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-4 mb-4 pb-4 border-bottom border-soft">
+                            <div class="text-center hover-mini" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followersModal">
+                                <div class="fw-bold text-dark fs-5" id="followerCount">{{ user.followers.count }}</div>
+                                <small class="text-muted fw-bold" style="font-size: 10px;">TAKİPÇİ</small>
+                            </div>
+                            <div class="vr opacity-25"></div>
+                            <div class="text-center hover-mini" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
+                                <div class="fw-bold text-dark fs-5">{{ user.following.count }}</div>
+                                <small class="text-muted fw-bold" style="font-size: 10px;">TAKİP</small>
+                            </div>
+                        </div>
+
+                        <div class="text-start px-2 mb-4">
+                            <label class="label-premium">BİYOGRAFİ</label>
+                            {% if request.user == user %}
+                                <textarea name="bio" form="profileMainForm" class="form-control input-premium"
+                                          placeholder="Kendinden bahset...">{{ user.bio|default:"" }}</textarea>
+                            {% else %}
+                                <div class="bio-container-premium">
+                                    <p id="bioText" class="small text-dark mb-0 fw-medium"
+                                       style="white-space: pre-line; line-height: 1.8; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                                        {{ user.bio|default:"Biyografi henüz eklenmedi." }}
+                                    </p>
+                                </div>
+                                <a href="javascript:void(0)" id="readMoreBtn" class="text-primary small fw-bold mt-2 d-inline-block text-decoration-none"
+                                   onclick="toggleBio()" style="display: none; font-size: 11px;">Daha fazlasını gör</a>
+                            {% endif %}
+                        </div>
+
+                        <div class="text-start px-2 mb-4">
+                            <label class="label-premium">UZMANLIK ALANLARI</label>
+                            <div class="skills-box p-1">
+                                {% if request.user == user %}
+                                    <input type="text" name="yetenekler" form="profileMainForm"
+                                           class="form-control input-premium"
+                                           style="min-height: 55px;"
+                                           placeholder="Python, Django, UI/UX..."
+                                           value="{{ user.yetenekler|default:'' }}">
+                                {% else %}
+                                    {% if user.yetenekler %}
+                                        {{ user.yetenekler|render_skills }}
+                                    {% else %}
+                                        <p class="small text-muted font-italic mb-0">Henüz yetenek eklenmedi...</p>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if request.user == user %}
+                        <div class="text-start mt-4 pt-4 border-top border-soft px-2">
+                            <label class="label-premium text-center w-100">
+                                <i class="fas fa-cog me-1"></i> PROFİL BİLGİLERİNİ GÜNCELLE
+                            </label>
+
+                            <form method="post" id="profileMainForm">
+                                {% csrf_token %}
+
+                                <div class="row g-2 mb-3">
+                                    <div class="col-6">
+                                        <label class="mini-label">ADINIZ</label>
+                                        <input type="text" name="first_name" class="form-control input-premium-sm" value="{{ user.first_name }}">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="mini-label">SOYADINIZ</label>
+                                        <input type="text" name="last_name" class="form-control input-premium-sm" value="{{ user.last_name }}">
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="mini-label">E-POSTA (GİZLİ)</label>
+                                    <input type="email" name="email" class="form-control input-premium-sm" value="{{ user.email }}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="mini-label">TELEFON (GİZLİ)</label>
+                                    <input type="text" name="phone" class="form-control input-premium-sm"
+                                           value="{{ user.profile.telefon|default:'' }}" placeholder="Örn: 5xx...">
+                                </div>
+
+                                <button type="submit" class="btn btn-update-profile w-100 rounded-pill py-3 fw-bold shadow-sm"
+                                        style="font-size:13px; letter-spacing:1px;">
+                                    BİLGİLERİ MÜHÜRLE <i class="fas fa-check-circle ms-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                        {% endif %}
+
+                        <form method="post" enctype="multipart/form-data" id="profileImageForm" style="display:none;">
+                            {% csrf_token %}
+                            <input type="file" name="profil_resmi" id="imageUploadInput" accept="image/*">
+                            <input type="hidden" name="camera_image" id="cameraImageInput">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card stat-card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-muted small">PeerScore</span>
+                                <div class="icon-bubble purple">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                            </div>
+                            <div class="h2 fw-bolder mb-0 mt-2 text-dark">{{ hesaplanan_score }}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card stat-card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-muted small">Yüklemeler</span>
+                                <div class="icon-bubble info">
+                                    <i class="fas fa-file-upload"></i>
+                                </div>
+                            </div>
+                            <div class="h2 fw-bolder mb-0 mt-2 text-dark">{{ toplam_yuklenen }} <small class="fs-6 opacity-50">Dosya</small></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="card stat-card border-0 shadow-sm rounded-4 p-4 h-100 bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold text-muted small">Toplam Kazanç</span>
+                                <div class="icon-bubble warning">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                            </div>
+                            <div class="h2 fw-bolder mb-0 mt-2 text-dark">{{ toplam_kazanc }} 🪙</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="button" class="btn btn-premium-stats shadow-lg rounded-pill px-5 py-3 fw-bold animate__animated animate__pulse animate__infinite" data-bs-toggle="modal" data-bs-target="#peerIstatistikModal">
+                        <i class="fas fa-chart-line me-2"></i> PEER-İSTATİSTİK (BORSA) <i class="fas fa-external-link-alt ms-2"></i>
+                    </button>
+                </div>
+
+                <div class="premium-achievement-wrapper mt-4">
+                    <div class="mb-4 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="fw-bold mb-1 text-dark">Akademik Vitrin</h4>
+                            <p class="text-muted small mb-0">Başarılar ve Projeler</p>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="achievement-premium-card academic-card h-100">
+                                <div class="achievement-header d-flex justify-content-between align-items-center mb-4">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="icon-circle bg-primary-subtle text-primary" style="width: 45px; height: 45px;">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                        <h6 class="fw-bold mb-0">Akademik</h6>
+                                    </div>
+                                    {% if request.user == user %}
+                                    <button class="btn btn-sm btn-light text-primary rounded-pill fw-bold"
+                                             data-bs-toggle="modal" data-bs-target="#addAchievement" onclick="setCategory('academic')">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    {% endif %}
+                                </div>
+
+                                <div class="achievement-body">
+                                    {% for a in user.achievements.all %}
+                                    {% if a.category == 'academic' %}
+                                    <div class="achievement-item shadow-sm">
+                                        <div class="achievement-left w-100">
+                                            <div class="mini-dot bg-primary flex-shrink-0"></div>
+                                            <div class="w-100 overflow-hidden">
+                                                <div class="achievement-title text-truncate fw-bold text-dark">{{ a.title }}</div>
+                                                {% if a.institution %}
+                                                <small class="text-muted d-block text-truncate">{{ a.institution }}</small>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex gap-2 mt-2">
+                                            <a href="{{ a.evidence_file.url }}" target="_blank" class="achievement-action text-primary">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            {% if request.user == user %}
+                                            <a href="javascript:void(0)" class="achievement-action text-success"
+                                               data-bs-toggle="modal" data-bs-target="#editAchievement{{ a.id }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{% url 'delete_achievement' a.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="achievement-action text-danger border-0">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="achievement-premium-card certificate-card h-100">
+                                <div class="achievement-header d-flex justify-content-between align-items-center mb-4">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="icon-circle bg-success-subtle text-success" style="width: 45px; height: 45px;">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                        <h6 class="fw-bold mb-0">Sertifika</h6>
+                                    </div>
+                                    {% if request.user == user %}
+                                    <button class="btn btn-sm btn-light text-success rounded-pill fw-bold"
+                                             data-bs-toggle="modal" data-bs-target="#addAchievement" onclick="setCategory('certificate')">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    {% endif %}
+                                </div>
+
+                                <div class="achievement-body">
+                                    {% for a in user.achievements.all %}
+                                    {% if a.category == 'certificate' %}
+                                    <div class="achievement-item shadow-sm">
+                                        <div class="achievement-left w-100">
+                                            <div class="mini-dot bg-success flex-shrink-0"></div>
+                                            <div class="w-100 overflow-hidden">
+                                                <div class="achievement-title text-truncate fw-bold text-dark">{{ a.title }}</div>
+                                                {% if a.institution %}
+                                                <small class="text-muted d-block text-truncate">{{ a.institution }}</small>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex gap-2 mt-2">
+                                            <a href="{{ a.evidence_file.url }}" target="_blank" class="achievement-action text-success">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            {% if request.user == user %}
+                                            <a href="javascript:void(0)" class="achievement-action text-primary"
+                                               data-bs-toggle="modal" data-bs-target="#editAchievement{{ a.id }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{% url 'delete_achievement' a.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="achievement-action text-danger border-0">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="achievement-premium-card project-card h-100">
+                                <div class="achievement-header d-flex justify-content-between align-items-center mb-4">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="icon-circle bg-warning-subtle text-warning" style="width: 45px; height: 45px;">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <h6 class="fw-bold mb-0">Proje</h6>
+                                    </div>
+                                    {% if request.user == user %}
+                                    <button class="btn btn-sm btn-light text-warning rounded-pill fw-bold"
+                                             data-bs-toggle="modal" data-bs-target="#addAchievement" onclick="setCategory('project')">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    {% endif %}
+                                </div>
+
+                                <div class="achievement-body">
+                                    {% for a in user.achievements.all %}
+                                    {% if a.category == 'project' %}
+                                    <div class="achievement-item shadow-sm">
+                                        <div class="achievement-left w-100">
+                                            <div class="mini-dot bg-warning flex-shrink-0"></div>
+                                            <div class="w-100 overflow-hidden">
+                                                <div class="achievement-title text-truncate fw-bold text-dark">{{ a.title }}</div>
+                                                {% if a.institution %}
+                                                <small class="text-muted d-block text-truncate">{{ a.institution }}</small>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex gap-2 mt-2">
+                                            <a href="{{ a.evidence_file.url }}" target="_blank" class="achievement-action text-warning">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            {% if request.user == user %}
+                                            <a href="javascript:void(0)" class="achievement-action text-primary"
+                                               data-bs-toggle="modal" data-bs-target="#editAchievement{{ a.id }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{% url 'delete_achievement' a.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="achievement-action text-danger border-0">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm rounded-4 p-4 bg-white mt-4 section-card-premium">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                        <div>
+                            <h5 class="fw-bold mb-0 text-dark">Notlar</h5>
+                            <small class="text-muted">Paylaşımlar ve satın aldıkların</small>
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-pills mb-4 premium-tabs bg-light p-1 rounded-pill d-inline-flex border" id="profileTabs">
+                        <li class="nav-item">
+                            <button class="nav-link active rounded-pill px-5 fw-bold" data-bs-toggle="pill" data-bs-target="#shared">Paylaştıklarım</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link rounded-pill px-5 fw-bold" data-bs-toggle="pill" data-bs-target="#library">Kütüphanem</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="shared">
+                            <div class="row g-3">
+                                {% for n in yuklenen_notlar %}
+                                <div class="col-md-6">
+                                    <div class="note-card-premium h-100">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div class="me-3">
+                                                <h6 class="fw-bold text-dark mb-1">{{ n.baslik }}</h6>
+                                                <small class="text-muted d-block">Not Detayı</small>
+                                            </div>
+                                            <span class="badge badge-purple-soft">
+                                                <i class="fas fa-upload me-1"></i> Yükleme
+                                            </span>
+                                        </div>
+                                        <div class="mt-3 d-flex justify-content-end">
+                                            <a href="{% url 'not_detay' n.pk %}" class="btn btn-sm btn-outline-primary rounded-pill px-3">İncele</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <p class="text-center opacity-50 py-5">Henüz not yok.</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="library" role="tabpanel">
+                            <div class="row g-3">
+                                {% for item in kutuphanem %}
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card achievement-premium-card h-100 shadow-sm library-card-premium">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                                <span class="badge badge-purple-soft">
+                                                    <i class="fas fa-file-alt me-1"></i> {{ item.dosya_tipi }}
+                                                </span>
+                                                <small class="text-muted">{{ item.yuklenme_tarihi|date:"d M Y" }}</small>
+                                            </div>
+                                            <h6 class="card-title mb-1 text-dark fw-bold">{{ item.baslik }}</h6>
+                                            <p class="card-text small text-secondary">
+                                                {{ item.aciklama|truncatechars:60 }}
+                                            </p>
+                                            <div class="mt-3 d-grid">
+                                                <a href="{% url 'not_detay' item.pk %}" class="btn btn-sm btn-purple-outline">
+                                                    <i class="fas fa-download me-1"></i> Notu Görüntüle
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <div class="col-12 text-center py-5">
+                                    <i class="fas fa-book-open fa-3x mb-3 text-muted" style="opacity: 0.3;"></i>
+                                    <p class="text-secondary">Henüz kütüphanende not bulunmuyor. Keşfetmeye ne dersin?</p>
+                                    <a href="{% url 'magaza' %}" class="btn btn-purple btn-sm">Mağazaya Git</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="peerIstatistikModal" tabindex="-1" aria-hidden="true" style="z-index: 1060;">
+    <div class="modal-dialog modal-xl" style="margin-top: 5vh; margin-bottom: 5vh;">
+        <div class="modal-content border-0 shadow-lg rounded-5 bg-dark text-white" style="border: 1px solid rgba(168, 85, 247, 0.3) !important;">
+            
+            <div class="modal-header border-secondary p-4 d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="icon-box-borsa">
+                        <i class="fas fa-chart-bar text-success"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title fw-bold text-white mb-0">Peerİstatistik | Market Analytics</h5>
+                        <small class="text-success fw-bold"><i class="fas fa-circle me-1 small animate__animated animate__flash animate__infinite"></i> Canlı Veri Akışı Aktif</small>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm rounded-pill px-3 fw-bold border-0 shadow-sm" data-bs-dismiss="modal" style="font-size: 12px;">
+                    <i class="fas fa-times me-1"></i> Paneli Kapat
+                </button>
+            </div>
+
+            <div class="modal-body p-4 p-lg-5">
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="stats-card-borsa p-4 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h6 class="fw-bold mb-0 text-white-50 uppercase-letter-spacing">AKADEMİK AKTİVİTE TRENDİ (7G)</h6>
+                                <span class="badge bg-success-soft">+24.8% 📈</span>
+                            </div>
+                            <div style="height: 300px;">
+                                <canvas id="earningTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="stats-card-borsa p-4 h-100">
+                            <h6 class="fw-bold mb-4 text-white-50 uppercase-letter-spacing">ETKİLEŞİM PORTFÖYÜ</h6>
+                            <div style="height: 220px;">
+                                <canvas id="interactionRatioChart"></canvas>
+                            </div>
+                            <div class="mt-4 pt-2 border-top border-secondary">
+                                <div class="d-flex justify-content-between small mb-2">
+                                    <span class="text-white-50"><i class="fas fa-file-upload text-primary me-2"></i>Paylaşılan Notlar</span>
+                                    <span class="fw-bold text-primary fs-6">{{ toplam_yuklenen|default:0 }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between small mb-2">
+                                    <span class="text-white-50"><i class="fas fa-cloud-download-alt text-info me-2"></i>Satın Alınan / İndirilen</span>
+                                    <span class="fw-bold text-info fs-6">{{ toplam_kutuphanem|default:0 }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between small mb-2">
+                                    <span class="text-white-50"><i class="fas fa-heart text-danger me-2"></i>Beğeniler & Etkileşim</span>
+                                    <span class="fw-bold text-danger fs-6">{{ user.followers.count|default:0 }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between small mb-3">
+                                    <span class="text-white-50"><i class="fas fa-comments text-success me-2"></i>Gelen Yorumlar</span>
+                                    <span class="fw-bold text-success fs-6">{{ user.following.count|default:0 }}</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center p-2 rounded-3 bg-white bg-opacity-10">
+                                    <span class="small fw-bold text-warning"><i class="fas fa-crown me-2"></i>PeerScore Gücü</span>
+                                    <span class="badge bg-warning text-dark fw-black fs-6">#{{ hesaplanan_score|default:0 }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="pomodoroWidget" class="pomodoro-widget shadow-lg p-3 d-flex align-items-center gap-3">
+    <div class="d-flex flex-column align-items-center">
+        <input type="number" id="customMinutes" value="25" min="1" max="180" class="fw-bold text-center border-0 bg-transparent p-0 m-0 shadow-none duration-input" title="Dakika girin">
+        <small class="input-sub-text">DAKİKA GİR</small>
+    </div>
+    
+    <div class="vr opacity-25 mx-1"></div>
+    
+    <div class="d-flex flex-column justify-content-center">
+        <div class="timer-display-premium fw-black" id="timerDisplay">00:25:00</div>
+        <div class="progress mt-1" style="height: 4px; width: 100px; background: rgba(0,0,0,0.06); border-radius: 10px;">
+            <div class="progress-bar bg-success" id="timerProgress" style="width: 0%"></div>
+        </div>
+    </div>
+
+    <div class="timer-controls ms-2">
+        <button id="timerBtn" class="btn btn-purple rounded-circle shadow-sm d-flex align-items-center justify-content-center" style="width: 42px; height: 42px; border: none;">
+            <i class="fas fa-play" id="btnIcon"></i>
+        </button>
+    </div>
+</div>
+
+{% if request.user == user %}
+{% for a in user.achievements.all %}
+<div class="modal fade" id="editAchievement{{ a.id }}" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-4">
+            <h6 class="fw-bold mb-3">Vitrin Güncelle</h6>
+            <form action="{% url 'edit_achievement' a.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" name="title" class="form-control rounded-pill mb-2 small shadow-none" value="{{ a.title }}" required>
+                <input type="text" name="institution" class="form-control rounded-pill mb-2 small shadow-none" value="{{ a.institution|default_if_none:'' }}">
+                <div class="mb-3 mt-2">
+                    <label class="small text-muted mb-1 fw-bold">Belgeyi Değiştir</label>
+                    <input type="file" name="evidence_file" class="form-control rounded-pill small shadow-none">
+                </div>
+                <button type="submit" class="btn btn-success w-100 rounded-pill fw-bold py-2">KAYDET</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="modal fade" id="addAchievement" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-4">
+            <h6 class="fw-bold mb-3">Yeni Vitrin Ekle</h6>
+            <form action="{% url 'add_achievement' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="category" id="modalCategory">
+                <input type="text" name="title" class="form-control rounded-pill mb-2 small" placeholder="Başlık" required>
+                <input type="text" name="institution" class="form-control rounded-pill mb-2 small" placeholder="Kurum (Opsiyonel)">
+                <input type="file" name="evidence_file" class="form-control rounded-pill mb-3 small" required>
+                <button type="submit" class="btn btn-primary w-100 rounded-pill fw-bold py-2">EKLE</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="modal fade" id="followersModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-4 p-3">
+            <h6 class="fw-bold mb-3">Takipçiler</h6>
+            {% for f in user.followers.all %}
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center">
+                    <img src="{% if f.follower.profil_resmi %}{{ f.follower.profil_resmi.url }}{% elif f.follower.profile.profil_resmi %}{{ f.follower.profile.profil_resmi.url }}{% else %}{% static 'img/default_pp.png' %}{% endif %}"
+                         class="rounded-circle me-2" width="35" height="35" style="object-fit:cover;">
+                    <span class="small fw-bold">@{{ f.follower.username }}</span>
+                </div>
+                <a href="{% url 'profil' f.follower.pk %}" class="btn btn-sm btn-light rounded-pill px-3" style="font-size:10px;">Gör</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="followingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-4 p-3">
+            <h6 class="fw-bold mb-3">Takip Edilenler</h6>
+            {% for f in user.following.all %}
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center">
+                    <img src="{% if f.following.profil_resmi %}{{ f.following.profil_resmi.url }}{% elif f.following.profile.profil_resmi %}{{ f.following.profile.profil_resmi.url }}{% else %}{% static 'img/default_pp.png' %}{% endif %}"
+                         class="rounded-circle me-2" width="35" height="35" style="object-fit:cover;">
+                    <span class="small fw-bold">@{{ f.following.username }}</span>
+                </div>
+                <a href="{% url 'profil' f.following.pk %}" class="btn btn-sm btn-light rounded-pill px-3" style="font-size:10px;">Gör</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="viewImageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-header border-0 p-0 position-absolute top-0 end-0" style="z-index: 10;">
+                <button type="button" class="btn-close btn-close-white shadow-none p-3" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0 text-center">
+                {% if user.profil_resmi %}
+                <img src="{{ user.profil_resmi.url }}" class="img-fluid rounded-4 shadow-lg" style="max-height: 80vh; border: 3px solid white;">
+                {% elif user.profile.profil_resmi %}
+                <img src="{{ user.profile.profil_resmi.url }}" class="img-fluid rounded-4 shadow-lg" style="max-height: 80vh; border: 3px solid white;">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="profileImageModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content border-0 shadow-lg rounded-5 overflow-hidden">
+            <div class="modal-header border-0 pb-0 pt-4 px-4">
+                <h5 class="fw-bold mb-0">Profil Fotoğrafı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body p-4" style="max-width: 420px; margin: auto;">
+                <div id="modalMainOptions" class="d-flex flex-column gap-3">
+                    <button class="btn btn-primary rounded-pill py-3 fw-bold w-100" onclick="openFilePicker()">
+                        GALERİDEN SEÇ
+                    </button>
+
+                    <button class="btn btn-info text-white rounded-pill py-3 fw-bold w-100" onclick="toggleCameraView(true)">
+                        FOTOĞRAF ÇEK
+                    </button>
+
+                    {% if user.profile.profil_resmi %}
+                    <form method="post" class="text-center">
+                        {% csrf_token %}
+                        <button type="submit" name="delete_profile_image" class="btn btn-link text-danger fw-bold text-decoration-none w-100">
+                            <i class="fas fa-trash me-1"></i> Resmi Kaldır
+                        </button>
+                    </form>
+                    {% endif %}
+
+                    <div class="mt-3 pt-3 border-top">
+                        <h6 class="text-muted small fw-bold mb-3">SATIN ALINAN AVATARLARIN</h6>
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for inv in user.envanter_genel.all %}
+                                {% if inv.item.kategori == 'avatar' %}
+                                    <div class="avatar-selection-wrapper position-relative">
+                                        <img src="{{ inv.item.preview_image.url }}" 
+                                             class="rounded-3 shadow-sm cursor-pointer {% if user.profile.profil_resmi and user.profile.profil_resmi.url == inv.item.preview_image.url %}border border-3 border-primary{% endif %}"
+                                             width="65" height="65"
+                                             onclick="selectAvatar('{{ inv.id }}')"
+                                             style="object-fit:cover; transition: all 0.2s;"
+                                             onmouseover="this.style.transform='scale(1.1)'"
+                                             onmouseout="this.style.transform='scale(1)'"
+                                             title="{{ inv.item.isim }} - Kuşanmak için tıkla">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cropView" style="display:none;">
+                    <div style="width: 100%; aspect-ratio: 1/1; background: #000; border-radius: 1rem; overflow: hidden; margin-bottom: 1.5rem;">
+                        <img id="cropImage" style="max-width: 100%;">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-dark rounded-pill py-3 fw-bold" onclick="applyCropAndUpload()">BİTTİ</button>
+                        <button type="button" class="btn btn-light rounded-pill py-2 text-muted" data-bs-dismiss="modal">İPTAL</button>
+                    </div>
+                </div>
+
+                <div id="cameraView" style="display:none;">
+                    <video id="video" width="100%" class="rounded-4 mb-3" autoplay playsinline></video>
+                    <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold" onclick="takeSnapshot()">ÇEK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="krediGonderModal" tabindex="-1" aria-labelledby="krediGonderModalLabel" aria-hidden="true" style="z-index: 1065;">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-5 p-4" style="background: rgba(255, 255, 255, 0.98); border: 1px solid rgba(168,85,247,.2) !important;">
+            <div class="modal-header border-0 pb-0 pt-2 px-2 d-flex justify-content-between align-items-center">
+                <h6 class="fw-bold mb-0 text-dark" id="krediGonderModalLabel">
+                    <i class="fas fa-coins text-warning me-1"></i> Kredi Gönder: @{{ user.username }}
+                </h6>
+                <button type="button" class="btn-close small shadow-none" data-bs-close="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'kredi_gonder' user.id %}" method="POST" class="mt-3">
+                {% csrf_token %}
+                <div class="modal-body p-1">
+                    <p class="text-muted small mb-3">
+                        Mevcut Bakiyeniz: <strong class="text-success">{{ request.user.kredi }} 🪙</strong>
+                    </p>
+                    <div class="mb-3">
+                        <label for="miktar" class="mini-label">GÖNDERİLECEK MİKTAR</label>
+                        <input type="number" class="form-control input-premium-sm" id="miktar" name="miktar" min="1" max="{{ request.user.kredi }}" required placeholder="Örn: 25" style="font-weight: 700;">
+                    </div>
+                </div>
+                <div class="d-grid gap-2 mt-2">
+                    <button type="submit" class="btn btn-update-profile w-100 rounded-pill py-2 fw-bold shadow-sm" style="font-size: 12px;">
+                        TRANSFERİ MÜHÜRLE <i class="fas fa-check-circle ms-1"></i>
+                    </button>
+                    <button type="button" class="btn btn-light rounded-pill py-2 small text-muted" data-bs-dismiss="modal" style="font-size: 11px;">İPTAL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ================================
+   PREMIUM THEME (SENİN ORİJİNAL TASARIMIN)
+================================ */
+:root{
+    --primary:#6366f1;
+    --primary-dark:#4f46e5;
+    --secondary:#a855f7;
+    --secondary-dark:#9333ea;
+    --success:#10b981;
+    --warning:#f59e0b;
+    --danger:#ef4444;
+    --bg:#f6f7fb;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --shadow-sm:0 6px 14px rgba(15,23,42,.05);
+    --shadow-md:0 14px 36px rgba(15,23,42,.09);
+    --shadow-lg:0 22px 50px rgba(15,23,42,.12);
+    --radius:24px;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+}
+
+.premium-bg{
+    background: radial-gradient(circle at top left, rgba(168,85,247,.10), transparent 55%),
+                radial-gradient(circle at top right, rgba(99,102,241,.10), transparent 55%),
+                #f8fafc;
+    min-height:100vh;
+    padding-bottom:4rem;
+}
+
+.shadow-premium{ box-shadow:var(--shadow-md)!important; }
+.border-soft{ border-color:rgba(168,85,247,.15)!important; }
+
+::-webkit-scrollbar{ width:8px; }
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(to bottom,var(--primary),var(--secondary));
+    border-radius:50px;
+}
+
+/* PROFILE CARD */
+.profile-card-premium{
+    border-radius:32px!important;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(168,85,247,.18)!important;
+    transition:.35s ease;
+}
+.profile-card-premium:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-lg)!important;
+}
+.profile-cover-premium{
+    height:130px;
+    background:linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+    position:relative;
+}
+.profile-cover-premium::after{
+    content:"";
+    position:absolute;
+    bottom:-30px;
+    left:0;
+    right:0;
+    height:60px;
+    background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+}
+
+/* AVATAR */
+.avatar-wrapper-premium{
+    width:132px;
+    height:132px;
+    border-radius:50%;
+    border:5px solid #fff;
+    background:#fff;
+    margin-top:-66px;
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    box-shadow:0 12px 35px rgba(15,23,42,.10);
+    z-index: 1;
+}
+.avatar-overlay-premium{
+    opacity:0;
+    backdrop-filter:blur(12px);
+    transition:.3s;
+    cursor:pointer;
+    background:linear-gradient(135deg, rgba(99,102,241,.75), rgba(168,85,247,.75));
+}
+.avatar-wrapper-premium:hover .avatar-overlay-premium{ opacity:1; }
+
+.avatar-frame {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    z-index: 5;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+/* LABELS + INPUTS */
+.label-premium{
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:var(--secondary);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+.label-premium::after{
+    content:"";
+    height:2px;
+    flex:1;
+    background:linear-gradient(to right, rgba(168,85,247,.65), rgba(99,102,241,.25));
+    border-radius:10px;
+}
+.mini-label{
+    font-size:10px;
+    font-weight:900;
+    color:var(--secondary);
+    letter-spacing:1px;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:6px;
+}
+.input-premium, .input-premium-sm{
+    border-radius:18px;
+    border:2px solid rgba(168,85,247,.18)!important;
+    background:rgba(248,250,252,.95)!important;
+    transition:.25s;
+}
+.input-premium{ padding:14px 14px; }
+.input-premium-sm{ padding:12px 12px; border-radius:16px; }
+
+.input-premium:focus, .input-premium-sm:focus{
+    border-color:rgba(168,85,247,.75)!important;
+    background:#fff!important;
+    box-shadow:0 0 0 4px rgba(168,85,247,.12)!important;
+    outline:none;
+}
+.bio-container-premium{
+    padding:16px;
+    border-radius:20px;
+    background:rgba(248,250,252,.95);
+    border:1px solid rgba(168,85,247,.12);
+    box-shadow:var(--shadow-sm);
+}
+
+/* PILL */
+.pill-premium{
+    padding:10px 14px;
+    border-radius:999px;
+    border:1px solid rgba(168,85,247,.18);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(248,250,252,.85);
+    box-shadow:var(--shadow-sm);
+}
+.warning-pill{ background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.18); }
+
+/* STAT CARDS */
+.stat-card{
+    border:1px solid rgba(168,85,247,.15)!important;
+    position:relative;
+    overflow:hidden;
+    transition:.3s ease;
+}
+.stat-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg, var(--secondary), var(--primary));
+    opacity:.8;
+}
+.stat-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md)!important; }
+
+.icon-bubble{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+}
+.icon-bubble.purple{ background:rgba(168,85,247,.12); color:var(--secondary); }
+.icon-bubble.info{ background:rgba(59,130,246,.10); color:#3b82f6; }
+.icon-bubble.warning{ background:rgba(245,158,11,.12); color:var(--warning); }
+
+/* ACHIEVEMENT */
+.achievement-premium-card{
+    background:var(--card);
+    border-radius:30px;
+    padding:24px;
+    transition:.35s ease;
+    border:1px solid rgba(168,85,247,.14);
+    height:100%;
+    box-shadow:var(--shadow-sm);
+}
+.achievement-premium-card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-md);
+    border-color:rgba(168,85,247,.28);
+}
+.achievement-body{ overflow-y:auto; max-height:380px; padding-right:6px; }
+.achievement-item{ padding:14px; border-radius:18px; background:rgba(248,250,252,.95); border:1px solid rgba(168,85,247,.12); margin-bottom:12px; }
+.achievement-title{ font-size:13px; }
+.achievement-left{ display:flex; gap:10px; align-items:flex-start; }
+.mini-dot{ width:10px; height:10px; border-radius:50%; margin-top:5px; }
+.achievement-action{ font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(248,250,252,.9); border:1px solid rgba(168,85,247,.10); transition:.2s; }
+.achievement-action:hover{ transform:scale(1.05); background:#fff; }
+
+/* NOTE / LIBRARY */
+.section-card-premium{ border:1px solid rgba(168,85,247,.15)!important; }
+.note-card-premium{ padding:18px; border-radius:22px; background:rgba(248,250,252,.95); border:1px solid rgba(168,85,247,.12); box-shadow:var(--shadow-sm); transition:.3s ease; }
+.note-card-premium:hover{ transform:translateY(-3px); box-shadow:var(--shadow-md); border-color:rgba(168,85,247,.30); }
+.library-card-premium{ border:1px solid rgba(168,85,247,.16)!important; }
+
+/* BADGES + BUTTONS */
+.badge-purple-soft{ background:rgba(168,85,247,.12); color:rgba(88,28,135,1); border:1px solid rgba(168,85,247,.22); font-weight:800; padding:7px 10px; border-radius:999px; font-size:10px; }
+.btn-purple{ background:linear-gradient(135deg, var(--primary), var(--secondary)); color:#fff; font-weight:800; border:none; border-radius:999px; padding:10px 16px; }
+.btn-purple:hover{ color:#fff; opacity:.92; }
+.btn-purple-outline{ border:2px solid rgba(168,85,247,.35); color:rgba(88,28,135,1); background:rgba(255,255,255,.85); border-radius:999px; font-weight:800; transition:.25s; }
+.btn-purple-outline:hover{ background:linear-gradient(135deg, var(--primary), var(--secondary)); color:#fff; border-color:transparent; }
+.btn-update-profile{ background:linear-gradient(135deg, var(--primary), var(--secondary))!important; color:white!important; font-weight:900; border:none; }
+.btn-update-profile:hover{ opacity:.95; }
+
+/* NAV TABS */
+.premium-tabs{ border:1px solid rgba(168,85,247,.15)!important; background:rgba(248,250,252,.85)!important; }
+.nav-pills .nav-link{ color:var(--muted); font-weight:800; transition:.25s; }
+.nav-pills .nav-link.active{ background:linear-gradient(135deg, var(--primary), var(--secondary))!important; box-shadow:0 10px 25px rgba(99,102,241,.22); color:#fff!important; }
+.nav-pills .nav-link:hover{ color:var(--secondary); }
+.hover-mini:hover{ transform:scale(1.02); transition:.2s; }
+
+/* ================================
+   🔥 PEERİSTATİSTİK MODAL & POMODORO 🔥
+================================ */
+.btn-premium-stats {
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    border: none;
+    letter-spacing: 1px;
+    font-size: 14px;
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+    transition: 0.4s;
+}
+
+.btn-premium-stats:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 15px 35px rgba(168, 85, 247, 0.6);
+    color: white;
+}
+
+.bg-dark { background-color: #0f172a !important; }
+
+.stats-card-borsa {
+    background: rgba(30, 41, 59, 0.95) !important;
+    border: 1px solid rgba(168, 85, 247, 0.3) !important;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.icon-box-borsa {
+    width: 45px;
+    height: 45px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.uppercase-letter-spacing {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+}
+
+.bg-success-soft {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 50px;
+}
+
+/* ⏱️ PeerOdak Premium CSS Kilitleri (YENİLENDİ) */
+.pomodoro-widget {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important; 
+    left: auto !important;
+    z-index: 1050 !important;
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(168, 85, 247, 0.2) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08) !important;
+    transition: all 0.3s ease;
+    animation: slideIn 0.5s ease-out;
+}
+
+.duration-input {
+    font-size: 24px !important;
+    color: #1e293b;
+    width: 55px;
+    outline: none;
+}
+
+.input-sub-text {
+    font-size: 8px;
+    color: #64748b;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.timer-display-premium {
+    font-size: 20px !important;
+    color: #1e293b;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* 🎯 MODAL KİLİTLENME ÇÖZÜCÜ (SİHİRLİ KOD) */
+.modal-open {
+    pointer-events: auto !important;
+}
+#peerIstatistikModal {
+    pointer-events: auto !important;
+    z-index: 1060 !important;
+}
+.modal-backdrop {
+    z-index: 1050 !important;
+}
+</style>
+
+<form id="setAvatarForm" method="post" style="display:none;">
+    {% csrf_token %}
+    <input type="hidden" name="set_inventory_avatar" id="inventoryAvatarId">
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => { 
+    const bioText = document.getElementById("bioText");
+    const readMoreBtn = document.getElementById("readMoreBtn");
+
+    if (bioText && readMoreBtn && bioText.scrollHeight > bioText.clientHeight) {
+        readMoreBtn.style.display = "inline-block";
+    }
+});
+
+function toggleBio() {
+    const bioText = document.getElementById("bioText");
+    const btn = document.getElementById("readMoreBtn");
+
+    if (!bioText || !btn) return;
+
+    if (bioText.style.webkitLineClamp === "3" || bioText.style.webkitLineClamp === "") {
+        bioText.style.webkitLineClamp = "unset";
+        btn.innerText = "Daha az göster";
+    } else {
+        bioText.style.webkitLineClamp = "3";
+        btn.innerText = "Daha fazlasını gör";
+    }
+}
+
+function copyPeerID() { 
+    const idText = document.getElementById('userPeerID')?.innerText; 
+    if (!idText) return;
+
+    navigator.clipboard.writeText(idText).then(() => alert("PeerID Kopyalandı!")); 
+}
+
+function setCategory(category) {
+    const modalCategory = document.getElementById("modalCategory");
+    if (modalCategory) modalCategory.value = category;
+}
+
+let cropper = null;
+let stream = null;
+
+const imageUploadInput = document.getElementById('imageUploadInput');
+
+if (imageUploadInput) {
+    imageUploadInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                document.getElementById('modalMainOptions').style.display = 'none'; 
+                document.getElementById('cropView').style.display = 'block';
+
+                const img = document.getElementById("cropImage");
+                img.src = event.target.result;
+
+                if (cropper) cropper.destroy();
+
+                setTimeout(() => {
+                    cropper = new Cropper(img, { aspectRatio: 1, viewMode: 1 });
+                }, 200);
+            };
+
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+}
+
+function applyCropAndUpload() { 
+    if (!cropper) return;
+
+    const canvas = cropper.getCroppedCanvas({ width: 800, height: 800 }); 
+    document.getElementById("cameraImageInput").value = canvas.toDataURL('image/jpeg', 0.9); 
+    document.getElementById("profileImageForm").submit(); 
+}
+
+function toggleCameraView(show) { 
+    document.getElementById('modalMainOptions').style.display = show ? 'none' : 'block'; 
+    document.getElementById('cameraView').style.display = show ? 'block' : 'none'; 
+
+    if (show) {
+        navigator.mediaDevices.getUserMedia({ video: true }).then(s => { 
+            stream = s; 
+            document.getElementById('video').srcObject = s; 
+        });
+    }
+}
+
+function takeSnapshot() { 
+    const canvas = document.createElement('canvas'); 
+    const video = document.getElementById('video'); 
+
+    canvas.width = video.videoWidth; 
+    canvas.height = video.videoHeight; 
+
+    canvas.getContext('2d').drawImage(video, 0, 0); 
+
+    if (stream) stream.getTracks().forEach(t => t.stop()); 
+
+    document.getElementById('cameraView').style.display = 'none'; 
+    document.getElementById('cropView').style.display = 'block'; 
+
+    const img = document.getElementById("cropImage"); 
+    img.src = canvas.toDataURL('image/jpeg'); 
+
+    if (cropper) cropper.destroy();
+
+    setTimeout(() => { 
+        cropper = new Cropper(img, { aspectRatio: 1, viewMode: 1 }); 
+    }, 200); 
+}
+
+// 🔥 TAKİP SİSTEMİ
+function takipSistemi(userId) {
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+    if (!csrftoken) return;
+
+    fetch("{% url 'takip_et_ajax' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": csrftoken,
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-Requested-With": "XMLHttpRequest"
+        },
+        body: "id=" + encodeURIComponent(userId)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'ok') {
+            const btn = document.getElementById('followBtn');
+            const countSpan = document.getElementById('followerCount');
+
+            if (countSpan) countSpan.innerText = data.count;
+
+            if (btn) {
+                if (data.action === 'followed') {
+                    btn.innerHTML = 'Takibi Bırak <i class="fas fa-user-minus ms-1"></i>';
+                    btn.classList.remove("btn-purple");
+                    btn.classList.add("btn-outline-secondary");
+                } else {
+                    btn.innerHTML = 'Takip Et <i class="fas fa-user-plus ms-1"></i>';
+                    btn.classList.remove("btn-outline-secondary");
+                    btn.classList.add("btn-purple");
+                }
+            }
+        }
+    })
+    .catch(err => console.error("Takip hatası:", err));
+}
+
+// 🔥 AVATAR SİSTEMİ
+function selectAvatar(inventoryId) {
+    document.getElementById('inventoryAvatarId').value = inventoryId;
+    document.getElementById('setAvatarForm').submit();
+}
+
+function openFilePicker() {
+    document.getElementById('imageUploadInput').click();
+}
+
+function closeModalAndGo(url) {
+    const modalEl = document.getElementById("profileImageModal");
+    const modal = bootstrap.Modal.getInstance(modalEl);
+
+    if (modal) modal.hide();
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 400);
+}
+
+// 🔥 Peerİstatistik Grafik Motoru
+document.addEventListener('DOMContentLoaded', function() {
+    const ctxTrend = document.getElementById('earningTrendChart').getContext('2d');
+    const gradient = ctxTrend.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(168, 85, 247, 0.5)');
+    gradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
+
+    new Chart(ctxTrend, {
+        type: 'line',
+        data: {
+            labels: ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'],
+            datasets: [{
+                label: 'Market Değeri',
+                data: [
+            Math.round({{ toplam_yuklenen|default:0 }} * 0.4), 
+            Math.round({{ toplam_yuklenen|default:0 }} * 0.8), 
+            Math.round({{ toplam_yuklenen|default:0 }} * 0.6), 
+            Math.round({{ toplam_yuklenen|default:0 }} * 1.2), 
+            Math.round({{ toplam_yuklenen|default:0 }} * 0.9), 
+            Math.round({{ toplam_yuklenen|default:0 }} * 1.5), 
+            {{ toplam_yuklenen|default:0 }}
+        ],
+                borderColor: '#a855f7',
+                backgroundColor: gradient,
+                fill: true,
+                tension: 0.4,
+                pointRadius: 5,
+                pointBackgroundColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8' } },
+                x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+            }
+        }
+    });
+
+    const ctxRatio = document.getElementById('interactionRatioChart').getContext('2d');
+    new Chart(ctxRatio, {
+        type: 'doughnut',
+        data: {
+            labels: ['Notlar', 'İndirilme', 'Takipçiler', 'Takip Edilen'],
+            datasets: [{
+                data: [
+                    {{ toplam_yuklenen|default:0 }}, 
+                    {{ toplam_kutuphanem|default:0 }}, 
+                    {{ user.followers.count|default:0 }}, 
+                    {{ user.following.count|default:0 }}
+                ],
+                backgroundColor: ['#6366f1', '#10b981', '#ef4444', '#f59e0b'],
+                borderWidth: 0,
+                hoverOffset: 15
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { 
+                legend: { 
+                    position: 'bottom', 
+                    labels: { color: '#fff', padding: 10, font: { size: 10 } } 
+                } 
+            },
+            cutout: '70%'
+        }
+    });
+});
+
+// ==========================================================
+// ⏱️ PEERODAK: ULTRA PREMIUM HİLE KORUMALI POMODORO MOTORU
+// ==========================================================
+document.addEventListener("DOMContentLoaded", () => {
+    let timer = null;
+    let isRunning = false;
+    const minutesInput = document.getElementById('customMinutes');
+    const display = document.getElementById('timerDisplay');
+    const btn = document.getElementById('timerBtn');
+    const btnIcon = document.getElementById('btnIcon');
+    const progress = document.getElementById('timerProgress');
+    
+    if (!minutesInput || !display || !btn || !btnIcon || !progress) return; 
+
+    let totalSeconds = parseInt(minutesInput.value) * 60;
+    let timeLeft = totalSeconds;
+
+    function formatTimeDisplay(secs) {
+        let h = Math.floor(secs / 3600);
+        let m = Math.floor((secs % 3600) / 60);
+        let s = secs % 60;
+        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    display.innerText = formatTimeDisplay(timeLeft);
+
+    minutesInput.addEventListener('input', () => {
+        if (!isRunning) {
+            let val = parseInt(minutesInput.value);
+            if (isNaN(val) || val < 1) val = 1;
+            if (val > 180) val = 180;
+            totalSeconds = val * 60;
+            timeLeft = totalSeconds;
+            display.innerText = formatTimeDisplay(timeLeft);
+            progress.style.width = '0%';
+        }
+    });
+
+    function resetTimerWithPenalty(reason) {
+        if (isRunning) {
+            clearInterval(timer);
+            isRunning = false;
+            btnIcon.className = 'fas fa-play';
+            minutesInput.removeAttribute('disabled');
+            
+            let val = parseInt(minutesInput.value);
+            if (isNaN(val) || val < 1) val = 25;
+            totalSeconds = val * 60;
+            timeLeft = totalSeconds;
+            
+            display.innerText = formatTimeDisplay(timeLeft);
+            progress.style.width = '0%';
+            alert(`🚨 DİKKAT! ${reason}. Odaklanma bozulduğu için süre sıfırlandı. Kazanımlar iptal edildi.`);
+        }
+    }
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden && isRunning) {
+            resetTimerWithPenalty("Farklı bir sekmeye veya uygulamaya geçtiğiniz tespit edildi");
+        }
+    });
+
+    btn.addEventListener('click', () => {
+        if (isRunning) {
+            resetTimerWithPenalty("Sayacı kendi isteğinizle durdurdunuz");
+        } else {
+            let val = parseInt(minutesInput.value);
+            if (isNaN(val) || val < 1) val = 1;
+            totalSeconds = val * 60;
+            timeLeft = totalSeconds; 
+            
+            minutesInput.setAttribute('disabled', 'true'); 
+            btnIcon.className = 'fas fa-stop';
+            isRunning = true;
+            
+            timer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    display.innerText = formatTimeDisplay(timeLeft);
+                    let percent = ((totalSeconds - timeLeft) / totalSeconds) * 100;
+                    progress.style.width = `${percent}%`;
+                } else {
+                    clearInterval(timer);
+                    isRunning = false;
+                    btnIcon.className = 'fas fa-play';
+                    minutesInput.removeAttribute('disabled');
+                    progress.style.width = '100%';
+                    
+                    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+                    if(csrftoken) {
+                        fetch("{% url 'pomodoro_odul_ajax' %}", {
+                            method: "POST",
+                            headers: {
+                                "X-Requested-With": "XMLHttpRequest",
+                                "X-CSRFToken": csrftoken
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'ok') {
+                                alert(`Tebrikler! Harika bir odaklanma seansı gerçekleştirdiniz. ${val} dakikalık çalışma başarıyla tamamlandı ve +30 PeerScore hesabınıza eklendi! 🏆`);
+                                const scoreDivs = document.querySelectorAll('.card.stat-card .h2');
+                                scoreDivs.forEach(div => {
+                                    if (!div.innerText.includes('Dosya') && !div.innerText.includes('🪙')) {
+                                        div.innerText = data.new_score;
+                                    }
+                                });
+                            }
+                        })
+                        .catch(err => {
+                            console.error("Ödül sistemi bağlantı hatası:", err);
+                            alert(`Tebrikler! Tam ${val} dakika odaklandınız. Ödül eklenirken bir bağlantı sorunu oluştu.`);
+                        });
+                    } else {
+                        alert(`Tebrikler! ${val} dakikalık odağı tamamladınız.`);
+                    }
+                }
+            }, 1000);
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,77 @@
+KREDİ SİSTEMİ🪙:Kredi sistemi şöyle olucak  sayfa sayısına göre  otomatik şekilde de ayarlanacak ancak kullanıcı da ayarlayabilecek çünkü çok zor bulunan bir notu da paylaşabilir ama azami sınır olucak max 30 kredi yazabilecek.Kullanıcılar arasında kredi paylaşmada olucak ancak bunda da günde sadece azami sınır olucak ve sadece kişiye 3 farklı hesaptan gelebilecek ki sistem suistimal edilmesin.Kredi sisteminde vergi sistemi de getirdik bir kişi bir notu indirirse eğer sistemde otomatik çekecek (10 kredilik bir notsa eğer 4 kredi sistem 6 kredi notu satan kullanıcı alır ve diğer notlar buna göre hesaplanacak).Eğer kullanıcı başka kişiler de getirir ve onlar gidip not indirir veya paylaşırsa her getiridiği kişi için 4 kredi ödül verilecek.Pro Detay  eğer kullanıcı "Premium Üye" ise sistem daha az komisyon (mesela 2 kredi) alacak.Not Kiralama Modeli:
+Adam notu satın almak istemiyor, sadece 24 saatliğine okumak istiyor.
+Daha ucuza notun kredisine göre mesela 10 kredilik not 3 krediye "Kirala" seçeneği sunacağız. Dosyayı indiremeyecek, sadece tarayıcıda okuyabilecek.
+
+FRONTEND KISMI🖋️:Front kısmı daha da güzel olucak buton şekilleri yazı renkleri dark mode wight modu ücretsiz verilecek zaten ama arkası lacivert yıldızlı animasyonlu sistem ya da daha güzel olan bir sistem olucak yani daha ürün olan bir front kısmı olucak kullanıcılar hem profesyonel bir arayüz hemde aradığını kolayca bulacak ve açılır kapanır panel olucak belki kullanıcı keşft kısmını full ekran görmek istiyor.
+
+MAĞAZA KISMI🏬:En can alıcı noktalardan biryerde burası aslında hem ticaret anlamında hemde üürn mantığı ile mükemmel bir mağaza olayı olucak burası sistemde bir sekme ve mağaza yazıcak.Sistem şöyle işleyecek mağazada kullanıcıların krdi ile alabildikleri 50 60 tane yani 3 5 tane değil fazla bir tema olucak arka plan teması olucak  ve güzellik ve zorluğuna göre fiyatlandrıma olucak.Mağazada sadece tema değil kullanıcının kendi profil fotoğraf çerçevesinde kullanacağı birçok çerçeve olucak renkli renksiz abartı abartısız kredi ile satılacak fiyat yine ayarında olucak.Yazı tipleri olucak bunlar onlardan çok daha düşük bir fiyatta olucak ve kişi ismini daha ışıklı renkli yanarsönerli yapabilecek böylelikle notları dhaa dikkat çekici olur ve en sonda paket sistemi olucak eğer kullanıcı 3 tane 5 tane 50 tane neyse not koyarsa bunu sistem görecek ona göre bunu paket hali gibi gösterip ona göre azami sınır olabilecek ve kredisini paketlerde kendi fiyatlandırabilecek bunda azami sınır olmaz çünkü 50 tane 30 sayfadan not koyarsa bu nadir olur ve 30 kredi az olacağı için adalet olmaz.Mağazada Buton şekilleri ile de olucak ateş püskürten ejderha mesela burada kullanıcı inceleye basınca ateş çıkar ve indirirse keza sistem böyle mağaza da kredi yüklemede olucak tabiki buda kişinin lig rozetinde gidecek bu aldığı butondur yazı tipidir çerçeve rozet liginde de kullanabilecek. 
+
+
+PROFİL KISMI🤖:1. Faz: Profil ve Ayarlar Altyapısı (Backend/Zemin)
+Önce o "Instagram Silüeti"ni gerçek fotoğraflara dönüştürecek motoru kurmamız lazım.
+
+Profil Modeli Genişletme: Django User modeline bio, profil_resmi, okul_unvani, yetenekler gibi alanların eklenmesi.
+
+Resim Yükleme Motoru: Media ayarlarının yapılması ve resimlerin sunucuya güvenli yüklenmesi.
+
+Ayarlar Sayfası: Kullanıcının bu bilgileri (ve o meşhur profil resmini) güncelleyebileceği jilet gibi bir form ekranı.
+
+2. Faz: Profil Dashboard İnşası (Visual/Şov)
+İstişare ettiğimiz o "Akademik Kimlik Kartı" tasarımı.
+
+Hero Section: Arka planda o an aktif olan takımın (GS, BJK vb.) hayalet logosu, ortada parlayan avatar ve isim.
+
+Sol Sütun (Identity): Yetenek rozetleri (Python, HTML vb.) ve kazanılan sertifika ikonlarının yerleşimi.
+
+Sağ Sütun (Performance): İndirme sayıları, PeerScore ve öne çıkarılan (pinned) 3 ana notun vitrinlenmesi.
+
+3. Faz: Sosyal & Etkileşim Katmanı (Engagement)
+Platformu sadece "not indirilen yer" olmaktan çıkarıp "sosyal bir akademik ağ" yapma aşaması.
+
+Soru-Cevap Duvarı: Notların altına veya direkt profile yapılabilecek profesyonel yorum/soru sistemi.
+
+Oyunlaştırma (Badge System): "500 İndirme", "Haftanın Notu" gibi başarıların otomatik rozete dönüşüp profile mıhlanması.
+
+4. Faz: Tematik Entegrasyon (Final Polish)
+Dinamik Renkler: Profil sayfasının, kullanıcının envanterindeki aktif temaya (Cyber, Ocean, Midnight) göre anlık renk değiştirmesi.
+
+Mobil Optimizasyon: Bu devasa dashboard'un telefonda da görünmesi.
+
+
+NOTLAR DETAYLANDIRMA GÖRÜNTÜLEME📝:Notları detaylandırma olucak  pdf world veya herneyse kaçıncı sınıfa hitap ediyor ne anlatıyor bunlar olucak.önizleme(preveiw) modu olucak kişi incele butonuna basınca birkaç sayfasını görebilecek ve ona göre satın alabilecek.Notlarda Soru Sorma Ve cevaplama olucak (bunun içerisinde bu varmı kaçıncı sınıfa hitap ediyor falan diye).
+
+GüVENLİK🪪:Dosya Doğrulama AI: Yüklenen dosya gerçekten bir ders notu mu yoksa boş bir sayfa mı? Bunu kontrol eden küçük bir sistem.
+Birisi 10 tane hesap açıp kendi notunu sürekli indirerek kredi kasmasın diye şu barikatları kurucaz IP ve Cihaz Kontrolü: Aynı internet ağından veya aynı bilgisayardan yapılan satın almaları sistem fark edecek ve "Kendi kendine ticaret yapamazsın" diyerek engelleyecek.İndirme Limiti: Yeni açılan bir hesap, belirli bir süre geçmeden veya e-postasını onaylamadan günde en fazla 1-2 not indirebilecek.Telif Bildir (Report) Sistemi: Her notun altına "Bu not teliflidir/izinsizdir" butonu koyacağız. 3 şikayet alan not otomatik incelenecek eğer telif varsa kayıt silinecek.Üniversite Onaylı Rozet: Sadece okul e-postasıyla (.edu.tr) kaydolanlara "Doğrulanmış Öğrenci" rozeti vererek, güvenilir satıcıları öne çıkaracağız.Yükleyici Sorumluluğu: Not yüklerken bir tik koydururuz: "Bu notun tüm hakları bana aittir, hoca slaytı değildir." (Hukuki olarak seni korur).
+AI Yazıcı: Kullanıcı panele girer, "Bana Python'da 'Listeler' konusunu anlatan, içinde 3 tane örnek kod olan profesyonel bir not hazırlal" der.
+Üretim: Sistem arka planda bu notu saniyeler içinde oluşturur, PeerLearn antetiyle PDF yapar.
+Telif Çözümü: Bu not tamamen orijinal olduğu için telif derdi de olmaz!
+Satış: Kullanıcı bu AI ile üretilen notu isterse kendi profilinde "Kendi Hazırladığım Not" diye krediyle satabilir veya ücretsiz paylaşabilir. (AI kullanmak için bizden kredi harcar, satarak geri kazanır).
+Hazır Şablonlar: Not yüklerken "Sade", "Renkli", "Akademik" gibi hazır sayfa düzenleri seçebilsin.
+Paylaşım Gücü: Notu satın alan kişi, kendi sayfasında "Bu notu aldım, çok iyi!" diyerek referans linkiyle paylaşabilsin (Affiliate mantığı).
+iletişim bilgileri olucak.
+
+OYUNLAR VE EĞLENCE SEKMESİ🎮: Sistemde ayrı bir "Oyunlar" sekmesi olacak. Burası hem eğlence hem de düşük miktarlarda kredi kazanma yeri olacak. Oyunlar tamamen kodla (Python ve JavaScript) yapılacak.
+Zeka Oyunları: Sudoku, Kelime Avı (Günün ders terimini bulma) veya Hızlı Matematik işlemleri gibi öğrenci konseptine uygun oyunlar olacak.
+Kredi Kazancı🪙: Oyunlara giriş 1 veya 2 kredi gibi sembolik bir ücretle olacak (Risk/Ödül dengesi). Oyunu başarıyla bitiren kişi (mesela Sudoku'yu çözen) 3-5 kredi kazanacak.
+Hile Engeli🛡️: Günde sadece azami 3 veya 5 kez oyunlardan kredi kazanılabilecek. Böylece kullanıcı bütün gün oyun oynamak yerine not paylaşmaya odaklanacak.
+Liderlik Tablosu🏆: Haftanın "Oyun Şampiyonu" olan kişiye sistem otomatik olarak 20 kredi bonus ve özel bir "Oyun Kralı" rozeti verecek.
+Mağaza Entegrasyonu Store🛒: Mağazada satılan o "Ateş püskürten ejderha" gibi özel efektli butonlar oyunlarda da görünecek, kişinin rütbesi oyun ekranında da belli olacak.
+
+
+premium eklenck
+
+Ödül Çarkı🏆=Hergün hediye çarkı olacak kredilerle temalar yazı stilleri falan çark olucak günde birkez premium için 2 kez çark olucak
+
+
+MOBİLE ENTEGRE EDİLECEK.
+herkese farklı kullanıcı adı ve id eklenecek 
+sıralamada kullanıcı istediği kadar ama max 100 sıra seçebiecek
+video tanıtım
+
+Ve daha da profesyonel olucak kullanıcı da soru işareti olmuyacak dedi hoca 
+
+
+
+
+
+

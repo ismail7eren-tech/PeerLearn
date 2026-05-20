@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5 animate__animated animate__fadeInUp">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            
+            <div class="card border-0 rounded-5 overflow-hidden mb-5 shadow-premium leaderboard-header">
+                <div class="card-body p-5 text-center position-relative z-1">
+                    <div class="mb-3">
+                        <i class="fas fa-crown fa-3x" style="color: #FFD700; filter: drop-shadow(0 4px 15px rgba(255, 215, 0, 0.4));"></i>
+                    </div>
+                    <h1 class="fw-black mb-2" style="color: #FFD700; font-size: 2.8rem; letter-spacing: -1.5px; text-shadow: 0 2px 10px rgba(0,0,0,0.4);">Zirvedekiler (Top 100)</h1>
+                    <p class="mb-0 fw-bold" style="color: #FFC107; font-size: 1.1rem; letter-spacing: 0.5px; text-shadow: 0 1px 5px rgba(0,0,0,0.2);">Platformun PeerScore gücü en yüksek, en seçkin dehaları.</p>
+                </div>
+            </div>
+
+            <div class="card border-0 rounded-5 shadow-premium overflow-hidden leaderboard-card">
+                <div class="table-responsive p-2 p-md-4">
+                    <table class="table align-middle mb-0 leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th class="ps-3 ps-md-4" style="width: 80px;">Sıra</th>
+                                <th>Kullanıcı</th>
+                                <th class="text-center d-none d-md-table-cell">İçerik Sayısı</th>
+                                <th class="text-center">PeerScore Gücü</th>
+                                <th class="text-end pe-3 pe-md-4">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for lider in liderler %}
+                            <tr class="{% if lider == request.user %}active-user-row{% endif %}">
+                                <td class="ps-3 ps-md-4">
+                                    {% if forloop.counter == 1 %}
+                                        <div class="rank-badge rank-1 shadow-sm"><i class="fas fa-trophy"></i></div>
+                                    {% elif forloop.counter == 2 %}
+                                        <div class="rank-badge rank-2 shadow-sm">2</div>
+                                    {% elif forloop.counter == 3 %}
+                                        <div class="rank-badge rank-3 shadow-sm">3</div>
+                                    {% else %}
+                                        <div class="rank-badge rank-other">#{{ forloop.counter }}</div>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <a href="{% url 'profil' lider.id %}" class="d-flex align-items-center text-decoration-none">
+                                        <div class="position-relative">
+                                            {% if lider.profile.profil_resmi %}
+                                                <img src="{{ lider.profile.profil_resmi.url }}" class="rounded-circle avatar-img shadow-sm" width="48" height="48">
+                                            {% elif lider.profil_resmi %}
+                                                <img src="{{ lider.profil_resmi.url }}" class="rounded-circle avatar-img shadow-sm" width="48" height="48">
+                                            {% else %}
+                                                <div class="rounded-circle d-flex align-items-center justify-content-center avatar-placeholder shadow-sm" style="width: 48px; height: 48px;">
+                                                    <i class="fas fa-user fs-5"></i>
+                                                </div>
+                                            {% endif %}
+                                            
+                                            {% if lider.is_premium %}
+                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning p-1 border border-2 border-white shadow-sm">
+                                                    <i class="fas fa-crown" style="font-size: 8px; color: #000;"></i>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="ms-3 d-flex flex-column">
+                                            <span class="fw-bold username-text">@{{ lider.username }}</span>
+                                            {% if lider == request.user %}
+                                                <span class="text-primary fw-black" style="font-size: 11px; letter-spacing: 0.5px;">(SİZ)</span>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </td>
+
+                                <td class="text-center d-none d-md-table-cell">
+                                    <span class="text-muted fw-bold small"><i class="fas fa-file-alt me-1 opacity-50"></i> {{ lider.note_count|default:"0" }}</span>
+                                </td>
+
+                                <td class="text-center">
+                                    <div class="score-pill">
+                                        <i class="fas fa-bolt"></i> {{ lider.profile.peerscore|default:"0" }}
+                                    </div>
+                                </td>
+
+                                <td class="text-end pe-3 pe-md-4">
+                                    {% if lider != request.user %}
+                                        <a href="{% url 'profil' lider.id %}" class="btn btn-sm btn-outline-primary rounded-pill px-3 fw-bold profile-btn">
+                                            İncele
+                                        </a>
+                                    {% else %}
+                                        <span class="badge bg-light text-muted fw-bold border px-3 py-2 rounded-pill">Senin Profilin</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center py-5">
+                                    <div class="opacity-25 mb-3"><i class="fas fa-chess-king fa-4x text-muted"></i></div>
+                                    <h5 class="fw-bold text-dark mb-1">Kimse Yok</h5>
+                                    <p class="text-muted fw-semibold">Henüz sıralama verisi oluşmadı.</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <p class="text-center text-muted small mt-4 fw-bold opacity-75">
+                <i class="fas fa-sync-alt me-1"></i> Liderlik tablosu PeerScore gücüne göre gerçek zamanlı hesaplanır.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* =========================================
+       👑 LİDERLİK TABLOSU PREMIUM TASARIMI
+    ========================================= */
+
+    /* Header Gradient & Pattern (Temalarla Uyumlu) */
+    .leaderboard-header {
+        background: linear-gradient(135deg, var(--brand-purple) 0%, var(--brand-peer) 100%);
+        position: relative;
+    }
+    .leaderboard-header::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        z-index: -1;
+    }
+
+    /* Tablo ve Kart Arkaplanı (Temalara Göre Renk Alır) */
+    .leaderboard-card {
+        background: var(--bg-surface) !important;
+        border: 1px solid var(--border-light) !important;
+    }
+
+    .leaderboard-table th {
+        border-bottom: 2px solid var(--border-light) !important;
+        color: var(--text-muted) !important;
+        letter-spacing: 1px;
+        font-size: 11px;
+    }
+    
+    .leaderboard-table td {
+        border-bottom: 1px solid var(--border-light) !important;
+        color: var(--text-dark) !important;
+        padding: 1.2rem 0.5rem !important;
+        transition: all 0.3s ease;
+    }
+
+    .leaderboard-table tr { transition: all 0.3s ease; }
+    .leaderboard-table tr:hover td {
+        background: rgba(0, 102, 255, 0.03);
+    }
+    .leaderboard-table tr:hover {
+        transform: scale(1.01);
+    }
+
+    .active-user-row td {
+        background: rgba(0, 102, 255, 0.05);
+    }
+
+    /* Rozet Tasarımları (Altın, Gümüş, Bronz) */
+    .rank-badge {
+        width: 36px; height: 36px;
+        display: inline-flex; align-items: center; justify-content: center;
+        border-radius: 50%; font-weight: 900; font-size: 14px;
+    }
+    .rank-1 { background: linear-gradient(135deg, #FFD700, #F8A502); color: #000; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.3); }
+    .rank-2 { background: linear-gradient(135deg, #E0E0E0, #9E9E9E); color: #000; box-shadow: 0 4px 10px rgba(158, 158, 158, 0.3); }
+    .rank-3 { background: linear-gradient(135deg, #CD7F32, #8B4513); color: #fff; box-shadow: 0 4px 10px rgba(205, 127, 50, 0.3); }
+    .rank-other { background: var(--bg-body); color: var(--text-muted); border: 1px solid var(--border-light); }
+
+    /* PeerScore Rozeti */
+    .score-pill {
+        background: rgba(251, 191, 36, 0.15);
+        color: #d97706;
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        padding: 6px 16px;
+        border-radius: 50px;
+        font-weight: 900;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+    .leaderboard-table tr:hover .score-pill {
+        transform: scale(1.05);
+        background: #fbbf24;
+        color: #fff;
+    }
+
+    .username-text { color: var(--text-dark); font-size: 1.05rem; }
+    .avatar-img { object-fit: cover; border-color: var(--bg-surface) !important; }
+    .avatar-placeholder { background: var(--bg-body); color: var(--text-muted); border: 2px solid var(--border-light); }
+    .profile-btn { border-width: 2px; }
+    .fw-black { font-weight: 900; }
+</style>
+{% endblock %}

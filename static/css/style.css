@@ -1,0 +1,4224 @@
+/* ==========================================================
+   PEERLEARN ANA TEMA (VARSAYILAN)
+   Durum: Kurtarıldı v1.0
+   Açıklama: Mor-Mavi Neon Aura, Işıltılı Kartlar
+   ========================================================== */
+
+body {
+    background: #050609 !important; /* Zifiri Karanlık Zemin */
+    color: #e0e6ed !important; /* Ferah Gri-Beyaz Yazılar */
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- ANA SAYFA NEON GÜNEŞİ (Arka Plan Işığı) --- */
+body::before {
+    content: "";
+    position: fixed;
+    top: -20%; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(111, 66, 193, 0.4) 0%, rgba(5, 6, 9, 0) 70%);
+    z-index: -1;
+    opacity: 0.8;
+}
+
+/* LOGO VE NEON YAZILAR */
+.text-peer { color: #ffffff !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+.text-learn { color: #6f42c1 !important; text-shadow: 0 0 15px #6f42c1; font-weight: 800; }
+
+/* NAVBAR VE FOOTER */
+.navbar {
+    background: rgba(5, 6, 9, 0.96) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #6f42c1 !important;
+    box-shadow: 0 0 25px rgba(111, 66, 193, 0.3) !important;
+}
+footer {
+    background: #000000 !important;
+    border-top: 2px solid #6f42c1 !important;
+}
+
+/* KARTLAR VE NEON GÖLGELER (Burası Çok Önemli) */
+.card, .pro-card, .balance-card, .list-group-item {
+    background: rgba(20, 22, 29, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(111, 66, 193, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    transition: all 0.3s ease;
+}
+
+.card:hover, .pro-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: #6f42c1 !important;
+    box-shadow: 0 0 25px rgba(111, 66, 193, 0.3) !important;
+}
+
+/* BUTONLAR: Mor Neon */
+.btn-primary, .btn-purple {
+    background: #6f42c1 !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(111, 66, 193, 0.4) !important;
+    border-radius: 50px !important;
+    font-weight: 700;
+}
+
+/* SIRALAMA TABLOSU VE MODALLAR */
+.table td, .table th { color: #ffffff !important; border-color: rgba(255, 255, 255, 0.05) !important; }
+.thead-dark th { background: #14161d !important; color: #6f42c1 !important; }
+
+/* ========================================================== */
+/* MAĞAZA TEMALARI - DINAMIK MOTOR                          */
+/* ========================================================== */
+
+/* ==========================================================
+   TEMA: NEON GECESİ v9.0 (PERFECT READABILITY EDITION)
+   Durum: Arka plan ve Neonlar Korundu, Yazılar Mükemmelleştirildi.
+   ========================================================== */
+/* ==========================================================
+   🦁 TEMA: NEON GECESİ v11.0 (PRO-GAMER & PREMIUM EDITION)
+   Sistem kilitlenmez, yeni eklenen tüm modüller neonlaşır!
+   ========================================================== */
+
+/* ==========================================================
+   🦁 TEMA: NEON GECESİ v12.0 (GÖZ DOSTU & OKUNABİLİR SEVİYE)
+   Sadece beyaz arka planda kaybolan metin renkleri düzeltildi!
+   ========================================================== */
+
+body.tema-neon {
+    background: radial-gradient(circle at top, rgba(188, 19, 254, 0.25) 0%, rgba(8, 10, 15, 1) 60%),
+                radial-gradient(circle at bottom, rgba(0, 212, 255, 0.20) 0%, rgba(8, 10, 15, 1) 75%) !important;
+    color: #f3f4f6 !important;
+    font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif !important;
+    letter-spacing: 0.2px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ARKADA NEON GLOW KATMANI */
+body.tema-neon::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 15% 15%, rgba(188, 19, 254, 0.28), transparent 50%),
+                radial-gradient(circle at 85% 25%, rgba(0, 212, 255, 0.25), transparent 50%),
+                radial-gradient(circle at 50% 85%, rgba(122, 11, 192, 0.22), transparent 55%);
+    opacity: 1;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* NAVBAR (SİBER CAM + MOR ELEKTRİK ÇİZGİSİ) */
+body.tema-neon .navbar {
+    background: rgba(10, 12, 18, 0.80) !important;
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(188, 19, 254, 0.45) !important;
+    box-shadow: 0 4px 30px rgba(188, 19, 254, 0.25) !important;
+}
+
+/* LOGO VE METİN PARLAMALARI */
+body.tema-neon .text-peer, 
+body.tema-neon .brand-text span:first-child,
+body.tema-neon .peer-title span {
+    color: #00d4ff !important;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.85), 0 0 30px rgba(0, 212, 255, 0.4) !important;
+    font-weight: 950 !important;
+}
+
+body.tema-neon .text-learn, 
+body.tema-neon .brand-text span:last-child,
+body.tema-neon .peer-title {
+    color: #bc13fe !important;
+    text-shadow: 0 0 15px rgba(188, 19, 254, 0.85), 0 0 30px rgba(188, 19, 254, 0.4) !important;
+    font-weight: 950 !important;
+}
+
+/* NAVBAR LİNKLERİ */
+body.tema-neon .nav-link,
+body.tema-neon .nav-link i,
+body.tema-neon .navbar-nav .nav-item a {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 800 !important;
+    transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.tema-neon .nav-link:hover,
+body.tema-neon .nav-link:hover i,
+body.tema-neon .navbar-nav .nav-item a:hover {
+    color: #00d4ff !important;
+    text-shadow: 0 0 12px rgba(0, 212, 255, 0.8) !important;
+    transform: translateY(-1px);
+}
+
+/* 🔥 1) SEARCH BOX VE INPUT YAZI RENGİ DÜZELTİLDİ */
+body.tema-neon .search-box input.form-control,
+body.tema-neon .search-box .search-input,
+body.tema-neon input[placeholder="Hızlı Ara..."] {
+    color: #1e293b !important; /* Beyaz alanda net görünen koyu lacivert/gri */
+    font-weight: 700 !important;
+}
+body.tema-neon input[placeholder="Hızlı Ara..."]::placeholder {
+    color: #94a3b8 !important; /* Okunabilir gri placeholder */
+}
+
+body.tema-neon .badge.bg-danger {
+    background: #ff007a !important;
+    box-shadow: 0 0 12px #ff007a !important;
+}
+
+/* TÜM KARTLAR VE MODÜLLER */
+body.tema-neon .card,
+body.tema-neon .profile-card-premium,
+body.tema-neon .stat-card,
+body.tema-neon .achievement-premium-card,
+body.tema-neon .note-card-premium,
+body.tema-neon .library-card-premium,
+body.tema-neon .magaza-card,
+body.tema-neon .section-card-premium,
+body.tema-neon .category-card {
+    background: rgba(15, 18, 26, 0.80) !important;
+    border: 1px solid rgba(188, 19, 254, 0.25) !important;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6) !important;
+    border-radius: 24px !important;
+}
+
+body.tema-neon .card:hover,
+body.tema-neon .profile-card-premium:hover,
+body.tema-neon .stat-card:hover,
+body.tema-neon .achievement-premium-card:hover,
+body.tema-neon .note-card-premium:hover,
+body.tema-neon .magaza-card:hover,
+body.tema-neon .category-card:hover {
+    transform: translateY(-6px) !important;
+    border: 1px solid rgba(0, 212, 255, 0.45) !important;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2), 0 15px 45px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* METİN RENKLERİ */
+body.tema-neon h1, body.tema-neon h2, body.tema-neon h3, 
+body.tema-neon h4, body.tema-neon h5, body.tema-neon h6,
+body.tema-neon .card-title, body.tema-neon .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+}
+
+body.tema-neon p, body.tema-neon span, body.tema-neon label,
+body.tema-neon .text-muted, body.tema-neon small, body.tema-neon .small {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO WIDGET) */
+body.tema-neon .pomodoro-widget {
+    background: rgba(10, 12, 18, 0.85) !important;
+    border: 1px solid rgba(0, 212, 255, 0.4) !important;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.25) !important;
+}
+body.tema-neon #customMinutes,
+body.tema-neon .timer-display,
+body.tema-neon .pomodoro-widget .small {
+    color: #00d4ff !important;
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5) !important;
+}
+
+/* 🪙 CÜZDAN ALANLARI */
+body.tema-neon .pill-premium,
+body.tema-neon .credit-box,
+body.tema-neon .wallet-box {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(188, 19, 254, 0.35) !important;
+    backdrop-filter: blur(12px);
+}
+body.tema-neon .credit-count,
+body.tema-neon .wallet-credit {
+    color: #facc15 !important;
+    text-shadow: 0 0 12px rgba(250, 204, 21, 0.6) !important;
+}
+
+/* 📊 GRAFİKLER */
+body.tema-neon .stats-card-borsa {
+    background: rgba(15, 18, 26, 0.95) !important;
+    border: 1px solid rgba(188, 19, 254, 0.3) !important;
+}
+
+/* INPUT ALANLARI */
+body.tema-neon .form-control,
+body.tema-neon input,
+body.tema-neon textarea,
+body.tema-neon select {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(188, 19, 254, 0.3) !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    border-radius: 16px !important;
+}
+body.tema-neon .form-control:focus,
+body.tema-neon input:focus,
+body.tema-neon textarea:focus {
+    border-color: rgba(0, 212, 255, 0.7) !important;
+    box-shadow: 0 0 18px rgba(0, 212, 255, 0.3) !important;
+}
+
+/* NAV TABS */
+body.tema-neon .premium-tabs {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(188, 19, 254, 0.2) !important;
+}
+body.tema-neon .nav-pills .nav-link {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+body.tema-neon .nav-pills .nav-link.active {
+    background: linear-gradient(135deg, #bc13fe, #00d4ff) !important;
+    box-shadow: 0 0 20px rgba(188, 19, 254, 0.4) !important;
+    color: white !important;
+}
+
+/* BUTONLAR */
+body.tema-neon .btn-primary,
+body.tema-neon .btn-purple,
+body.tema-neon .btn-update-profile,
+body.tema-neon .btn-premium-stats {
+    background: linear-gradient(135deg, #bc13fe, #00d4ff) !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    border-radius: 16px !important;
+}
+
+/* 🔥 2) SIRALAMA LİSTESİ / TABLO METİNLERİ KESİN OLARAK KOYULAŞTIRILDI */
+body.tema-neon .table {
+    color: #1e293b !important; /* Tablo içindeki genel yazıları koyu slate yapar */
+}
+body.tema-neon .table thead th {
+    background: rgba(26, 5, 51, 0.95) !important;
+    color: #00d4ff !important; /* Başlıklar parlasın */
+    border-bottom: 2px solid rgba(188, 19, 254, 0.5) !important;
+}
+body.tema-neon .table td,
+body.tema-neon .table td span,
+body.tema-neon .table td text,
+body.tema-neon .table tbody tr td {
+    color: #0f172a !important; /* Kullanıcı adları, "Not" yazısı ve krediler zifiri koyu olur */
+    font-weight: 700 !important;
+}
+
+/* FOOTER */
+body.tema-neon footer {
+    background: rgba(10, 12, 18, 0.9) !important;
+    border-top: 1px solid rgba(188, 19, 254, 0.3) !important;
+}
+
+
+/* ==========================================================
+   TEMA: OCEAN DEEP v2.0 (FINAL IMMERSIVE UPDATE)
+   ========================================================== */
+
+/* ==========================================================
+   🌊 TEMA: OCEAN DEEP v4.0 (PURE CSS BACKGROUND EDITION)
+   HTML'e dokunmadan, her şeyi tek bir resim ve CSS ile çözer!
+   ========================================================== */
+/* ==========================================================
+   🌊 TEMA 1: OCEAN DEEP v5.0 (FINAL IMMERSIVE BLUE EDITION)
+   HTML'e dokunmadan, her şeyi tek bir resim ve CSS ile çözer!
+   ========================================================== */
+
+body.tema-ocean {
+    background-color: #000814 !important; /* Resim yüklenene kadar koruyucu koyu renk */
+    
+    /* 🔥 SİHİRLİ ALAN: İndirdiğin ocean.tema.png resmini arkaya gömer.
+       linear-gradient katmanı resmi hafifçe karartır ki önündeki yazılar kabak gibi okunsun. */
+    background-image: 
+        linear-gradient(rgba(0, 8, 20, 0.82), rgba(0, 8, 20, 0.88)), 
+        url('/static/img/ocean.tema.png') !important;
+        
+    background-size: cover !important;
+    background-position: center !important;
+    background-attachment: fixed !important; /* Sayfa kaysa bile resim arkada sabit kalır */
+    color: #e0f2f1 !important; /* Ferah kristal beyaz yazı */
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* NAVBAR (SABİT OKYANUS TAVANI) */
+body.tema-ocean .navbar {
+    background: rgba(0, 8, 20, 0.85) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid #00f2ff !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-ocean .text-peer, 
+body.tema-ocean .brand-text span:first-child, 
+body.tema-ocean .peer-title span { 
+    color: #00f2ff !important; 
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.85) !important; 
+}
+body.tema-ocean .text-learn, 
+body.tema-ocean .brand-text span:last-child, 
+body.tema-ocean .peer-title { 
+    color: #22d3ee !important; 
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI (İSTEDİĞİN CANLI SİBER MAVİYE ÇEKİLDİ) */
+body.tema-ocean .nav-link, 
+body.tema-ocean .navbar-nav .nav-item a,
+body.tema-ocean .nav-link i {
+    color: #00f2ff !important; /* Net ve parıldayan okyanus mavisi */
+    text-shadow: 0 0 8px rgba(0, 242, 255, 0.4) !important;
+    font-weight: 800 !important;
+    opacity: 0.95;
+}
+body.tema-ocean .nav-link:hover, 
+body.tema-ocean .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(0, 242, 255, 0.8) !important;
+    opacity: 1;
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE PLACEHOLDER MAVİSİ */
+body.tema-ocean .search-box input.form-control, 
+body.tema-ocean .search-input {
+    color: #00f2ff !important;
+    font-weight: 700 !important;
+}
+body.tema-ocean .search-input::placeholder {
+    color: rgba(0, 242, 255, 0.5) !important;
+}
+
+/* --- TÜM KARTLAR VE MODÜLLER (OKYANUS CAMI & BLUR EFEKTİ) --- */
+body.tema-ocean .card, 
+body.tema-ocean .pro-card,
+body.tema-ocean .balance-card,
+body.tema-ocean .profile-card-premium,
+body.tema-ocean .stat-card,
+body.tema-ocean .achievement-premium-card,
+body.tema-ocean .note-card-premium,
+body.tema-ocean .library-card-premium,
+body.tema-ocean .magaza-card,
+body.tema-ocean .section-card-premium,
+body.tema-ocean .category-card {
+    background: rgba(0, 18, 30, 0.70) !important; /* Şeffaf okyanus camı */
+    backdrop-filter: blur(15px) !important; /* Arkadaki deniz resmini efsane buğulu gösterir */
+    border: 1px solid rgba(0, 242, 255, 0.25) !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65) !important;
+    border-radius: 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Neon Mavi Parlama */
+body.tema-ocean .card:hover,
+body.tema-ocean .profile-card-premium:hover,
+body.tema-ocean .stat-card:hover,
+body.tema-ocean .note-card-premium:hover,
+body.tema-ocean .magaza-card:hover {
+    transform: translateY(-6px) !important;
+    border: 1px solid rgba(0, 242, 255, 0.5) !important;
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.25), 0 15px 45px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Yazı Fontları ve Renk Güvenliği */
+body.tema-ocean h1, body.tema-ocean h2, body.tema-ocean h3, 
+body.tema-ocean h4, body.tema-ocean h5, body.tema-ocean h6,
+body.tema-ocean .card-title, body.tema-ocean .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.4) !important;
+}
+body.tema-ocean p, body.tema-ocean span, body.tema-ocean label,
+body.tema-ocean .text-muted, body.tema-ocean small, body.tema-ocean .small {
+    color: #a5f3fc !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO WIDGET) OKYANUS MAVİSİ */
+body.tema-ocean .pomodoro-widget {
+    background: rgba(0, 8, 20, 0.85) !important;
+    border: 1px solid rgba(0, 242, 255, 0.4) !important;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2) !important;
+}
+body.tema-ocean #customMinutes,
+body.tema-ocean .timer-display {
+    color: #00f2ff !important;
+    text-shadow: 0 0 8px rgba(0, 242, 255, 0.4) !important;
+}
+
+/* SIRALAMA LİSTESİ / TABLOLAR (NET OKUNABİLİR BEYAZ) */
+body.tema-ocean .table { color: #ffffff !important; }
+body.tema-ocean .table thead th {
+    background: rgba(0, 18, 30, 0.9) !important;
+    color: #00f2ff !important;
+    border-bottom: 2px solid #00f2ff !important;
+}
+body.tema-ocean .table td {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 600 !important;
+}
+
+/* FOOTER */
+body.tema-ocean footer {
+    background: rgba(0, 8, 20, 0.9) !important;
+    border-top: 1px solid rgba(0, 242, 255, 0.3) !important;
+}
+
+/* ==========================================================
+   🐄 TEMA: SWEET COW v5.0 (PREMIUM INTEGRATED UNIFIED EDITION)
+   Sistem kilitlenmez. Yeni eklenen tüm komponentler inekleşir!
+   ========================================================== */
+
+body.tema-cow {
+    background-color: #050608 !important; /* Zifiri Siyah Gece Modu */
+    color: #ffffff !important;
+    font-family: 'Poppins', sans-serif !important;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* BENEKLERİN OLDUĞU ARKA PLAN KATMANI */
+body.tema-cow::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    
+    background-image: 
+        radial-gradient(ellipse at 12% 18%, #ffffff 130px, transparent 132px),
+        radial-gradient(ellipse at 88% 10%, #ffffff 100px, transparent 102px),
+        radial-gradient(ellipse at 45% 55%, #ffffff 150px, transparent 152px),
+        radial-gradient(ellipse at 75% 85%, #ffffff 120px, transparent 122px),
+        radial-gradient(ellipse at 15% 90%, #ffffff 140px, transparent 142px);
+    
+    background-size: 100% 100%;
+    opacity: 0.22 !important; 
+    filter: none !important;
+}
+
+/* NAVBAR: Sakız Pembesi Çizgi & Siyah Taban */
+body.tema-cow .navbar {
+    background: rgba(5, 6, 8, 0.98) !important;
+    border-bottom: 4px solid #ff85a1 !important;
+    box-shadow: 0 4px 25px rgba(255, 133, 161, 0.4) !important;
+}
+
+/* MARKA LOGO RENKLERİ */
+body.tema-cow .text-peer, body.tema-cow .brand-text span:first-child, body.tema-cow .peer-title span {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6) !important;
+}
+body.tema-cow .text-learn, body.tema-cow .brand-text span:last-child, body.tema-cow .peer-title {
+    color: #ff85a1 !important;
+    text-shadow: 0 0 12px rgba(255, 133, 161, 0.5) !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (PEMBE ŞEKERLEME MODU) */
+body.tema-cow .nav-link, 
+body.tema-cow .navbar-nav .nav-item a,
+body.tema-cow .nav-link i {
+    color: #ff85a1 !important; /* Üst menüyü tamamen pembeye çektik kral */
+    font-weight: 800 !important;
+    transition: all 0.2s ease;
+}
+body.tema-cow .nav-link:hover, body.tema-cow .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 133, 161, 0.8) !important;
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE BEMBEYAZ KONTRAST */
+body.tema-cow .search-box input.form-control, 
+body.tema-cow .search-input {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+body.tema-cow .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* TÜM KARTLAR, MODÜLLER VE ENVANTER PANEL KUTULARI (İNEK BENEK IMZASI) */
+body.tema-cow .card, 
+body.tema-cow .pro-card,
+body.tema-cow .list-group-item,
+body.tema-cow .table-responsive,
+body.tema-cow .profile-card-premium,
+body.tema-cow .stat-card,
+body.tema-cow .achievement-premium-card,
+body.tema-cow .note-card-premium,
+body.tema-cow .library-card-premium,
+body.tema-cow .magaza-card,
+body.tema-cow .section-card-premium,
+body.tema-cow .category-card {
+    background: #11141b !important; /* Koyu gri-siyah kart içi */
+    border: 3px solid #ffffff !important; /* Kalın bembeyaz çerçeve */
+    border-radius: 25px !important;
+    box-shadow: 10px 10px 0px #ff85a1 !important; /* Pembe kalın 3D blok gölge */
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Kart Hover Durumunda Pembe Patlama */
+body.tema-cow .card:hover,
+body.tema-cow .profile-card-premium:hover,
+body.tema-cow .stat-card:hover,
+body.tema-cow .note-card-premium:hover,
+body.tema-cow .magaza-card:hover {
+    transform: translate(-2px, -2px) !important;
+    box-shadow: 14px 14px 0px #ff85a1, 0 0 20px rgba(255, 133, 161, 0.2) !important;
+}
+
+/* YAZI OKUNABİLİRLİĞİ SİGORTASI */
+body.tema-cow h1, body.tema-cow h2, body.tema-cow h3, 
+body.tema-cow h4, body.tema-cow h5, body.tema-cow h6,
+body.tema-cow .card-title, body.tema-cow .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+}
+body.tema-cow p, body.tema-cow span:not(.badge), body.tema-cow label,
+body.tema-cow .text-muted, body.tema-cow small, body.tema-cow .small {
+    color: #ffffff !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) SWEET COW ENTEGRASYONU */
+body.tema-cow .pomodoro-widget {
+    background: #11141b !important;
+    border: 3px solid #ffffff !important;
+    box-shadow: 6px 6px 0px #ff85a1 !important;
+}
+body.tema-cow #customMinutes,
+body.tema-cow .timer-display {
+    color: #ff85a1 !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ROZETLERİ (SAKIZ PEMBESİ & BEYAZ BLOK) */
+body.tema-cow .pill-premium,
+body.tema-cow .credit-box,
+body.tema-cow .wallet-box {
+    background: #ffffff !important;
+    border: 2px solid #ff85a1 !important;
+    border-radius: 18px !important;
+}
+body.tema-cow .credit-count,
+body.tema-cow .wallet-credit,
+body.tema-cow .wallet-label {
+    color: #ff85a1 !important;
+    font-weight: 900 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-cow .stats-card-borsa {
+    background: #11141b !important;
+    border: 3px solid #ffffff !important;
+}
+
+/* FORM INPUTLARI VE METİN KUTULARI */
+body.tema-cow .form-control,
+body.tema-cow input,
+body.tema-cow textarea,
+body.tema-cow select {
+    background: #050608 !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important;
+}
+body.tema-cow .form-control:focus,
+body.tema-cow input:focus {
+    border-color: #ff85a1 !important;
+    box-shadow: 0 0 10px rgba(255, 133, 161, 0.4) !important;
+}
+
+/* TABLO / SIRALAMA DÜZENLEME (NET KONTRAST) */
+body.tema-cow .table { color: #ffffff !important; }
+body.tema-cow thead th {
+    background: #ff85a1 !important; /* Başlıklar pembe */
+    color: #000000 !important; /* Yazılar siyah */
+    font-weight: 900 !important;
+    border: 2px solid #ffffff !important;
+}
+body.tema-cow .table td {
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* BUTONLAR: ŞEKERLEME STİLİ CONTRAST */
+body.tema-cow .btn-primary, 
+body.tema-cow .btn-purple,
+body.tema-cow .btn-update-profile,
+body.tema-cow .btn-premium-stats {
+    background: #ff85a1 !important;
+    border: 2px solid #ffffff !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
+    border-radius: 16px !important;
+    box-shadow: 4px 4px 0px #ffffff !important;
+}
+body.tema-cow .btn-primary:hover {
+    transform: translate(1px, 1px) !important;
+    box-shadow: 2px 2px 0px #ffffff !important;
+}
+
+/* FOOTER */
+body.tema-cow footer {
+    background: #050608 !important;
+    border-top: 4px solid #ff85a1 !important;
+}
+/* ==========================================================
+   🚀 TEMA 4: MARS SUNSET (KIZIL GEZEGEN v1.5 - UNIFIED PREMIUM)
+   Sistem kilitlenmez. Yeni eklenen tüm komponentler Marslaşır!
+   ========================================================== */
+
+body.tema-mars {
+    background-color: #1a0a05 !important; /* Koyu pas rengi zemin */
+    color: #ffffff !important; /* Ana yazılar bembeyaz yapıldı kral */
+    font-family: 'Exo 2', sans-serif !important; 
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- DİNAMİK MARS ATMOSFERİ --- */
+body.tema-mars::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 50% 100%, #ff4d00 0%, rgba(26, 10, 5, 0) 50%),
+        linear-gradient(180deg, #0f0502 0%, #1a0a05 100%) !important;
+}
+
+/* KIZIL TOZ ZERRELERİ */
+body.tema-mars::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    background-image: 
+        radial-gradient(#ff4d00 1px, transparent 1px),
+        radial-gradient(#ff9e7d 1px, transparent 1px);
+    background-size: 150px 150px, 250px 250px;
+    opacity: 0.15;
+    animation: marsDust 30s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes marsDust {
+    0% { background-position: 0 0; }
+    100% { background-position: 500px 500px; }
+}
+
+/* NAVBAR: Turuncu Neon Şerit */
+body.tema-mars .navbar {
+    background: rgba(15, 5, 2, 0.95) !important;
+    border-bottom: 3px solid #ff4d00 !important;
+    box-shadow: 0 4px 20px rgba(255, 77, 0, 0.3) !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-mars .text-peer, body.tema-mars .brand-text span:first-child, body.tema-mars .peer-title span { 
+    color: #ffffff !important; 
+    text-shadow: 0 0 10px #ff4d00; 
+}
+body.tema-mars .text-learn, body.tema-mars .brand-text span:last-child, body.tema-mars .peer-title { 
+    color: #ff4d00 !important; 
+    font-weight: 800; 
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (KIZIL NEON GÜNCELLEMESİ) */
+body.tema-mars .nav-link, 
+body.tema-mars .navbar-nav .nav-item a,
+body.tema-mars .nav-link i {
+    color: #ff4d00 !important; /* Kararan üst menüyü Mars turuncusuna çektik kral */
+    text-shadow: 0 0 8px rgba(255, 77, 0, 0.4) !important;
+    font-weight: 800 !important;
+    opacity: 0.95;
+    transition: all 0.2s ease;
+}
+body.tema-mars .nav-link:hover, body.tema-mars .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(255, 77, 0, 0.8) !important;
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE MARS TURUNCUSU KONTRAST */
+body.tema-mars .search-box input.form-control, 
+body.tema-mars .search-input {
+    color: #ff4d00 !important;
+    font-weight: 700 !important;
+}
+body.tema-mars .search-input::placeholder {
+    color: rgba(255, 77, 0, 0.5) !important;
+}
+
+/* KARTLAR, MODÜLLER VE ENVANTER KUTULARI (KIZIL PAS CAMI) */
+body.tema-mars .card, 
+body.tema-mars .pro-card,
+body.tema-mars .profile-card-premium,
+body.tema-mars .stat-card,
+body.tema-mars .achievement-premium-card,
+body.tema-mars .note-card-premium,
+body.tema-mars .library-card-premium,
+body.tema-mars .magaza-card,
+body.tema-mars .section-card-premium,
+body.tema-mars .category-card {
+    background: rgba(30, 10, 5, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 77, 0, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+    border-radius: 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Isı Paneli Parlaması */
+body.tema-mars .card:hover,
+body.tema-mars .profile-card-premium:hover,
+body.tema-mars .stat-card:hover,
+body.tema-mars .note-card-premium:hover,
+body.tema-mars .magaza-card:hover {
+    transform: translateY(-5px) !important;
+    border: 1px solid rgba(255, 77, 0, 0.6) !important;
+    box-shadow: 0 0 20px rgba(255, 77, 0, 0.25), 0 12px 35px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* YAZI RENK GÜVENLİĞİ */
+body.tema-mars h1, body.tema-mars h2, body.tema-mars h3, 
+body.tema-mars item-title, body.tema-mars h5, body.tema-mars h6,
+body.tema-mars .card-title, body.tema-mars .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.9) !important;
+}
+body.tema-mars p, body.tema-mars span, body.tema-mars label,
+body.tema-mars small, body.tema-mars .small {
+    color: #ffffff !important;
+}
+body.tema-mars .text-muted {
+    color: #dfdfdf !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) MARS ENTEGRASYONU */
+body.tema-mars .pomodoro-widget {
+    background: #2a0e05 !important;
+    border: 1px solid #ff4d00 !important;
+    box-shadow: 0 0 15px rgba(255, 77, 0, 0.2) !important;
+}
+body.tema-mars #customMinutes,
+body.tema-mars .timer-display {
+    color: #ff4d00 !important;
+    text-shadow: 0 0 6px rgba(255, 77, 0, 0.5) !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI KRAL */
+body.tema-mars .pill-premium,
+body.tema-mars .credit-box,
+body.tema-mars .wallet-box {
+    background: #2a0e05 !important;
+    border: 1px solid #ff4d00 !important;
+}
+body.tema-mars .credit-count,
+body.tema-mars .wallet-credit {
+    color: #fbbf24 !important;
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.4) !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-mars .stats-card-borsa {
+    background: rgba(15, 5, 2, 0.95) !important;
+    border: 1px solid rgba(255, 77, 0, 0.3) !important;
+}
+
+/* INPUT VE FORMLAR */
+body.tema-mars .form-control,
+body.tema-mars input,
+body.tema-mars textarea,
+body.tema-mars select {
+    background: rgba(15, 5, 2, 0.6) !important;
+    border: 1px solid rgba(255, 77, 0, 0.3) !important;
+    color: #ffffff !important;
+}
+body.tema-mars .form-control:focus,
+body.tema-mars input:focus {
+    border-color: #ff4d00 !important;
+    box-shadow: 0 0 12px rgba(255, 77, 0, 0.3) !important;
+}
+
+/* SIRALAMA TABLOSU FIX (NET KOYULUK VE OKUNABİLİRLİK) */
+body.tema-mars .table { color: #ffffff !important; }
+body.tema-mars thead th {
+    background: #2a0e05 !important;
+    color: #ff4d00 !important;
+    border-bottom: 2px solid #ff4d00 !important;
+    font-weight: 800 !important;
+}
+body.tema-mars .table td {
+    color: #ffffff !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 77, 0, 0.1) !important;
+}
+
+/* BUTONLAR: Isı Paneli Turuncusu */
+body.tema-mars .btn-primary, 
+body.tema-mars .btn-purple,
+body.tema-mars .btn-update-profile,
+body.tema-mars .btn-premium-stats {
+    background: linear-gradient(135deg, #ff4d00, #8b2a00) !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(255, 77, 0, 0.3) !important;
+}
+body.tema-mars .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 77, 0, 0.5) !important;
+}
+
+/* MODALLAR VE KULLANICI ROZETLERİ */
+body.tema-mars .user-info-nav span, 
+body.tema-mars .balance-card,
+body.tema-mars .modal-content {
+    background: #2a0e05 !important;
+    border: 1px solid #ff4d00 !important;
+    color: #ffffff !important;
+}
+
+/* FOOTER */
+body.tema-mars footer {
+    background: rgba(15, 5, 2, 0.95) !important;
+    border-top: 3px solid #ff4d00 !important;
+}
+
+/* ==========================================================
+   TEMA SERİ ÜRETİM BLOĞU (6 YENİ TEMA v1.0)
+   ========================================================== */
+/* ==========================================================
+   ❄️ TEMA 5: ARCTIC ICE (BUZUL ÇAĞI v1.5 - PREMIUM UNIFIED)
+   Sistem kilitlenmez. Yeni eklenen tüm komponentler buz tutar!
+   ========================================================== */
+
+body.tema-arctic { 
+    background-color: #030810 !important; 
+    color: #e0f2fe !important; 
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- DİNAMİK KUTUP ŞAFAĞI --- */
+body.tema-arctic::before { 
+    content: ""; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    z-index: -1; 
+    background: radial-gradient(circle at 50% 10%, #0ea5e9 0%, rgba(3, 8, 16, 0) 60%), 
+                linear-gradient(180deg, #030810 0%, #010408 100%) !important; 
+}
+
+/* NAVBAR: Kutup Mavisi Neon Şerit */
+body.tema-arctic .navbar { 
+    background: rgba(3, 8, 16, 0.90) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid #0ea5e9 !important; 
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3) !important; 
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-arctic .text-peer, body.tema-arctic .brand-text span:first-child, body.tema-arctic .peer-title span {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.6) !important;
+}
+body.tema-arctic .text-learn, body.tema-arctic .brand-text span:last-child, body.tema-arctic .peer-title { 
+    color: #0ea5e9 !important; 
+    text-shadow: 0 0 15px #0ea5e9; 
+    font-weight: 900 !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (NEON BUZUL MAVİSİ) */
+body.tema-arctic .nav-link, 
+body.tema-arctic .navbar-nav .nav-item a,
+body.tema-arctic .nav-link i {
+    color: #0ea5e9 !important; /* Karanlıkta boğulan üst barı tamamen parlak kutup mavisine çektik kral */
+    text-shadow: 0 0 8px rgba(14, 165, 233, 0.4) !important;
+    font-weight: 800 !important;
+    opacity: 0.95;
+    transition: all 0.2s ease;
+}
+body.tema-arctic .nav-link:hover, body.tema-arctic .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(14, 165, 233, 0.8) !important;
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE KUTUP MAVİSİ KONTRAST */
+body.tema-arctic .search-box input.form-control, 
+body.tema-arctic .search-input {
+    color: #0ea5e9 !important;
+    font-weight: 700 !important;
+}
+body.tema-arctic .search-input::placeholder {
+    color: rgba(14, 165, 233, 0.5) !important;
+}
+
+/* KARTLAR, MODÜLLER VE ENVANTER PANEL KUTULARI (BUZUL CAMI) */
+body.tema-arctic .card, 
+body.tema-arctic .pro-card,
+body.tema-arctic .profile-card-premium,
+body.tema-arctic .stat-card,
+body.tema-arctic .achievement-premium-card,
+body.tema-arctic .note-card-premium,
+body.tema-arctic .library-card-premium,
+body.tema-arctic .magaza-card,
+body.tema-arctic .section-card-premium,
+body.tema-arctic .category-card { 
+    background: rgba(5, 15, 25, 0.75) !important; 
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(14, 165, 233, 0.25) !important; 
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.65) !important;
+    border-radius: 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Kristal Parlaması */
+body.tema-arctic .card:hover,
+body.tema-arctic .profile-card-premium:hover,
+body.tema-arctic .stat-card:hover,
+body.tema-arctic .note-card-premium:hover,
+body.tema-arctic .magaza-card:hover {
+    transform: translateY(-5px) !important;
+    border: 1px solid rgba(14, 165, 233, 0.5) !important;
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.3), 0 12px 35px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* YAZI RENK GÜVENLİĞİ SİGORTASI */
+body.tema-arctic h1, body.tema-arctic h2, body.tema-arctic h3, 
+body.tema-arctic h4, body.tema-arctic h5, body.tema-arctic h6,
+body.tema-arctic .card-title, body.tema-arctic .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.2) !important;
+}
+body.tema-arctic p, body.tema-arctic span, body.tema-arctic label,
+body.tema-arctic small, body.tema-arctic .small {
+    color: #e0f2fe !important;
+}
+body.tema-arctic .text-muted {
+    color: #93c5fd !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) BUZUL ENTEGRASYONU */
+body.tema-arctic .pomodoro-widget {
+    background: rgba(5, 15, 25, 0.85) !important;
+    border: 1px solid #0ea5e9 !important;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.2) !important;
+}
+body.tema-arctic #customMinutes,
+body.tema-arctic .timer-display {
+    color: #0ea5e9 !important;
+    text-shadow: 0 0 6px rgba(14, 165, 233, 0.4) !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI */
+body.tema-arctic .pill-premium,
+body.tema-arctic .credit-box,
+body.tema-arctic .wallet-box {
+    background: rgba(3, 8, 16, 0.6) !important;
+    border: 1px solid #0ea5e9 !important;
+}
+body.tema-arctic .credit-count,
+body.tema-arctic .wallet-credit {
+    color: #fbbf24 !important;
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.4) !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-arctic .stats-card-borsa {
+    background: rgba(3, 8, 16, 0.95) !important;
+    border: 1px solid rgba(14, 165, 233, 0.25) !important;
+}
+
+/* INPUTLAR VE METİN ALANLARI */
+body.tema-arctic .form-control,
+body.tema-arctic input,
+body.tema-arctic textarea,
+body.tema-arctic select {
+    background: rgba(1, 4, 8, 0.6) !important;
+    border: 1px solid rgba(14, 165, 233, 0.25) !important;
+    color: #ffffff !important;
+}
+body.tema-arctic .form-control:focus,
+body.tema-arctic input:focus {
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 0 12px rgba(14, 165, 233, 0.3) !important;
+}
+
+/* BUTONLAR: Kristal Mavi Buz Katmanı */
+body.tema-arctic .btn-primary, 
+body.tema-arctic .btn-purple,
+body.tema-arctic .btn-update-profile,
+body.tema-arctic .btn-premium-stats { 
+    background: #0ea5e9 !important; 
+    border: none !important;
+    color: #000000 !important; 
+    font-weight: 800 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-arctic .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.5) !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ */
+body.tema-arctic .table { color: #ffffff !important; }
+body.tema-arctic thead th {
+    background: rgba(5, 15, 25, 0.9) !important;
+    color: #0ea5e9 !important;
+    border-bottom: 2px solid #0ea5e9 !important;
+    font-weight: 800 !important;
+}
+body.tema-arctic .table td {
+    color: rgba(255, 255, 255, 0.9) !important;
+    border-bottom: 1px solid rgba(14, 165, 233, 0.1) !important;
+}
+
+/* MODALLAR VE KULLANICI KUTULARI */
+body.tema-arctic .user-info-nav span, 
+body.tema-arctic .balance-card,
+body.tema-arctic .modal-content { 
+    background: rgba(5, 15, 25, 0.9) !important;
+    border: 1px solid #0ea5e9 !important; 
+    color: #e0f2fe !important; 
+}
+
+/* FOOTER */
+body.tema-arctic footer {
+    background: rgba(1, 4, 8, 0.95) !important;
+    border-top: 2px solid #0ea5e9 !important;
+}
+
+/* ==========================================================
+   👑 TEMA 6: MIDNIGHT LUXURY (VIP GOLD v1.5 - TOTAL INTEGRATION)
+   Sistem kilitlenmez. Yeni eklenen tüm komponentler altınlaşır!
+   ========================================================== */
+
+body.tema-luxury { 
+    background-color: #111111 !important; 
+    color: #f8fafc !important; 
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- VIP GECE FONU --- */
+body.tema-luxury::before { 
+    content: ""; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    z-index: -1; 
+    background: linear-gradient(135deg, #0b0b0b 0%, #171717 100%) !important; 
+}
+
+/* NAVBAR: Ağır Altın Sarısı Neon Şerit */
+body.tema-luxury .navbar { 
+    background: #000000 !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid #f59e0b !important; 
+    box-shadow: 0 4px 25px rgba(245, 158, 11, 0.25) !important; 
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-luxury .text-peer, body.tema-luxury .brand-text span:first-child, body.tema-luxury .peer-title span {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.5) !important;
+}
+body.tema-luxury .text-learn, body.tema-luxury .brand-text span:last-child, body.tema-luxury .peer-title { 
+    color: #f59e0b !important; 
+    text-shadow: 0 0 15px #f59e0b; 
+    font-weight: 900 !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (VIP GOLD NEON AYARI) */
+body.tema-luxury .nav-link, 
+body.tema-luxury .navbar-nav .nav-item a,
+body.tema-luxury .nav-link i {
+    color: #f59e0b !important; /* Karanlıkta kaybolan üst bar linkleri artık parıldayan altın rengi */
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.3) !important;
+    font-weight: 800 !important;
+    opacity: 0.95;
+    transition: all 0.2s ease;
+}
+body.tema-luxury .nav-link:hover, body.tema-luxury .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.7) !important;
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE ALTIN KONTRAST */
+body.tema-luxury .search-box input.form-control, 
+body.tema-luxury .search-input {
+    color: #f59e0b !important;
+    font-weight: 700 !important;
+}
+body.tema-luxury .search-input::placeholder {
+    color: rgba(245, 158, 11, 0.5) !important;
+}
+
+/* KARTLAR, MODÜLLER VE ENVANTER PANEL KUTULARI (LÜKS KARBON SİYAHI) */
+body.tema-luxury .card, 
+body.tema-luxury .pro-card,
+body.tema-luxury .profile-card-premium,
+body.tema-luxury .stat-card,
+body.tema-luxury .achievement-premium-card,
+body.tema-luxury .note-card-premium,
+body.tema-luxury .library-card-premium,
+body.tema-luxury .magaza-card,
+body.tema-luxury .section-card-premium,
+body.tema-luxury .category-card { 
+    background: #161616 !important; 
+    border: 1px solid rgba(245, 158, 11, 0.25) !important; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8) !important;
+    border-radius: 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Kartların Üzerine Gelindiğinde VIP Altın Parlaması */
+body.tema-luxury .card:hover,
+body.tema-luxury .profile-card-premium:hover,
+body.tema-luxury .stat-card:hover,
+body.tema-luxury .note-card-premium:hover,
+body.tema-luxury .magaza-card:hover {
+    transform: translateY(-5px) !important;
+    border: 1px solid rgba(245, 158, 11, 0.5) !important;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.25), 0 12px 35px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* YAZI RENK GÜVENLİĞİ SİGORTASI */
+body.tema-luxury h1, body.tema-luxury h2, body.tema-luxury h3, 
+body.tema-luxury h4, body.tema-luxury h5, body.tema-luxury h6,
+body.tema-luxury .card-title, body.tema-luxury .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+body.tema-luxury p, body.tema-luxury span, body.tema-luxury label,
+body.tema-luxury small, body.tema-luxury .small {
+    color: #f8fafc !important;
+}
+body.tema-luxury .text-muted {
+    color: #cbd5e1 !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) LUXURY ENTEGRASYONU */
+body.tema-luxury .pomodoro-widget {
+    background: #111111 !important;
+    border: 1px solid #f59e0b !important;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.15) !important;
+}
+body.tema-luxury #customMinutes,
+body.tema-luxury .timer-display {
+    color: #f59e0b !important;
+    text-shadow: 0 0 6px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI (GOLD EDITION) */
+body.tema-luxury .pill-premium,
+body.tema-luxury .credit-box,
+body.tema-luxury .wallet-box {
+    background: #000000 !important;
+    border: 1px solid #f59e0b !important;
+}
+body.tema-luxury .credit-count,
+body.tema-luxury .wallet-credit {
+    color: #fbbf24 !important;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.6) !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-luxury .stats-card-borsa {
+    background: #0b0b0b !important;
+    border: 1px solid rgba(245, 158, 11, 0.25) !important;
+}
+
+/* INPUTLAR VE METİN ALANLARI */
+body.tema-luxury .form-control,
+body.tema-luxury input,
+body.tema-luxury textarea,
+body.tema-luxury select {
+    background: #000000 !important;
+    border: 1px solid rgba(245, 158, 11, 0.25) !important;
+    color: #ffffff !important;
+}
+body.tema-luxury .form-control:focus,
+body.tema-luxury input:focus {
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.3) !important;
+}
+
+/* BUTONLAR: Isı Paneli Altın Degradeli */
+body.tema-luxury .btn-primary, 
+body.tema-luxury .btn-purple,
+body.tema-luxury .btn-update-profile,
+body.tema-luxury .btn-premium-stats { 
+    background: linear-gradient(135deg, #f59e0b, #b45309) !important; 
+    border: none !important;
+    color: #000000 !important; 
+    font-weight: 800 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-luxury .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.5) !important;
+}
+
+/* SIRALAMA TABLO METİNLERİ */
+body.tema-luxury .table { color: #ffffff !important; }
+body.tema-luxury thead th {
+    background: #000000 !important;
+    color: #f59e0b !important;
+    border-bottom: 2px solid #f59e0b !important;
+    font-weight: 800 !important;
+}
+body.tema-luxury .table td {
+    color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid rgba(245, 158, 11, 0.1) !important;
+}
+
+/* MODALLAR VE ROZETLER */
+body.tema-luxury .user-info-nav span, 
+body.tema-luxury .balance-card,
+body.tema-luxury .modal-content { 
+    background: #111111 !important;
+    border: 1px solid #f59e0b !important; 
+    color: #ffffff !important; 
+}
+
+/* FOOTER */
+body.tema-luxury footer {
+    background: #000000 !important;
+    border-top: 2px solid #f59e0b !important;
+}
+
+
+
+/* ==========================================================
+   🌿 TEMA 7: FOREST GHOST (MİSTİK ORMAN v2.0 - ULTRA AAA EDITION)
+   Eskisine bağlı kalmadan, tamamen sıfırdan zirve tasarıma çekildi!
+   ========================================================== */
+
+body.tema-forest { 
+    background-color: #040806 !important; /* Derin Orman Siyahı */
+    color: #e6fbf0 !important; /* Kristal zümrüt beyazı yazı */
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    letter-spacing: 0.1px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- DİNAMİK ORMAN SİSİ VE NEON AYDINLATMA --- */
+body.tema-forest::before { 
+    content: ""; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    z-index: -1; 
+    background: 
+        radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.18) 0%, rgba(4, 8, 6, 0) 65%),
+        radial-gradient(circle at 10% 80%, rgba(5, 150, 105, 0.12) 0%, rgba(4, 8, 6, 0) 50%),
+        linear-gradient(180deg, #040806 0%, #010301 100%) !important; 
+}
+
+/* NAVBAR: Zümrüt Cam & Yeşeren Şerit */
+body.tema-forest .navbar { 
+    background: rgba(4, 8, 6, 0.85) !important;
+    backdrop-filter: blur(18px);
+    border-bottom: 2px solid #10b981 !important; 
+    box-shadow: 0 4px 25px rgba(16, 185, 129, 0.25) !important; 
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-forest .text-peer, body.tema-forest .brand-text span:first-child, body.tema-forest .peer-title span {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4) !important;
+}
+body.tema-forest .text-learn, body.tema-forest .brand-text span:last-child, body.tema-forest .peer-title { 
+    color: #10b981 !important; 
+    text-shadow: 0 0 15px rgba(16, 185, 129, 0.8); 
+    font-weight: 900 !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (ZÜMRÜT NEON STİLİ) */
+body.tema-forest .nav-link, 
+body.tema-forest .navbar-nav .nav-item a,
+body.tema-forest .nav-link i {
+    color: #10b981 !important; /* Menü linkleri can canlı parıldayan zümrüt yeşili */
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.3) !important;
+    font-weight: 800 !important;
+    opacity: 0.95;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body.tema-forest .nav-link:hover, body.tema-forest .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.7) !important;
+    transform: translateY(-1px);
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE MAT YEŞİL UYUMU */
+body.tema-forest .search-box input.form-control, 
+body.tema-forest .search-input {
+    color: #10b981 !important;
+    font-weight: 700 !important;
+}
+body.tema-forest .search-input::placeholder {
+    color: rgba(16, 185, 129, 0.45) !important;
+}
+
+/* 💎 KARTLAR, MODÜLLER VE PANELLER (MİSTİK CAM EFEKTİ) */
+body.tema-forest .card, 
+body.tema-forest .pro-card,
+body.tema-forest .profile-card-premium,
+body.tema-forest .stat-card,
+body.tema-forest .achievement-premium-card,
+body.tema-forest .note-card-premium,
+body.tema-forest .library-card-premium,
+body.tema-forest .magaza-card,
+body.tema-forest .section-card-premium,
+body.tema-forest .category-card { 
+    background: rgba(10, 22, 15, 0.70) !important; /* Orman gölgesi şeffaf mat cam */
+    backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7) !important;
+    border-radius: 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Orman Şafağı Parlaması */
+body.tema-forest .card:hover,
+body.tema-forest .profile-card-premium:hover,
+body.tema-forest .stat-card:hover,
+body.tema-forest .note-card-premium:hover,
+body.tema-forest .magaza-card:hover {
+    transform: translateY(-5px) !important;
+    border: 1px solid rgba(16, 185, 129, 0.5) !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.25), 0 12px 35px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* YAZI RENK GÜVENLİĞİ VE KONTRAST MOTORU */
+body.tema-forest h1, body.tema-forest h2, body.tema-forest h3, 
+body.tema-forest h4, body.tema-forest h5, body.tema-forest h6,
+body.tema-forest .card-title, body.tema-forest .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+body.tema-forest p, body.tema-forest span, body.tema-forest label,
+body.tema-forest small, body.tema-forest .small {
+    color: #d1fae5 !important; /* Ferah naneli beyaz */
+}
+body.tema-forest .text-muted {
+    color: #a7f3d0 !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) ORMAN ENTEGRASYONU */
+body.tema-forest .pomodoro-widget {
+    background: rgba(10, 22, 15, 0.85) !important;
+    border: 1px solid #10b981 !important;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15) !important;
+}
+body.tema-forest #customMinutes,
+body.tema-forest .timer-display {
+    color: #10b981 !important;
+    text-shadow: 0 0 6px rgba(16, 185, 129, 0.4) !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI (FOREST GOLD ENTEGRE) */
+body.tema-forest .pill-premium,
+body.tema-forest .credit-box,
+body.tema-forest .wallet-box {
+    background: rgba(4, 8, 6, 0.6) !important;
+    border: 1px solid #10b981 !important;
+}
+body.tema-forest .credit-count,
+body.tema-forest .wallet-credit {
+    color: #fbbf24 !important; /* Altın paralar net parlasın */
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.4) !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-forest .stats-card-borsa {
+    background: rgba(4, 8, 6, 0.95) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+}
+
+/* INPUTLAR VE METİN ALANLARI */
+body.tema-forest .form-control,
+body.tema-forest input,
+body.tema-forest textarea,
+body.tema-forest select {
+    background: rgba(1, 3, 1, 0.6) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25) !important;
+    color: #ffffff !important;
+}
+body.tema-forest .form-control:focus,
+body.tema-forest input:focus {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* BUTONLAR: Canlı Zümrüt Yeşili Katmanı */
+body.tema-forest .btn-primary, 
+body.tema-forest .btn-purple,
+body.tema-forest .btn-update-profile,
+body.tema-forest .btn-premium-stats { 
+    background: linear-gradient(135deg, #10b981, #047857) !important; 
+    border: none !important;
+    color: #ffffff !important; 
+    font-weight: 800 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-forest .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5) !important;
+}
+
+/* SIRALAMA TABLOSU VE METİNLERİ */
+body.tema-forest .table { color: #ffffff !important; }
+body.tema-forest thead th {
+    background: rgba(10, 22, 15, 0.95) !important;
+    color: #10b981 !important;
+    border-bottom: 2px solid #10b981 !important;
+    font-weight: 800 !important;
+}
+body.tema-forest .table td {
+    color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1) !important;
+}
+
+/* MODALLAR VE KULLANICI KUTULARI */
+body.tema-forest .user-info-nav span, 
+body.tema-forest .balance-card,
+body.tema-forest .modal-content { 
+    background: rgba(10, 22, 15, 0.9) !important;
+    border: 1px solid #10b981 !important; 
+    color: #e6fbf0 !important; 
+}
+
+/* FOOTER */
+body.tema-forest footer {
+    background: rgba(1, 3, 1, 0.95) !important;
+    border-top: 2px solid #10b981 !important;
+}
+
+/* ==========================================================
+   🚨 TEMA 8: CRIMSON RED (KAN KIRMIZISI v2.0 - CYBER ESPORTS EDITION)
+   Sıradan kırmızı modları çöpe atar, AAA oyun arayüzü kalitesine taşır!
+   ========================================================== */
+
+body.tema-crimson { 
+    background-color: #080101 !important; /* Zifiri Kan Karanlığı */
+    color: #ffe4e6 !important; /* Ferah kristal gül beyazı yazı */
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    letter-spacing: 0.1px;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- DİNAMİK CEHENNEM ŞAFAĞI VE NEON SESTLER --- */
+body.tema-crimson::before { 
+    content: ""; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    z-index: -1; 
+    background: 
+        radial-gradient(circle at 50% 100%, #b91c1c 0%, rgba(10, 1, 1, 0) 55%),
+        radial-gradient(circle at 85% 15%, rgba(220, 38, 38, 0.12) 0%, rgba(10, 1, 1, 0) 45%),
+        linear-gradient(180deg, #080101 0%, #000000 100%) !important; 
+}
+
+/* NAVBAR: Siber Kan Camı & Kırmızı Akım Şeridi */
+body.tema-crimson .navbar { 
+    background: rgba(8, 1, 1, 0.90) !important;
+    backdrop-filter: blur(18px);
+    border-bottom: 2px solid #b91c1c !important; 
+    box-shadow: 0 4px 25px rgba(185, 28, 28, 0.35) !important; 
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-crimson .text-peer, body.tema-crimson .brand-text span:first-child, body.tema-crimson .peer-title span {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(185, 28, 28, 0.5) !important;
+}
+body.tema-crimson .text-learn, body.tema-crimson .brand-text span:last-child, body.tema-crimson .peer-title { 
+    color: #b91c1c !important; 
+    text-shadow: 0 0 18px #b91c1c; 
+    font-weight: 900 !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (YIRTICI KIRMIZI NEON AYARI) */
+body.tema-crimson .nav-link, 
+body.tema-crimson .navbar-nav .nav-item a,
+body.tema-crimson .nav-link i {
+    color: #b91c1c !important; /* Menü linkleri can canlı parıldayan turnuva kırmızısı */
+    text-shadow: 0 0 8px rgba(185, 28, 28, 0.4) !important;
+    font-weight: 800 !important;
+    opacity: 0.95;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body.tema-crimson .nav-link:hover, body.tema-crimson .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(185, 28, 28, 0.8) !important;
+    transform: translateY(-1px);
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE KAN KIRMIZISI REAKSİYONU */
+body.tema-crimson .search-box input.form-control, 
+body.tema-crimson .search-input {
+    color: #b91c1c !important;
+    font-weight: 700 !important;
+}
+body.tema-crimson .search-input::placeholder {
+    color: rgba(185, 28, 28, 0.5) !important;
+}
+
+/* 💎 KARTLAR, MODÜLLER VAN PANELLER (SİBER PREMIUM CRIMSON GLASS) */
+body.tema-crimson .card, 
+body.tema-crimson .pro-card,
+body.tema-crimson .profile-card-premium,
+body.tema-crimson .stat-card,
+body.tema-crimson .achievement-premium-card,
+body.tema-crimson .note-card-premium,
+body.tema-crimson .library-card-premium,
+body.tema-crimson .magaza-card,
+body.tema-crimson .section-card-premium,
+body.tema-crimson .category-card { 
+    background: rgba(22, 5, 5, 0.75) !important; /* Muazzam cehennem camı tonu */
+    backdrop-filter: blur(14px) !important;
+    border: 1px solid rgba(185, 28, 28, 0.3) !important; 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.75) !important;
+    border-radius: 24px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Isı Paneli Patlaması */
+body.tema-crimson .card:hover,
+body.tema-crimson .profile-card-premium:hover,
+body.tema-crimson .stat-card:hover,
+body.tema-crimson .note-card-premium:hover,
+body.tema-crimson .magaza-card:hover {
+    transform: translateY(-5px) !important;
+    border: 1px solid rgba(239, 68, 68, 0.6) !important;
+    box-shadow: 0 0 22px rgba(185, 28, 28, 0.3), 0 12px 35px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* YAZI KONTRAST EMNİYETİ KİLİDİ */
+body.tema-crimson h1, body.tema-crimson h2, body.tema-crimson h3, 
+body.tema-crimson h4, body.tema-crimson h5, body.tema-crimson h6,
+body.tema-crimson .card-title, body.tema-crimson .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+body.tema-crimson p, body.tema-crimson span, body.tema-crimson label,
+body.tema-crimson small, body.tema-crimson .small {
+    color: #fecdd3 !important; /* Yumuşak pembe-beyaz okunabilir font */
+}
+body.tema-crimson .text-muted {
+    color: #fda4af !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) CRIMSON INTEGRATION */
+body.tema-crimson .pomodoro-widget {
+    background: rgba(22, 5, 5, 0.85) !important;
+    border: 1px solid #b91c1c !important;
+    box-shadow: 0 0 15px rgba(185, 28, 28, 0.2) !important;
+}
+body.tema-crimson #customMinutes,
+body.tema-crimson .timer-display {
+    color: #b91c1c !important;
+    text-shadow: 0 0 6px rgba(185, 28, 28, 0.5) !important;
+}
+
+/* 🪙 CÜZDAN & BAKIYE ALANLARI (BLOOD GOLD EDİTİON) */
+body.tema-crimson .pill-premium,
+body.tema-crimson .credit-box,
+body.tema-crimson .wallet-box {
+    background: rgba(8, 1, 1, 0.6) !important;
+    border: 1px solid #b91c1c !important;
+}
+body.tema-crimson .credit-count,
+body.tema-crimson .wallet-credit {
+    color: #fbbf24 !important; /* Altın sikkeler parlasın */
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.4) !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-crimson .stats-card-borsa {
+    background: rgba(8, 1, 1, 0.95) !important;
+    border: 1px solid rgba(185, 28, 28, 0.25) !important;
+}
+
+/* INPUTLAR VE FORMLAR */
+body.tema-crimson .form-control,
+body.tema-crimson input,
+body.tema-crimson textarea,
+body.tema-crimson select {
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgba(185, 28, 28, 0.3) !important;
+    color: #ffffff !important;
+}
+body.tema-crimson .form-control:focus,
+body.tema-crimson input:focus {
+    border-color: #b91c1c !important;
+    box-shadow: 0 0 12px rgba(185, 28, 28, 0.3) !important;
+}
+
+/* BUTONLAR: Isı Paneli Lav Degradeli */
+body.tema-crimson .btn-primary, 
+body.tema-crimson .btn-purple,
+body.tema-crimson .btn-update-profile,
+body.tema-crimson .btn-premium-stats { 
+    background: linear-gradient(135deg, #b91c1c, #7f1d1d) !important; 
+    border: none !important;
+    color: #ffffff !important; 
+    font-weight: 800 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4) !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-crimson .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(185, 28, 28, 0.6) !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ (NET VE TOK) */
+body.tema-crimson .table { color: #ffffff !important; }
+body.tema-crimson thead th {
+    background: rgba(22, 5, 5, 0.95) !important;
+    color: #b91c1c !important;
+    border-bottom: 2px solid #b91c1c !important;
+    font-weight: 800 !important;
+}
+body.tema-crimson .table td {
+    color: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid rgba(185, 28, 28, 0.15) !important;
+}
+
+/* MODALLAR VE BİLGİ ROZETLERİ */
+body.tema-crimson .user-info-nav span, 
+body.tema-crimson .balance-card,
+body.tema-crimson .modal-content { 
+    background: rgba(22, 5, 5, 0.9) !important;
+    border: 1px solid #b91c1c !important; 
+    color: #ffe4e6 !important; 
+}
+
+/* FOOTER */
+body.tema-crimson footer {
+    background: rgba(0, 0, 0, 0.95) !important;
+    border-top: 2px solid #b91c1c !important;
+}
+
+/* ==========================================================
+   🌸 TEMA 9: KAWAII PINK (TATLI PEMBE v2.0 - PROFILE & INVENTORY)
+   Sadece profilim alanı ve envanteri şirinleştirir, gerisine dokunmaz!
+   ========================================================== */
+
+/* --- SADECE PROFİL VE ENVANTER SAYFASINDAKİ ARKA PLAN DEĞİŞİMİ --- */
+body.tema-kawaii { 
+    background-color: #fff1f2 !important; /* Yumuşak pastel pembe zemin */
+    color: #1f2937 !important; 
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* NAVBAR DURUMU: Temiz Beyaz ve Pembe Alt Çizgi */
+body.tema-kawaii .navbar { 
+    background: #ffffff !important; 
+    border-bottom: 3px solid #fb7185 !important; 
+    box-shadow: 0 4px 15px rgba(251, 113, 133, 0.1) !important; 
+}
+body.tema-kawaii .text-peer { color: #1f2937 !important; }
+body.tema-kawaii .text-learn { color: #fb7185 !important; font-weight: 800; }
+
+/* NAVBAR LINKLERİ */
+body.tema-kawaii .nav-link, 
+body.tema-kawaii .navbar-nav .nav-item a,
+body.tema-kawaii .nav-link i {
+    color: #fb7185 !important; /* Menü linkleri tatlı çilek pembesi */
+    font-weight: 700 !important;
+}
+body.tema-kawaii .nav-link:hover {
+    color: #1f2937 !important;
+}
+
+/* 🔥 SADECE PROFİLİM YERİ VE ENVANTER KARTLARI (KAWAII STYLE) */
+body.tema-kawaii .profile-card-premium,
+body.tema-kawaii .stat-card,
+body.tema-kawaii .achievement-premium-card,
+body.tema-kawaii .note-card-premium,
+body.tema-kawaii .library-card-premium,
+body.tema-kawaii .section-card-premium,
+body.tema-kawaii .category-card,
+body.tema-kawaii .magaza-card,
+body.tema-kawaii .card, 
+body.tema-kawaii .pro-card { 
+    background: #ffffff !important; /* Bembeyaz temiz kartlar */
+    border: 2px solid #fb7185 !important; /* Tatlı pembe çerçeve */
+    box-shadow: 6px 6px 0px rgba(251, 113, 133, 0.15) !important; /* 3D yumuşak pembe gölge */
+    border-radius: 24px !important;
+    color: #1f2937 !important;
+    transition: all 0.25s ease-in-out !important;
+}
+
+/* Profil ve Envanter Kartları Hover Durumu */
+body.tema-kawaii .card:hover,
+body.tema-kawaii .profile-card-premium:hover,
+body.tema-kawaii .magaza-card:hover {
+    transform: translate(-2px, -2px) !important;
+    box-shadow: 9px 9px 0px rgba(251, 113, 133, 0.25) !important;
+}
+
+/* PROFİL VE ENVANTER İÇİNDEKİ BAŞLIKLAR VE YAZILAR */
+body.tema-kawaii h1, body.tema-kawaii h2, body.tema-kawaii h3, 
+body.tema-kawaii h4, body.tema-kawaii h5, body.tema-kawaii h6,
+body.tema-kawaii .card-title, body.tema-kawaii .modal-title {
+    color: #1f2937 !important; /* Yazılar net ve koyu gri, okunması sıfır hata */
+    font-weight: 800 !important;
+}
+body.tema-kawaii p, body.tema-kawaii span, body.tema-kawaii label,
+body.tema-kawaii small, body.tema-kawaii .small {
+    color: #4b5563 !important;
+}
+body.tema-kawaii .text-muted {
+    color: #9ca3af !important;
+}
+
+/* ⏱️ POMODORO SAYACI VE YENİ MODÜLLERİN KAWAII UYUMU */
+body.tema-kawaii .pomodoro-widget {
+    background: #ffffff !important;
+    border: 2px solid #fb7185 !important;
+    box-shadow: 4px 4px 0px rgba(251, 113, 133, 0.1) !important;
+}
+body.tema-kawaii #customMinutes,
+body.tema-kawaii .timer-display {
+    color: #fb7185 !important;
+    font-weight: 800 !important;
+}
+
+/* 🪙 KREDİ VE CÜZDAN ROZETLERİ */
+body.tema-kawaii .pill-premium,
+body.tema-kawaii .credit-box,
+body.tema-kawaii .wallet-box {
+    background: #ffffff !important;
+    border: 2px solid #fb7185 !important;
+}
+body.tema-kawaii .credit-count,
+body.tema-kawaii .wallet-credit {
+    color: #fb7185 !important;
+    font-weight: 800 !important;
+}
+
+/* PROFİLDEKİ BUTONLAR: Pamuk Şekeri Modu */
+body.tema-kawaii .btn-primary, 
+body.tema-kawaii .btn-purple,
+body.tema-kawaii .btn-update-profile,
+body.tema-kawaii .btn-premium-stats { 
+    background: #fb7185 !important; 
+    border: none !important;
+    color: #ffffff !important; 
+    font-weight: 700 !important;
+    border-radius: 50px !important; /* Yuvarlatılmış şirin butonlar */
+    box-shadow: 0 4px 12px rgba(251, 113, 133, 0.2) !important;
+}
+body.tema-kawaii .btn-primary:hover {
+    background: #f43f5e !important;
+    transform: translateY(-1px) !important;
+}
+
+/* PROFİLDEKİ SIRALAMA TABLOLARI */
+body.tema-kawaii .table { color: #1f2937 !important; }
+body.tema-kawaii thead th {
+    background: #ffe4e6 !important;
+    color: #fb7185 !important;
+    border-bottom: 2px solid #fb7185 !important;
+    font-weight: 700 !important;
+}
+body.tema-kawaii .table td {
+    color: #4b5563 !important;
+    border-bottom: 1px solid #ffe4e6 !important;
+}
+
+/* PROFİL BİLGİ ROZETLERİ VE MODALLAR */
+body.tema-kawaii .user-info-nav span, 
+body.tema-kawaii .balance-card,
+body.tema-kawaii .modal-content { 
+    border: 2px solid #fb7185 !important; 
+    color: #fb7185 !important; 
+    background: #ffffff !important; 
+}
+
+/* FOOTER */
+body.tema-kawaii footer {
+    background: #ffffff !important;
+    border-top: 2px solid #fb7185 !important;
+}
+/* ==========================================================
+   TEMA GÖRÜNÜRLÜK VE OKUNABİLİRLİK YAMASI (FINAL)
+   Açıklama: Bu blok style.css'in EN ALTINA eklenmelidir.
+   ========================================================== */
+
+/* 1. MIDNIGHT LUXURY (VIP GOLD) FIX */
+body.tema-luxury .nav-link, 
+body.tema-luxury .nav-link i, 
+body.tema-luxury .navbar-brand span,
+body.tema-luxury .peermarket-slogan,
+body.tema-luxury .kullanilabilir-kredi-text,
+body.tema-luxury .card-body *,
+body.tema-luxury .profile-tabs .nav-link,
+body.tema-luxury .nav-tabs .nav-link,
+body.tema-luxury .text-muted,
+body.tema-luxury .profile-info-text {
+    color: #ffffff !important; /* Yazılar Beyaz */
+    opacity: 1 !important;
+}
+
+body.tema-luxury .nav-link:hover {
+    color: #f59e0b !important; /* Üzerine gelince Altın */
+}
+
+/* 2. CYBER HACKER (MATRIX) FIX */
+body.tema-cyber .nav-link,
+body.tema-cyber .nav-link i,
+body.tema-cyber .navbar-brand span,
+body.tema-cyber .peermarket-title,
+body.tema-cyber .peermarket-slogan,
+body.tema-cyber .kullanilabilir-kredi-text,
+body.tema-cyber .profile-tabs .nav-link,
+body.tema-cyber .nav-tabs .nav-link,
+body.tema-cyber .card-body *,
+body.tema-cyber .text-muted,
+body.tema-cyber .profile-info-text {
+    color: #00ff00 !important; /* Her Şey Matrix Yeşili */
+    -webkit-text-fill-color: #00ff00 !important;
+    opacity: 1 !important;
+    background: transparent !important;
+}
+
+body.tema-cyber .nav-tabs .nav-link.active {
+    border-bottom: 3px solid #00ff00 !important;
+}
+
+/* ==========================================================
+   FOREST GHOST v2.5 - HAREKETLİ ORMAN GARANTİSİ
+   ========================================================== */
+
+/* Sadece Forest Temasında Arka Planı Aç */
+body.tema-forest .forest-background-dynamic {
+    display: block !important;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1; /* -2 çok arkadaydı, -1'e çektik */
+    background: #020a05 !important;
+    overflow: hidden;
+}
+
+/* Ağaçların arkasındaki mistik ışık (Ağaçlar burada belli olur) */
+body.tema-forest .forest-glow {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 60%;
+    background: radial-gradient(circle at 50% 100%, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+}
+
+/* SALLANMA ANİMASYONU */
+@keyframes treeSway {
+    0% { transform: rotate(-2deg); }
+    100% { transform: rotate(2deg); }
+}
+
+/* AĞAÇ SİLÜETLERİ (Resim gelmese bile bunlar görünür) */
+body.tema-forest .tree-layer {
+    position: absolute;
+    bottom: -10px;
+    transform-origin: bottom center;
+    background-color: #051a0d; /* Koyu yeşil dolgu */
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Üçgen (Çam ağacı formu) */
+    animation: treeSway 10s ease-in-out infinite alternate;
+}
+
+/* Ağaç Konumları ve Boyutları */
+body.tema-forest .tree-1 {
+    left: 5%; width: 200px; height: 500px;
+    background-image: url('https://i.imgur.com/8F3i0uT.png'); /* PNG Ağaç */
+    background-size: cover;
+    opacity: 0.5;
+}
+
+body.tema-forest .tree-2 {
+    right: 8%; width: 250px; height: 600px;
+    background-image: url('https://i.imgur.com/5uRjF7K.png'); /* PNG Ağaç */
+    background-size: cover;
+    animation-duration: 15s;
+    opacity: 0.4;
+}
+
+body.tema-forest .tree-3 {
+    left: 40%; width: 150px; height: 400px;
+    background-color: rgba(5, 26, 13, 0.6);
+    animation-duration: 8s;
+    opacity: 0.3;
+}
+
+/* YUKARIYI YEŞİL YAPMA (Navbar Fix) */
+body.tema-forest .navbar {
+    background: rgba(1, 4, 2, 0.98) !important;
+    border-bottom: 3px solid #10b981 !important;
+}
+
+body.tema-forest .nav-link, 
+body.tema-forest .nav-link i,
+body.tema-forest .navbar-brand .text-peer {
+    color: #ffffff !important;
+}
+
+body.tema-forest .navbar-brand .text-learn {
+    color: #10b981 !important;
+    text-shadow: 0 0 10px #10b981;
+}
+/* ==========================================================
+   CRIMSON RED - THE PASSION & POWER (MASTERPIECE v3.0)
+   ========================================================== */
+
+/* 1. ARKA PLAN: NABIZ GİBİ ATAN DERİN KIRMIZI */
+body.tema-crimson {
+    background: radial-gradient(circle at 50% 0%, #660000 0%, #1a0000 50%, #050000 100%) fixed !important;
+    animation: crimsonPulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes crimsonPulse {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+/* 2. NAVBAR: "RUBY GLASS" (YAKUT CAM) EFEKTİ */
+body.tema-crimson .navbar {
+    background: rgba(20, 0, 0, 0.9) !important;
+    border-bottom: 2px solid #ff0000 !important;
+    box-shadow: 0 4px 30px rgba(255, 0, 0, 0.3) !important;
+    backdrop-filter: blur(15px);
+}
+
+/* Nav Linkleri: Saf Beyaz ve Kan Kırmızısı Işıltı */
+body.tema-crimson .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 700 !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.tema-crimson .nav-link:hover {
+    color: #ff0000 !important;
+    text-shadow: 0 0 15px #ff0000;
+    transform: translateY(-2px);
+}
+
+/* 3. KARTLAR: "OBSİDYEN VE KOR" */
+body.tema-crimson .card, 
+body.tema-crimson .pro-card,
+body.tema-crimson .list-group-item {
+    background: linear-gradient(145deg, rgba(30, 0, 0, 0.9), rgba(10, 0, 0, 0.95)) !important;
+    border: 1px solid rgba(255, 0, 0, 0.2) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Kartın altına ince bir kırmızı çizgi (Aşkın çizgisi) */
+body.tema-crimson .card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; width: 0; height: 3px;
+    background: #ff0000;
+    transition: width 0.5s ease;
+}
+
+body.tema-crimson .card:hover::after {
+    width: 100%;
+}
+
+/* 4. METİNLER: KRİSTAL NETLİK */
+body.tema-crimson h1, body.tema-crimson h2, body.tema-crimson h3, 
+body.tema-crimson .card-title {
+    color: #ffffff !important;
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.5) !important;
+    letter-spacing: 1px;
+}
+
+/* 5. BUTONLAR: "YANAN KOR" (ANIMATED) */
+body.tema-crimson .btn-primary, 
+body.tema-crimson .btn-purple {
+    background: #8b0000 !important;
+    background: linear-gradient(45deg, #8b0000, #ff0000, #8b0000) !important;
+    background-size: 200% auto !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3) !important;
+    animation: crimsonGradient 3s linear infinite;
+}
+
+@keyframes crimsonGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 6. MARKET VE KULLANICI BİLGİSİ */
+body.tema-crimson .peermarket-title {
+    background: linear-gradient(to right, #ffffff 0%, #ff0000 100%) !important;
+    background-clip: text !important; /* Standart hali */
+    -webkit-background-clip: text !important; /* Chrome/Safari için */
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important; /* Yedek olarak */
+    font-weight: 900 !important;
+}
+
+body.tema-crimson .user-info-nav span {
+    background: rgba(255, 0, 0, 0.1) !important;
+    border: 1px solid #ff0000 !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2) !important;
+}
+
+/* ==========================================================
+   KAWAII PINK - AŞKO KUŞKO EDITION (v2.0)
+   ========================================================== */
+
+/* 1. ANA ATMOSFER: PAMUK ŞEKER GRADYANI */
+body.tema-kawaii {
+    background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%) fixed !important;
+    color: #be185d !important; /* Koyu Pembe Yazılar */
+    font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* Dinamik Katmanı Sadece Pink'te Göster */
+.pink-background-dynamic { display: none; }
+body.tema-kawaii .pink-background-dynamic {
+    display: block;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 2. UÇUŞAN KALPLER (Bunu seveceksin aslanım) */
+.floating-hearts {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23fb7185"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+    background-size: 50px 50px;
+    opacity: 0.1;
+    animation: heartFloat 25s linear infinite;
+}
+
+@keyframes heartFloat {
+    0% { background-position: 0 0; }
+    100% { background-position: 500px 1000px; }
+}
+
+/* 3. NAVBAR: ÇİLEKLİ YOĞURT STİLİ */
+body.tema-kawaii .navbar {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 4px solid #fb7185 !important;
+    box-shadow: 0 4px 20px rgba(251, 113, 133, 0.2) !important;
+}
+
+body.tema-kawaii .nav-link {
+    color: #be185d !important;
+    font-weight: 700 !important;
+    transition: 0.3s;
+}
+
+body.tema-kawaii .nav-link:hover {
+    transform: scale(1.1) rotate(2deg); /* Hafif oyuncu bir hareket */
+    color: #fb7185 !important;
+}
+
+/* 4. KARTLAR: "SOFT BUBBLE" (Yumuşak Baloncuk) */
+body.tema-kawaii .card, 
+body.tema-kawaii .pro-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 2px solid #ffccd5 !important;
+    border-radius: 25px !important;
+    box-shadow: 8px 8px 0px #ffe4e6 !important; /* Kawaii tarzı sert gölge */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body.tema-kawaii .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 12px 12px 0px #fb7185 !important;
+}
+
+/* 5. BUTONLAR: "GLOSSY PINK" (Parlak Dudak Parlatıcısı Etkisi) */
+body.tema-kawaii .btn-primary, 
+body.tema-kawaii .btn-purple {
+    background: linear-gradient(135deg, #fb7185, #f43f5e) !important;
+    border: none !important;
+    border-radius: 50px !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 15px rgba(251, 113, 133, 0.4) !important;
+    text-transform: lowercase; /* Aşko kuşko tarzı: her şey küçük harf :) */
+}
+
+body.tema-kawaii .btn-primary::after {
+    content: " ✨"; /* Butonların yanına minik parıltı */
+}
+
+/* 6. MARKET BAŞLIĞI */
+body.tema-kawaii .peermarket-title {
+    background: linear-gradient(to right, #fb7185, #db2777) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    font-family: 'Poppins', sans-serif !important;
+    font-style: italic;
+}
+
+/* ==========================================================
+   PEERLEARN FINAL SERİSİ - 7 DEV TEMA
+   ========================================================== */
+
+
+/* ==========================================================
+   💰 TEMA 10: CASH & RICH (PARA TEMASI v2.0 - ULTIMATE VIP EDITION)
+   Eskisine bağlı kalmadan, tamamen elit finans arayüzü kalitesine çekildi!
+   ========================================================== */
+
+body.tema-money { 
+    background-color: #020c06 !important; /* Derin Dolar Yeşili Siyahı */
+    color: #e6fcf0 !important; /* Parlak nane beyazı genel yazılar */
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- DİNAMİK ZENGİNLİK ATMOSFERİ VE ALTIN IŞILTI --- */
+body.tema-money::before { 
+    content: ""; 
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    z-index: -1; 
+    background: 
+        radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.15) 0%, rgba(2, 12, 6, 0) 60%),
+        radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.1) 0%, rgba(2, 12, 6, 0) 50%),
+        linear-gradient(180deg, #020c06 0%, #000000 100%) !important; 
+}
+
+/* NAVBAR: Mat Siyah & Altın Şerit Güvencesi */
+body.tema-money .navbar { 
+    background: #000000 !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 3px solid #d4af37 !important; 
+    box-shadow: 0 4px 25px rgba(212, 175, 55, 0.25) !important; 
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-money .text-peer, body.tema-money .brand-text span:first-child, body.tema-money .peer-title span {
+    color: #d4af37 !important; /* Altın sarısı Peer */
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.6) !important;
+    font-weight: 950 !important;
+}
+body.tema-money .text-learn, body.tema-money .brand-text span:last-child, body.tema-money .peer-title { 
+    color: #00ff88 !important; /* Siber darphane yeşili Learn */
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.8) !important;
+    font-weight: 950 !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (DARPHANE NEON MAVİ/YEŞİL AYARI) */
+body.tema-money .nav-link, 
+body.tema-money .navbar-nav .nav-item a,
+body.tema-money .nav-link i {
+    color: #00ff88 !important; /* Üst bar linkleri tamamen parıldayan siber yeşil yapıldı kral */
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.3) !important;
+    font-weight: 800 !important;
+    opacity: 0.95;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body.tema-money .nav-link:hover, body.tema-money .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(0, 255, 136, 0.7) !important;
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE SİBER YEŞİL KONTRAST */
+body.tema-money .search-box input.form-control, 
+body.tema-money .search-input {
+    color: #00ff88 !important;
+    font-weight: 700 !important;
+}
+body.tema-money .search-input::placeholder {
+    color: rgba(0, 255, 136, 0.45) !important;
+}
+
+/* 💎 KARTLAR, MODÜLLER VE PANELLER (RICH RICH GLASS EFEKTİ) */
+body.tema-money .card, 
+body.tema-money .pro-card,
+body.tema-money .profile-card-premium,
+body.tema-money .stat-card,
+body.tema-money .achievement-premium-card,
+body.tema-money .note-card-premium,
+body.tema-money .library-card-premium,
+body.tema-money .magaza-card,
+body.tema-money .section-card-premium,
+body.tema-money .category-card,
+body.tema-money .list-group-item { 
+    background: #081a0f !important; /* Koyu premium yeşil-siyah kart içi */
+    border: 2px solid #d4af37 !important; /* Ağır mat altın çerçeve */
+    box-shadow: 8px 8px 0px rgba(212, 175, 55, 0.2) !important; /* Altın 3D blok gölge */
+    border-radius: 24px !important;
+    color: #ffffff !important;
+    transition: all 0.25s ease-in-out !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Kripto Parlaması */
+body.tema-money .card:hover,
+body.tema-money .profile-card-premium:hover,
+body.tema-money .magaza-card:hover {
+    transform: translate(-2px, -2px) !important;
+    border-color: #00ff88 !important; /* Hover yapınca altına dönüşen yeşil hat */
+    box-shadow: 12px 12px 0px rgba(0, 255, 136, 0.25) !important;
+}
+
+/* METİN VE BAŞLIK GÜVENLİĞİ SİGORTASI */
+body.tema-money h1, body.tema-money h2, body.tema-money h3, 
+body.tema-money h4, body.tema-money h5, body.tema-money h6,
+body.tema-money .card-title, body.tema-money .modal-title {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+body.tema-money p, body.tema-money span:not(.badge), body.tema-money label,
+body.tema-money small, body.tema-money .small {
+    color: #e6fcf0 !important;
+}
+body.tema-money .text-muted {
+    color: #a7f3d0 !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) RICH MONEY ENTEGRASYONU */
+body.tema-money .pomodoro-widget {
+    background: #081a0f !important;
+    border: 2px solid #d4af37 !important;
+    box-shadow: 6px 6px 0px rgba(212, 175, 55, 0.15) !important;
+}
+body.tema-money #customMinutes,
+body.tema-money .timer-display {
+    color: #00ff88 !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 CÜZDAN & BAKIYE ALANLARI (REAL RICH ENTEGRE) */
+body.tema-money .pill-premium,
+body.tema-money .credit-box,
+body.tema-money .wallet-box {
+    background: #000000 !important;
+    border: 2px solid #d4af37 !important;
+    border-radius: 18px !important;
+}
+body.tema-money .credit-count,
+body.tema-money .wallet-credit,
+body.tema-money .wallet-label {
+    color: #fbbf24 !important; /* Altın paralar parıl parıl parlasın */
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.6) !important;
+    font-weight: 900 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-money .stats-card-borsa {
+    background: #020c06 !important;
+    border: 2px solid #d4af37 !important;
+}
+
+/* INPUTLAR VE METİN ALANLARI */
+body.tema-money .form-control,
+body.tema-money input,
+body.tema-money textarea,
+body.tema-money select {
+    background: #000000 !important;
+    border: 1px solid rgba(212, 175, 55, 0.4) !important;
+    color: #ffffff !important;
+}
+body.tema-money .form-control:focus,
+body.tema-money input:focus {
+    border-color: #00ff88 !important;
+    box-shadow: 0 0 12px rgba(0, 255, 136, 0.3) !important;
+}
+
+/* BUTONLAR: Siber Darphane Yeşili */
+body.tema-money .btn-primary, 
+body.tema-money .btn-purple,
+body.tema-money .btn-update-profile,
+body.tema-money .btn-premium-stats { 
+    background: linear-gradient(135deg, #00ff88, #059669) !important; 
+    border: none !important;
+    color: #000000 !important; 
+    font-weight: 900 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3) !important;
+}
+body.tema-money .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5) !important;
+}
+
+/* SIRALAMA TABLOSU VE METİNLERİ */
+body.tema-money .table { color: #ffffff !important; }
+body.tema-money thead th {
+    background: #000000 !important;
+    color: #d4af37 !important; /* Tablo başlıkları asil altın */
+    border-bottom: 2px solid #d4af37 !important;
+    font-weight: 900 !important;
+}
+body.tema-money .table td {
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-weight: 700 !important;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15) !important;
+}
+
+/* FOOTER */
+body.tema-money footer {
+    background: #000000 !important;
+    border-top: 3px solid #d4af37 !important;
+}
+
+/* ==========================================================
+   🏎️ TEMA 11: CAR PREMIUM (REDLINE & CARBON v2.0 - TRACK EDITION)
+   Eskisine bağlı kalmadan, tamamen yarış kokpiti kalitesine çekildi!
+   ========================================================== */
+
+body.tema-car {
+    background-color: #000000 !important;
+    background-image: 
+        radial-gradient(circle at 50% 0%, #1a1a1a 0%, #000000 80%),
+        url('https://www.transparenttextures.com/patterns/carbon-fibre.png') !important; /* Karbon fiber dokusu */
+    color: #ff0000 !important; /* Agresif devir saati kırmızısı */
+    font-family: 'Exo 2', 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 🏎️ ARKADAKİ HAYALET HIZ GÖSTERGESİ SİGORTASI */
+body.tema-car::before {
+    content: "";
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 70vh; height: 70vh; z-index: -1;
+    background: url('https://cdn-icons-png.flaticon.com/512/3039/3039304.png') no-repeat center !important;
+    background-size: contain !important;
+    opacity: 0.04 !important; 
+    filter: invert(1) brightness(200%);
+    pointer-events: none;
+}
+
+/* NAVBAR: Kokpit Siyahı & Kırmızı Redline Şeridi */
+body.tema-car .navbar {
+    background: #000000 !important;
+    border-bottom: 4px solid #ff0000 !important;
+    box-shadow: 0 4px 25px rgba(255, 0, 0, 0.3) !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-car .text-peer, body.tema-car .brand-text span:first-child, body.tema-car .peer-title span {
+    color: #ff0000 !important;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.8) !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+}
+body.tema-car .text-learn, body.tema-car .brand-text span:last-child, body.tema-car .peer-title {
+    color: #ffffff !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE IKONLAR (REDLINE GÖSTERGE MAVİSİ/KIRMIZISI) */
+body.tema-car .nav-link, 
+body.tema-car .navbar-nav .nav-item a,
+body.tema-car .nav-link i {
+    color: #ff0000 !important;
+    font-weight: 900 !important;
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.4) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+body.tema-car .nav-link:hover, body.tema-car .navbar-nav .nav-item a:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px #ff0000 !important;
+    transform: scale(1.03);
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE AGRESİF KIRMIZI */
+body.tema-car .search-box input.form-control, 
+body.tema-car .search-input {
+    color: #ff0000 !important;
+    font-weight: 800 !important;
+}
+body.tema-car .search-input::placeholder {
+    color: rgba(255, 0, 0, 0.5) !important;
+}
+
+/* 🏁 KARTLAR, MODÜLLER VE ENVANTER KUTULARI (OBSİDYEN VE KOR) */
+body.tema-car .card, 
+body.tema-car .pro-card,
+body.tema-car .profile-card-premium,
+body.tema-car .stat-card,
+body.tema-car .achievement-premium-card,
+body.tema-car .note-card-premium,
+body.tema-car .library-card-premium,
+body.tema-car .magaza-card,
+body.tema-car .section-card-premium,
+body.tema-car .category-card,
+body.tema-car .list-group-item {
+    background: #000000 !important;
+    border: 2px solid #ff0000 !important;
+    border-left: 10px solid #ff0000 !important; /* Agresif sol şerit imzası */
+    box-shadow: 10px 10px 0px #000000 !important;
+    border-radius: 0px !important; /* Spor araba keskinliği, yuvarlama yok kral */
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Karbon Titremesi */
+body.tema-car .card:hover,
+body.tema-car .profile-card-premium:hover,
+body.tema-car .magaza-card:hover {
+    transform: translate(-3px, -3px) !important;
+    box-shadow: 14px 14px 0px #ff0000, 0 0 20px rgba(255, 0, 0, 0.3) !important;
+}
+
+/* TÜM METİN ELEMANLARINI ZORLA NET KIRMIZI YAP (GÜVENLİK KİLİDİ) */
+body.tema-car p, body.tema-car span:not(.badge), body.tema-car div:not(.liderlik-header):not(.liderlik-banner), 
+body.tema-car small, body.tema-car b, body.tema-car i, body.tema-car li, body.tema-car label,
+body.tema-car .card-text {
+    color: #ff0000 !important;
+    font-weight: 700 !important;
+}
+
+/* BAŞLIKLAR: AGRESİF PARLAMA */
+body.tema-car h1, body.tema-car h2, body.tema-car h3, 
+body.tema-car h4, body.tema-car h5, body.tema-car h6,
+body.tema-car .card-title, body.tema-car .modal-title {
+    color: #ff0000 !important;
+    text-transform: uppercase;
+    font-weight: 950 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+}
+body.tema-car .text-muted {
+    color: #ef4444 !important;
+}
+
+/* 🛑 4. LİDERLİK BANNER / HEADER ALANLARI (KONTRAST CANAVARI) */
+body.tema-car .liderlik-header,
+body.tema-car .liderlik-banner,
+body.tema-car .profile-header-box,
+body.tema-car [class*="header"],
+body.tema-car section.py-5.bg-dark {
+    background: #ff0000 !important;
+    background-color: #ff0000 !important;
+    border: 5px solid #000000 !important;
+    box-shadow: 12px 12px 0px #000000 !important;
+    padding: 50px 20px !important;
+    border-radius: 0px !important;
+}
+
+/* Banner İçindeki Yazıları ZORLA Net Koyu Siyah Yap */
+body.tema-car .liderlik-header *,
+body.tema-car .liderlik-banner *,
+body.tema-car .profile-header-box *,
+body.tema-car .liderlik-header p,
+body.tema-car .liderlik-header h1 {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    background: transparent !important;
+    text-shadow: none !important;
+    font-weight: 950 !important;
+}
+body.tema-car .liderlik-header i, body.tema-car .liderlik-header .trophy-icon, body.tema-car .liderlik-header svg {
+    filter: brightness(0) !important;
+    color: #000000 !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) COCKPIT DESIGN */
+body.tema-car .pomodoro-widget {
+    background: #000000 !important;
+    border: 2px solid #ff0000 !important;
+    border-left: 8px solid #ff0000 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 0px !important;
+}
+body.tema-car #customMinutes,
+body.tema-car .timer-display {
+    color: #ff0000 !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI (RACING CHROME) */
+body.tema-car .pill-premium,
+body.tema-car .credit-box,
+body.tema-car .wallet-box {
+    background: #000000 !important;
+    border: 2px solid #ff0000 !important;
+    border-radius: 0px !important;
+}
+body.tema-car .credit-count,
+body.tema-car .wallet-credit,
+body.tema-car .wallet-label {
+    color: #ffffff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6) !important;
+    font-weight: 900 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-car .stats-card-borsa {
+    background: #000000 !important;
+    border: 2px solid #ff0000 !important;
+}
+
+/* INPUTLAR VE FORMLAR */
+body.tema-car .form-control,
+body.tema-car input,
+body.tema-car textarea,
+body.tema-car select {
+    background: #0a0a0a !important;
+    border: 2px solid #ff0000 !important;
+    color: #ff0000 !important;
+    border-radius: 0px !important;
+}
+body.tema-car .form-control:focus,
+body.tema-car input:focus {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4) !important;
+    outline: none !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ (PİST SIRALAMASI) */
+body.tema-car .table { color: #ff0000 !important; }
+body.tema-car thead th {
+    background: #000000 !important;
+    color: #ffffff !important; /* Başlıklar net beyaz */
+    border-bottom: 3px solid #ff0000 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+}
+body.tema-car .table td {
+    color: #ff0000 !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2) !important;
+    font-weight: 700 !important;
+}
+
+/* 🏎️ BUTONLAR: TERS KONTRAST PİST KESİMİ */
+body.tema-car .btn-primary, 
+body.tema-car .btn-purple,
+body.tema-car .btn-update-profile,
+body.tema-car .btn-premium-stats {
+    background: #ff0000 !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    font-weight: 950 !important;
+    border-radius: 0px !important;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%) !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-car .btn-primary:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* FOOTER */
+body.tema-car footer {
+    background: #000000 !important;
+    border-top: 4px solid #ff0000 !important;
+}
+
+/* ==========================================================
+   🦁 TEMA 12: GALATASARAY - ULTRA PREMIUM (CHAMPIONS NIGHT v2.0)
+   Eskisine bağlı kalmadan, tamamen aslan yuvası kalitesine çekildi!
+   ========================================================== */
+
+body.tema-gs {
+    background-color: #2a0000 !important;
+
+    /* Sinematik GS ışıklandırma matrisi */
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 204, 0, 0.45) 0%, transparent 60%),
+        radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.20) 0%, transparent 70%),
+        radial-gradient(circle at 80% 70%, rgba(255, 204, 0, 0.15) 0%, transparent 75%),
+        linear-gradient(180deg, #1b0000 0%, #450000 60%, #1b0000 100%) !important;
+
+    color: #ffcc00 !important; /* Parıldayan Aslan Altını */
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 🏆 STADYUM SPOTLIGHT AURA (Dinamik Arka Efekt) */
+body.tema-gs::after {
+    content: "";
+    position: fixed;
+    top: -25%; left: -25%;
+    width: 150%; height: 150%;
+    z-index: -3;
+    background: conic-gradient(
+        from 180deg,
+        rgba(255, 204, 0, 0.08),
+        rgba(255, 0, 0, 0.05),
+        rgba(255, 204, 0, 0.08)
+    );
+    filter: blur(85px);
+    opacity: 0.85;
+    animation: gsAuraMove 10s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes gsAuraMove {
+    from { transform: rotate(0deg) scale(1); }
+    to   { transform: rotate(12deg) scale(1.1); }
+}
+
+/* 🛡️ DEV ARKA PLAN LOGOSU (İstediğin o PNG ayarı jilet gibi burada kral) */
+body.tema-gs::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 55% !important; left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 85vh !important; height: 85vh !important;
+    z-index: -2 !important;
+    background: url("../images/gs_logo.png") no-repeat center !important;
+    background-size: contain !important;
+    opacity: 0.18 !important;
+    filter: drop-shadow(0px 0px 50px rgba(255, 204, 0, 0.35)) brightness(1.05) contrast(1.2) !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* İçeriğin logoya basılmaması için katman güvencesi */
+body.tema-gs > * {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* NAVBAR: Champions Glass */
+body.tema-gs .navbar {
+    background: rgba(15, 0, 0, 0.80) !important;
+    backdrop-filter: blur(18px) !important;
+    border-bottom: 3px solid rgba(255, 204, 0, 0.85) !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6) !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-gs .navbar-brand .text-peer {
+    color: #ffcc00 !important;
+    font-weight: 950 !important;
+    text-shadow: 0 0 10px rgba(255, 204, 0, 0.45) !important;
+}
+body.tema-gs .navbar-brand .text-learn {
+    color: #ff0000 !important;
+    font-weight: 950 !important;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.35) !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE İKONLAR (SARI KIRMIZI NEON SİGORTASI) */
+body.tema-gs .nav-link, 
+body.tema-gs .navbar-nav .nav-item a {
+    color: rgba(255, 204, 0, 0.95) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.5px;
+    transition: 0.3s;
+}
+body.tema-gs .nav-link i {
+    color: #ffcc00 !important;
+    transition: 0.3s;
+}
+body.tema-gs .nav-link:hover, 
+body.tema-gs .nav-link:hover i {
+    color: #ff0000 !important;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE ASLAN ALTINI KONTRASTI */
+body.tema-gs .search-box input.form-control, 
+body.tema-gs .search-input {
+    color: #ffcc00 !important;
+    font-weight: 800 !important;
+}
+body.tema-gs .search-input::placeholder {
+    color: rgba(255, 204, 0, 0.5) !important;
+}
+
+/* 🏆 TÜM KARTLAR, MODÜLLER VE ENVANTER KUTULARI (PREMIUM ASLAN CAMI) */
+body.tema-gs .card,
+body.tema-gs .pro-card,
+body.tema-gs .profile-card-premium,
+body.tema-gs .stat-card,
+body.tema-gs .achievement-premium-card,
+body.tema-gs .note-card-premium,
+body.tema-gs .library-card-premium,
+body.tema-gs .magaza-card,
+body.tema-gs .section-card-premium,
+body.tema-gs .category-card,
+body.tema-gs .list-group-item {
+    background: rgba(10, 0, 0, 0.70) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 204, 0, 0.65) !important;
+    border-left: 10px solid rgba(255, 0, 0, 0.95) !important; /* Agresif aslan kırmızı şeridi */
+    border-radius: 18px !important;
+    box-shadow: 0 12px 45px rgba(0,0,0,0.85) !important;
+    transition: 0.35s ease !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Şampiyonluk Parlaması */
+body.tema-gs .card:hover,
+body.tema-gs .profile-card-premium:hover,
+body.tema-gs .magaza-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: rgba(255, 204, 0, 1) !important;
+    box-shadow: 0 0 35px rgba(255, 204, 0, 0.25), 0 20px 60px rgba(0,0,0,0.9) !important;
+}
+
+/* TÜM YAZILAR GÜVENLİK SİGORTASI (KAPKARANLIKTA KALAN YERLER İÇİN) */
+body.tema-gs p, body.tema-gs span:not(.badge), body.tema-gs div, 
+body.tema-gs small, body.tema-gs b, body.tema-gs li, 
+body.tema-gs label, body.tema-gs td, body.tema-gs th, body.tema-gs .card-text {
+    color: #ffcc00 !important;
+    font-weight: 750 !important;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.85) !important;
+}
+
+/* BAŞLIKLAR: KÜKREYEN NEON GOLD */
+body.tema-gs h1, body.tema-gs h2, body.tema-gs h3, 
+body.tema-gs h4, body.tema-gs h5, body.tema-gs h6,
+body.tema-gs .card-title, body.tema-gs .modal-title {
+    color: #ffcc00 !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 18px rgba(255, 204, 0, 0.35), 2px 2px 0 rgba(0,0,0,0.6);
+}
+body.tema-gs .text-muted {
+    color: #fdb912 !important;
+}
+
+/* 🟥 LİDERLİK / HEADER KUTUSU (NEFES KESEN TRİBÜN KIRMIZISI) */
+body.tema-gs .liderlik-header,
+body.tema-gs .liderlik-banner,
+body.tema-gs .profile-header-box,
+body.tema-gs [class*="header"],
+body.tema-gs section.py-5.bg-dark {
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.95), rgba(90, 0, 0, 0.95)) !important;
+    border: 3px solid rgba(255, 204, 0, 0.85) !important;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.8) !important;
+    padding: 50px 20px !important;
+    border-radius: 18px !important;
+}
+body.tema-gs .liderlik-header *,
+body.tema-gs .liderlik-banner *,
+body.tema-gs .profile-header-box *,
+body.tema-gs .liderlik-header p,
+body.tema-gs .liderlik-header h1 {
+    color: #ffcc00 !important;
+    font-weight: 950 !important;
+    text-shadow: 0 0 12px rgba(255, 204, 0, 0.25), 2px 2px 0 rgba(0,0,0,0.7) !important;
+}
+body.tema-gs .liderlik-header i, body.tema-gs .liderlik-header .trophy-icon, body.tema-gs .liderlik-header svg {
+    color: #ffcc00 !important;
+    filter: drop-shadow(0px 0px 12px rgba(255, 204, 0, 0.6)) !important;
+    opacity: 1 !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) ASLAN ENTEGRASYONU */
+body.tema-gs .pomodoro-widget {
+    background: rgba(10, 0, 0, 0.85) !important;
+    border: 2px solid rgba(255, 204, 0, 0.7) !important;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.2) !important;
+}
+body.tema-gs #customMinutes,
+body.tema-gs .timer-display {
+    color: #ffcc00 !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 KREDİ ROZETİ VE CÜZDAN ALANLARI */
+body.tema-gs .kredi-badge,
+body.tema-gs .pill-premium,
+body.tema-gs .credit-box,
+body.tema-gs .wallet-box {
+    background: rgba(20, 0, 0, 0.8) !important;
+    border: 2px solid rgba(255, 204, 0, 0.85) !important;
+    box-shadow: 0 0 18px rgba(255, 204, 0, 0.25) !important;
+}
+body.tema-gs .kredi-badge span, body.tema-gs .kredi-badge i,
+body.tema-gs .credit-count, body.tema-gs .wallet-credit {
+    color: #ffcc00 !important;
+    font-weight: 950 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-gs .stats-card-borsa {
+    background: rgba(10, 0, 0, 0.9) !important;
+    border: 1px solid rgba(255, 204, 0, 0.5) !important;
+}
+
+/* INPUTLAR VE FORMLAR */
+body.tema-gs .form-control,
+body.tema-gs input,
+body.tema-gs textarea,
+body.tema-gs select {
+    background: rgba(15, 0, 0, 0.6) !important;
+    border: 1px solid rgba(255, 204, 0, 0.5) !important;
+    color: #ffcc00 !important;
+}
+body.tema-gs .form-control:focus,
+body.tema-gs input:focus {
+    border-color: #ff0000 !important;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.4) !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ */
+body.tema-gs .table { color: #ffcc00 !important; }
+body.tema-gs thead th {
+    background: rgba(15, 0, 0, 0.95) !important;
+    color: #ffcc00 !important;
+    border-bottom: 2px solid rgba(255, 204, 0, 0.85) !important;
+    font-weight: 900 !important;
+}
+body.tema-gs .table td {
+    color: #ffcc00 !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.15) !important;
+}
+
+/* 🟨 BUTONLAR: KUPALAR ETKİSİ ALTIN GRADIENT */
+body.tema-gs .btn-primary,
+body.tema-gs .btn-purple,
+body.tema-gs .btn-update-profile,
+body.tema-gs .btn-premium-stats {
+    background: linear-gradient(90deg, #ffcc00 0%, #ff9900 50%, #ffcc00 100%) !important;
+    color: #450000 !important;
+    border: 2px solid rgba(255, 204, 0, 0.9) !important;
+    font-weight: 950 !important;
+    border-radius: 14px !important;
+    box-shadow: 0 0 18px rgba(255, 204, 0, 0.35) !important;
+    transition: 0.35s ease !important;
+}
+body.tema-gs .btn-primary:hover {
+    transform: scale(1.05) !important;
+    background: linear-gradient(90deg, #ff0000 0%, #ffcc00 50%, #ff0000 100%) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.35), 0 0 35px rgba(255, 204, 0, 0.35) !important;
+}
+
+/* FOOTER */
+body.tema-gs footer {
+    background: rgba(10, 0, 0, 0.95) !important;
+    border-top: 3px solid rgba(255, 204, 0, 0.85) !important;
+}
+
+/* ==========================================================
+   💛 TEMA 13: FENERBAHÇE - ULTRA PREMIUM (KADIKÖY REDUX v2.0)
+   Eskisine bağlı kalmadan, tamamen çubuklu asalet kalitesine çekildi!
+   ========================================================== */
+
+body.tema-fb {
+    background-color: #001b44 !important; /* Çok koyu asil lacivert */
+    background-image: radial-gradient(circle at top, rgba(255, 235, 0, 0.35) 0%, #001b44 80%) !important;
+    color: #ffeb00 !important; /* FB Parlak Sarısı */
+    font-family: 'Exo 2', 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 🦅 ARKADAKİ HAYALET LOGO SİGORTASI (İstediğin o URL ayarı jilet gibi burada kral) */
+body.tema-fb::before {
+    content: "" !important;
+    position: fixed !important; 
+    top: 50% !important; left: 50% !important; 
+    transform: translate(-50%, -50%) !important;
+    width: 70vh !important; height: 70vh !important; 
+    z-index: -1 !important;
+    background: url('https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png') no-repeat center !important;
+    background-size: contain !important;
+    opacity: 0.05 !important; 
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* İçeriğin logoya ezilmemesi için katman güvencesi */
+body.tema-fb > * {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* NAVBAR: Kadıköy Glass */
+body.tema-fb .navbar {
+    background: #001b44 !important;
+    border-bottom: 4px solid #ffeb00 !important;
+    box-shadow: 0 4px 25px rgba(255, 235, 0, 0.25) !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-fb .navbar-brand .text-peer {
+    color: #001b44 !important; /* FB Lacivert */
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #ffffff !important; /* Yazıyı patlatan beyaz şerit */
+}
+body.tema-fb .navbar-brand .text-learn {
+    color: #ffeb00 !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5) !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE İKONLAR (SARI LACİVERT NEON AYARI) */
+body.tema-fb .nav-link, 
+body.tema-fb .navbar-nav .nav-item a {
+    color: #ffeb00 !important; 
+    font-weight: 900 !important;
+    transition: 0.25s ease;
+}
+body.tema-fb .nav-link i {
+    color: #ffeb00 !important;
+}
+body.tema-fb .nav-link:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 235, 0, 0.6) !important;
+    transform: scale(1.02);
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE SARI KONTRAST */
+body.tema-fb .search-box input.form-control, 
+body.tema-fb .search-input {
+    color: #ffeb00 !important;
+    font-weight: 800 !important;
+}
+body.tema-fb .search-input::placeholder {
+    color: rgba(255, 235, 0, 0.5) !important;
+}
+
+/* 💛 TÜM KARTLAR, MODÜLLER VE ENVANTER KUTULARI (ÇUBUKLU MATRİX) */
+body.tema-fb .card,
+body.tema-fb .pro-card,
+body.tema-fb .profile-card-premium,
+body.tema-fb .stat-card,
+body.tema-fb .achievement-premium-card,
+body.tema-fb .note-card-premium,
+body.tema-fb .library-card-premium,
+body.tema-fb .magaza-card,
+body.tema-fb .section-card-premium,
+body.tema-fb .category-card,
+body.tema-fb .list-group-item {
+    background: #000814 !important; /* Derin uzay siyahı kart içi */
+    border: 2px solid #001b44 !important;
+    border-left: 10px solid #ffeb00 !important; /* Agresif FB sarı şeridi */
+    box-shadow: 10px 10px 0px #000000 !important;
+    border-radius: 0px !important; /* Klasik sert spor tarzı kesim */
+    transition: all 0.25s ease-in-out !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Tribün Coşkusu Parlaması */
+body.tema-fb .card:hover,
+body.tema-fb .profile-card-premium:hover,
+body.tema-fb .magaza-card:hover {
+    transform: translate(-3px, -3px) !important;
+    border-color: #ffeb00 !important;
+    box-shadow: 14px 14px 0px #001b44, 0 0 20px rgba(255, 235, 0, 0.2) !important;
+}
+
+/* TÜM YAZILAR GÜVENLİK SİGORTASI */
+body.tema-fb p, body.tema-fb span:not(.badge), body.tema-fb div:not(.liderlik-header):not(.liderlik-banner), 
+body.tema-fb small, body.tema-fb b, body.tema-fb i, body.tema-fb li, 
+body.tema-fb label, body.tema-fb td, body.tema-fb th, body.tema-fb .card-text {
+    color: #ffeb00 !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6) !important;
+}
+
+/* BAŞLIK DÜZENLEMELERİ */
+body.tema-fb h1, body.tema-fb h2, body.tema-fb h3, 
+body.tema-fb h4, body.tema-fb h5, body.tema-fb h6,
+body.tema-fb .card-title, body.tema-fb .modal-title {
+    color: #001b44 !important; /* FB Lacivert Başlıklar */
+    text-transform: uppercase;
+    font-weight: 950 !important;
+    text-shadow: 2px 2px 0px #ffffff !important;
+}
+body.tema-fb .text-muted {
+    color: #fde047 !important;
+}
+
+/* 🟦 LİDERLİK / HEADER KUTULARI (KADIKÖY DEFANS KALESİ) */
+body.tema-fb .liderlik-header,
+body.tema-fb .liderlik-banner,
+body.tema-fb .profile-header-box,
+body.tema-fb [class*="header"],
+body.tema-fb section.py-5.bg-dark {
+    background-color: #001b44 !important;
+    background: #001b44 !important;
+    background-image: none !important;
+    border: 5px solid #ffeb00 !important;
+    box-shadow: 12px 12px 0px #000000 !important;
+    padding: 50px 20px !important;
+    border-radius: 0px !important;
+}
+body.tema-fb .liderlik-header *,
+body.tema-fb .liderlik-banner *,
+body.tema-fb .profile-header-box *,
+body.tema-fb .liderlik-header p,
+body.tema-fb .liderlik-header h1 {
+    color: #ffeb00 !important;
+    -webkit-text-fill-color: #ffeb00 !important;
+    background: transparent !important;
+    text-shadow: 2px 2px 4px #000000 !important;
+    font-weight: 950 !important;
+}
+body.tema-fb .liderlik-header i, body.tema-fb .liderlik-header .trophy-icon, body.tema-fb .liderlik-header svg {
+    color: #ffeb00 !important;
+    filter: none !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) SARI LACİVERT ENTEGRASYONU */
+body.tema-fb .pomodoro-widget {
+    background: #000814 !important;
+    border: 2px solid #001b44 !important;
+    border-left: 8px solid #ffeb00 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 0px !important;
+}
+body.tema-fb #customMinutes,
+body.tema-fb .timer-display {
+    color: #ffeb00 !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI GÜCÜ */
+body.tema-fb .pill-premium,
+body.tema-fb .credit-box,
+body.tema-fb .wallet-box {
+    background: #000814 !important;
+    border: 2px solid #ffeb00 !important;
+    border-radius: 0px !important;
+}
+body.tema-fb .credit-count,
+body.tema-fb .wallet-credit,
+body.tema-fb .wallet-label {
+    color: #ffffff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6) !important;
+    font-weight: 900 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-fb .stats-card-borsa {
+    background: #000814 !important;
+    border: 2px solid #001b44 !important;
+}
+
+/* INPUTLAR VE FORMLAR */
+body.tema-fb .form-control,
+body.tema-fb input,
+body.tema-fb textarea,
+body.tema-fb select {
+    background: #000814 !important;
+    border: 2px solid #001b44 !important;
+    color: #ffeb00 !important;
+    border-radius: 0px !important;
+}
+body.tema-fb .form-control:focus,
+body.tema-fb input:focus {
+    border-color: #ffeb00 !important;
+    box-shadow: 0 0 12px rgba(255, 235, 0, 0.3) !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ */
+body.tema-fb .table { color: #ffeb00 !important; }
+body.tema-fb thead th {
+    background: #001b44 !important;
+    color: #ffffff !important; /* Başlıklar net beyaz parlasın */
+    border-bottom: 3px solid #ffeb00 !important;
+    font-weight: 900 !important;
+}
+body.tema-fb .table td {
+    color: #ffeb00 !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 235, 0, 0.15) !important;
+    font-weight: 700 !important;
+}
+
+/* 🟨 BUTONLAR: SARI KONTRAST KESİM */
+body.tema-fb .btn-primary,
+body.tema-fb .btn-purple,
+body.tema-fb .btn-update-profile,
+body.tema-fb .btn-premium-stats {
+    background: #ffeb00 !important;
+    color: #001b44 !important;
+    border: 2px solid #001b44 !important;
+    font-weight: 950 !important;
+    border-radius: 0px !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-fb .btn-primary:hover {
+    background: #ffffff !important;
+    color: #001b44 !important;
+    border-color: #ffeb00 !important;
+    box-shadow: 0 0 15px rgba(255, 235, 0, 0.4) !important;
+}
+
+/* FOOTER */
+body.tema-fb footer {
+    background: #001b44 !important;
+    border-top: 4px solid #ffeb00 !important;
+}
+
+/* ==========================================================
+   🦅 TEMA 14: BEŞİKTAŞ - ULTRA PREMIUM (KARA KARTAL v2.0)
+   Eskisine bağlı kalmadan, tamamen siyah-beyaz asalet kalitesine çekildi!
+   ========================================================== */
+
+body.tema-bjk {
+    background-color: #000000 !important;
+    /* Tepeden asil bir beyaz şafak süzülür, derin siyahla birleşir */
+    background-image: radial-gradient(circle at top, rgba(255, 255, 255, 0.18) 0%, #000000 85%) !important;
+    color: #ffffff !important;
+    font-family: 'Exo 2', 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 🦅 ARKADAKİ HAYALET LOGO SİGORTASI (İstediğin o lokal dosya ve PNG ayarı jilet gibi burada kral) */
+body.tema-bjk::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 50% !important; left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 85vh !important; height: 85vh !important;
+    z-index: -1 !important;
+    background: url("../images/bjk_logo.png") no-repeat center !important;
+    background-size: contain !important;
+    opacity: 0.20 !important;
+    filter: drop-shadow(0px 0px 30px rgba(255, 255, 255, 0.3)) !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* İçeriğin logoya ezilmemesi ve ön planda cam gibi durması için katman güvencesi */
+body.tema-bjk > * {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* NAVBAR: Dolmabahçe Glass */
+body.tema-bjk .navbar {
+    background: #000000 !important;
+    border-bottom: 4px solid #ffffff !important;
+    box-shadow: 0 4px 25px rgba(255, 255, 255, 0.15) !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-bjk .navbar-brand .text-peer {
+    color: #000000 !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #ffffff !important; /* Logoyu patlatan saf beyaz gölge */
+}
+body.tema-bjk .navbar-brand .text-learn {
+    color: #ffffff !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4) !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE İKONLAR (SİYAH BEYAZ NEON SİGORTASI) */
+body.tema-bjk .nav-link, 
+body.tema-bjk .navbar-nav .nav-item a {
+    color: #ffffff !important; 
+    font-weight: 900 !important;
+    letter-spacing: 0.3px;
+    transition: 0.25s ease-in-out;
+}
+body.tema-bjk .nav-link i {
+    color: #ffffff !important;
+}
+body.tema-bjk .nav-link:hover {
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.5) !important;
+    transform: translateY(-1px);
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE KONTRAST BEYAZI */
+body.tema-bjk .search-box input.form-control, 
+body.tema-bjk .search-input {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+body.tema-bjk .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 🏁 TÜM KARTLAR, MODÜLLER VE ENVANTER KUTULARI (KAPKARA KARTAL CAMI) */
+body.tema-bjk .card,
+body.tema-bjk .pro-card,
+body.tema-bjk .profile-card-premium,
+body.tema-bjk .stat-card,
+body.tema-bjk .achievement-premium-card,
+body.tema-bjk .note-card-premium,
+body.tema-bjk .library-card-premium,
+body.tema-bjk .magaza-card,
+body.tema-bjk .section-card-premium,
+body.tema-bjk .category-card,
+body.tema-bjk .list-group-item {
+    background: #0a0a0a !important; /* Mat siyah kart içi */
+    border: 2px solid #ffffff !important;
+    border-left: 10px solid #ffffff !important; /* Agresif asil beyaz sol şerit */
+    box-shadow: 10px 10px 0px #000000 !important;
+    border-radius: 0px !important; /* Keskin spor arayüzü hatları, yuvarlama yok kral */
+    transition: all 0.25s ease-in-out !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Beşiktaş Coşkusu Parlaması */
+body.tema-bjk .card:hover,
+body.tema-bjk .profile-card-premium:hover,
+body.tema-bjk .magaza-card:hover {
+    transform: translate(-3px, -3px) !important;
+    box-shadow: 14px 14px 0px #ffffff, 0 0 20px rgba(255, 255, 255, 0.15) !important;
+}
+
+/* TÜM YAZILAR GÜVENLİK SİGORTASI (KAPKARANLIKTA OKUNMAYAN YER KALMASIN) */
+body.tema-bjk p, body.tema-bjk span:not(.badge), body.tema-bjk div:not(.liderlik-header):not(.liderlik-banner), 
+body.tema-bjk small, body.tema-bjk b, body.tema-bjk i, body.tema-bjk li, 
+body.tema-bjk label, body.tema-bjk td, body.tema-bjk th, body.tema-bjk .card-text {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.85) !important;
+}
+
+/* BAŞLIK DÜZENLEMELERİ (NET GÖLGELİ) */
+body.tema-bjk h1, body.tema-bjk h2, body.tema-bjk h3, 
+body.tema-bjk h4, body.tema-bjk h5, body.tema-bjk h6,
+body.tema-bjk .card-title, body.tema-bjk .modal-title {
+    color: #000000 !important; /* BJK Siyah Başlıklar */
+    text-transform: uppercase;
+    font-weight: 950 !important;
+    text-shadow: 2px 2px 0px #ffffff !important;
+}
+body.tema-bjk .text-muted {
+    color: #e2e8f0 !important;
+}
+
+/* 🖤 LİDERLİK / HEADER KUTULARI (ZİFİRİ DEFANS HATTI) */
+body.tema-bjk .liderlik-header,
+body.tema-bjk .liderlik-banner,
+body.tema-bjk .profile-header-box,
+body.tema-bjk [class*="header"],
+body.tema-bjk section.py-5.bg-dark {
+    background-color: #000000 !important;
+    background: #000000 !important;
+    background-image: none !important;
+    border: 5px solid #ffffff !important;
+    box-shadow: 15px 15px 0px #111111 !important;
+    padding: 50px 20px !important;
+    border-radius: 0px !important;
+}
+body.tema-bjk .liderlik-header *,
+body.tema-bjk .liderlik-banner *,
+body.tema-bjk .profile-header-box *,
+body.tema-bjk .liderlik-header p,
+body.tema-bjk .liderlik-header h1 {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: transparent !important;
+    text-shadow: 2px 2px 4px #000000 !important;
+    font-weight: 950 !important;
+}
+body.tema-bjk .liderlik-header i, body.tema-bjk .liderlik-header .trophy-icon, body.tema-bjk .liderlik-header svg {
+    color: #ffffff !important;
+    filter: none !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) BJK ENTEGRASYONU */
+body.tema-bjk .pomodoro-widget {
+    background: #0a0a0a !important;
+    border: 2px solid #ffffff !important;
+    border-left: 8px solid #ffffff !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 0px !important;
+}
+body.tema-bjk #customMinutes,
+body.tema-bjk .timer-display {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI ASALETİ */
+body.tema-bjk .pill-premium,
+body.tema-bjk .credit-box,
+body.tema-bjk .wallet-box {
+    background: #0a0a0a !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 0px !important;
+}
+body.tema-bjk .credit-count,
+body.tema-bjk .wallet-credit,
+body.tema-bjk .wallet-label {
+    color: #ffffff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
+    font-weight: 900 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-bjk .stats-card-borsa {
+    background: #0a0a0a !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* INPUTLAR VE FORMLAR */
+body.tema-bjk .form-control,
+body.tema-bjk input,
+body.tema-bjk textarea,
+body.tema-bjk select {
+    background: #0a0a0a !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important;
+    border-radius: 0px !important;
+}
+body.tema-bjk .form-control:focus,
+body.tema-bjk input:focus {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3) !important;
+    outline: none !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ */
+body.tema-bjk .table { color: #ffffff !important; }
+body.tema-bjk thead th {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border-bottom: 3px solid #ffffff !important;
+    font-weight: 900 !important;
+}
+body.tema-bjk .table td {
+    color: #ffffff !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    font-weight: 700 !important;
+}
+
+/* ⬜ BUTONLAR: KARTAL KESİMİ */
+body.tema-bjk .btn-primary,
+body.tema-bjk .btn-purple,
+body.tema-bjk .btn-update-profile,
+body.tema-bjk .btn-premium-stats {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    font-weight: 950 !important;
+    border-radius: 0px !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-bjk .btn-primary:hover {
+    background: #0a0a0a !important;
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* FOOTER */
+body.tema-bjk footer {
+    background: #000000 !important;
+    border-top: 4px solid #ffffff !important;
+}
+
+/* ==========================================================
+   🌊 TEMA 15: TRABZONSPOR - ULTRA PREMIUM (FIRTINA REDUX v2.0)
+   Eskisine bağlı kalmadan, tamamen Karadeniz hırçınlığı kalitesine çekildi!
+   ========================================================== */
+
+body.tema-ts {
+    background-color: #1a050a !important; /* Çok koyu asil bordo */
+    /* Tepeden Karadeniz mavisi bir süzülme, aşağı doğru derin bordo */
+    background-image: radial-gradient(circle at top, rgba(90, 176, 227, 0.25) 0%, #1a050a 85%) !important;
+    color: #5ab0e3 !important; /* Fırtına Mavisi */
+    font-family: 'Exo 2', 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 🌊 ARKADAKİ HAYALET LOGO SİGORTASI (İstediğin o 75vh lokal dosya ayarı jilet gibi burada kral) */
+body.tema-ts::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 55% !important; left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 75vh !important; height: 75vh !important;
+    z-index: -1 !important;
+    background: url("../images/ts_logo.png") no-repeat center !important;
+    background-size: contain !important;
+    opacity: 0.20 !important; 
+    filter: brightness(1.2) contrast(1.1) !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* İçeriğin logoya ezilmemesi ve ön planda cam gibi durması için katman güvencesi */
+body.tema-ts > * {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* NAVBAR: Avni Aker Glass */
+body.tema-ts .navbar {
+    background: #1a050a !important;
+    border-bottom: 4px solid #5ab0e3 !important;
+    box-shadow: 0 4px 25px rgba(90, 176, 227, 0.25) !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-ts .navbar-brand .text-peer {
+    color: #810323 !important; /* Canlı Bordo */
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px #ffffff !important; /* Logoyu patlatan saf beyaz gölge */
+}
+body.tema-ts .navbar-brand .text-learn {
+    color: #5ab0e3 !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5) !important;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE İKONLAR (FIRTINA NEON AYARI) */
+body.tema-ts .nav-link, 
+body.tema-ts .navbar-nav .nav-item a {
+    color: #5ab0e3 !important; 
+    font-weight: 900 !important;
+    transition: 0.25s ease-in-out;
+}
+body.tema-ts .nav-link i {
+    color: #5ab0e3 !important;
+}
+body.tema-ts .nav-link:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(90, 176, 227, 0.6) !important;
+    transform: scale(1.02);
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE FIRTINA MAVİSİ KONTRAST */
+body.tema-ts .search-box input.form-control, 
+body.tema-ts .search-input {
+    color: #5ab0e3 !important;
+    font-weight: 800 !important;
+}
+body.tema-ts .search-input::placeholder {
+    color: rgba(90, 176, 227, 0.5) !important;
+}
+
+/* 💎 TÜM KARTLAR, MODÜLLER VE ENVANTER KUTULARI (FIRTINA CAMI) */
+body.tema-ts .card,
+body.tema-ts .pro-card,
+body.tema-ts .profile-card-premium,
+body.tema-ts .stat-card,
+body.tema-ts .achievement-premium-card,
+body.tema-ts .note-card-premium,
+body.tema-ts .library-card-premium,
+body.tema-ts .magaza-card,
+body.tema-ts .section-card-premium,
+body.tema-ts .category-card,
+body.tema-ts .list-group-item {
+    background: #0d0205 !important; /* Mat koyu bordo kart içi */
+    border: 2px solid #810323 !important;
+    border-left: 10px solid #5ab0e3 !important; /* Agresif fırtına mavisi sol şerit */
+    box-shadow: 10px 10px 0px #000000 !important;
+    border-radius: 0px !important; /* Keskin spor arayüzü hatları, yuvarlama yok kral */
+    transition: all 0.25s ease-in-out !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Bordo Mavi Coşku Parlaması */
+body.tema-ts .card:hover,
+body.tema-ts .profile-card-premium:hover,
+body.tema-ts .magaza-card:hover {
+    transform: translate(-3px, -3px) !important;
+    border-color: #5ab0e3 !important;
+    box-shadow: 14px 14px 0px #810323, 0 0 20px rgba(90, 176, 227, 0.2) !important;
+}
+
+/* TÜM YAZILAR GÜVENLİK SİGORTASI (KAPKARANLIKTA OKUNMAYAN METİN KALMASIN) */
+body.tema-ts p, body.tema-ts span:not(.badge), body.tema-ts div:not(.liderlik-header):not(.liderlik-banner), 
+body.tema-ts small, body.tema-ts b, body.tema-ts i, body.tema-ts li, 
+body.tema-ts label, body.tema-ts td, body.tema-ts th, body.tema-ts .card-text {
+    color: #5ab0e3 !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.85) !important;
+}
+
+/* BAŞLIK DÜZENLEMELERİ (NET BEYAZ GÖLGELİ BORDO) */
+body.tema-ts h1, body.tema-ts h2, body.tema-ts h3, 
+body.tema-ts h4, body.tema-ts h5, body.tema-ts h6,
+body.tema-ts .card-title, body.tema-ts .modal-title {
+    color: #810323 !important; /* Bordo Başlıklar */
+    text-transform: uppercase;
+    font-weight: 950 !important;
+    text-shadow: 2px 2px 0px #ffffff !important;
+}
+body.tema-ts .text-muted {
+    color: #93c5fd !important;
+}
+
+/* 🟥 LİDERLİK / HEADER KUTULARI (FIRTINA DEFANS HATTI) */
+body.tema-ts .liderlik-header,
+body.tema-ts .liderlik-banner,
+body.tema-ts .profile-header-box,
+body.tema-ts [class*="header"],
+body.tema-ts section.py-5.bg-dark {
+    background-color: #810323 !important;
+    background: #810323 !important;
+    background-image: none !important;
+    border: 5px solid #5ab0e3 !important;
+    box-shadow: 12px 12px 0px #1a050a !important;
+    padding: 50px 20px !important;
+    border-radius: 0px !important;
+}
+body.tema-ts .liderlik-header *,
+body.tema-ts .liderlik-banner *,
+body.tema-ts .profile-header-box *,
+body.tema-ts .liderlik-header p,
+body.tema-ts .liderlik-header h1 {
+    color: #5ab0e3 !important;
+    -webkit-text-fill-color: #5ab0e3 !important;
+    background: transparent !important;
+    text-shadow: 2px 2px 4px #000000 !important;
+    font-weight: 950 !important;
+}
+body.tema-ts .liderlik-header i, body.tema-ts .liderlik-header .trophy-icon, body.tema-ts .liderlik-header svg {
+    color: #5ab0e3 !important;
+    filter: none !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) TS ENTEGRASYONU */
+body.tema-ts .pomodoro-widget {
+    background: #0d0205 !important;
+    border: 2px solid #810323 !important;
+    border-left: 8px solid #5ab0e3 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 0px !important;
+}
+body.tema-ts #customMinutes,
+body.tema-ts .timer-display {
+    color: #5ab0e3 !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI GÜCÜ */
+body.tema-ts .pill-premium,
+body.tema-box,
+body.tema-ts .wallet-box {
+    background: #0d0205 !important;
+    border: 2px solid #5ab0e3 !important;
+    border-radius: 0px !important;
+}
+body.tema-ts .credit-count,
+body.tema-ts .wallet-credit,
+body.tema-ts .wallet-label {
+    color: #ffffff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5) !important;
+    font-weight: 900 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-ts .stats-card-borsa {
+    background: #0d0205 !important;
+    border: 2px solid #810323 !important;
+}
+
+/* INPUTLAR VE FORMLAR */
+body.tema-ts .form-control,
+body.tema-ts input,
+body.tema-ts textarea,
+body.tema-ts select {
+    background: #0d0205 !important;
+    border: 2px solid #810323 !important;
+    color: #5ab0e3 !important;
+    border-radius: 0px !important;
+}
+body.tema-ts .form-control:focus,
+body.tema-ts input:focus {
+    box-shadow: 0 0 12px rgba(90, 176, 227, 0.3) !important;
+    outline: none !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ */
+body.tema-ts .table { color: #5ab0e3 !important; }
+body.tema-ts thead th {
+    background: #810323 !important;
+    color: #ffffff !important; /* Başlıklar net beyaz parlasın */
+    border-bottom: 3px solid #5ab0e3 !important;
+    font-weight: 900 !important;
+}
+body.tema-ts .table td {
+    color: #5ab0e3 !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(90, 176, 227, 0.15) !important;
+    font-weight: 700 !important;
+}
+
+/* 🟦 BUTONLAR: SARI KONTRAST KESİM */
+body.tema-ts .btn-primary,
+body.tema-ts .btn-purple,
+body.tema-ts .btn-update-profile,
+body.tema-ts .btn-premium-stats {
+    background: #5ab0e3 !important;
+    color: #810323 !important;
+    border: 2px solid #810323 !important;
+    font-weight: 950 !important;
+    border-radius: 0px !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-ts .btn-primary:hover {
+    background: #ffffff !important;
+    color: #810323 !important;
+    border-color: #5ab0e3 !important;
+    box-shadow: 0 0 15px rgba(90, 176, 227, 0.4) !important;
+}
+
+/* FOOTER */
+body.tema-ts footer {
+    background: #1a050a !important;
+    border-top: 4px solid #5ab0e3 !important;
+}
+
+/* ==========================================================
+   ⚽ TEMA 16: FUTBOLLU - ULTRA PREMIUM (STADIUM NIGHTS v2.0)
+   Eskisine bağlı kalmadan, tamamen canlı yeşil saha kalitesine çekildi!
+   ========================================================== */
+
+body.tema-football {
+    background-color: #012408 !important; /* Derin saha yeşili */
+    background-image: 
+        radial-gradient(circle at 50% 0%, #0a4d14 0%, #012408 80%),
+        url('https://www.transparenttextures.com/patterns/pinstriped-suit.png') !important; /* Saha çizgileri efekti */
+    color: #ffffff !important;
+    font-family: 'Exo 2', 'Plus Jakarta Sans', sans-serif !important;
+    position: relative;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* 🏟️ ARKADAKİ HAYALET FUTBOL SAHASI (İstediğin o URL katmanı jilet gibi burada kral) */
+body.tema-football::before {
+    content: "" !important;
+    position: fixed !important; top: 50% !important; left: 50% !important; transform: translate(-50%, -50%) !important;
+    width: 80vh !important; height: 80vh !important; z-index: -1 !important;
+    background: url('https://cdn-icons-png.flaticon.com/512/33/33736.png') no-repeat center !important;
+    background-size: contain !important;
+    opacity: 0.03 !important; 
+    filter: invert(1) !important;
+    pointer-events: none !important;
+    display: block !important;
+}
+
+/* İçeriğin sahaya gömülmemesi için katman güvencesi */
+body.tema-football > * {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* NAVBAR: Projektör Altındaki Gece Matrisi */
+body.tema-football .navbar {
+    background: rgba(0, 0, 0, 0.9) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 4px solid #00ff44 !important;
+    box-shadow: 0 4px 25px rgba(0, 255, 68, 0.25) !important;
+}
+
+/* LOGO VE MARKA PARLAMALARI */
+body.tema-football .navbar-brand .text-peer {
+    color: #00ff44 !important; /* Fosforlu Saha Yeşili */
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(0, 255, 68, 0.5) !important;
+}
+body.tema-football .navbar-brand .text-learn {
+    color: #ffffff !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+}
+
+/* 🔥 ÜST MENÜ LINK YAZILARI VE İKONLAR (SAHA IŞIKLARI AYARI) */
+body.tema-football .nav-link, 
+body.tema-football .navbar-nav .nav-item a {
+    color: #ffffff !important; 
+    font-weight: 900 !important;
+    transition: 0.25s ease-in-out;
+}
+body.tema-football .nav-link i {
+    color: #ffffff !important;
+}
+body.tema-football .nav-link:hover {
+    color: #00ff44 !important;
+    text-shadow: 0 0 10px rgba(0, 255, 68, 0.6) !important;
+}
+
+/* 🔥 ARAMA KUTUSU İÇİNDEKİ YAZI VE SAHA YEŞİLİ REAKSİYONU */
+body.tema-football .search-box input.form-control, 
+body.tema-football .search-input {
+    color: #00ff44 !important;
+    font-weight: 800 !important;
+}
+body.tema-football .search-input::placeholder {
+    color: rgba(0, 255, 68, 0.5) !important;
+}
+
+/* 💎 TÜM KARTLAR, MODÜLLER VE ENVANTER KUTULARI (MEŞHUR KALIN SOL ŞERİT YEŞİL) */
+body.tema-football .card,
+body.tema-football .pro-card,
+body.tema-football .profile-card-premium,
+body.tema-football .stat-card,
+body.tema-football .achievement-premium-card,
+body.tema-football .note-card-premium,
+body.tema-football .library-card-premium,
+body.tema-football .magaza-card,
+body.tema-football .section-card-premium,
+body.tema-football .category-card,
+body.tema-football .list-group-item {
+    background: #011a06 !important; /* Koyu yeşil zemin */
+    border: 2px solid #ffffff !important;
+    border-left: 12px solid #00ff44 !important; /* O MEŞHUR KALIN SOL ŞERİT */
+    box-shadow: 10px 10px 0px #000000 !important;
+    border-radius: 0px !important; /* Maç ciddiyeti keskin hatlar */
+    transition: all 0.25s ease-in-out !important;
+}
+
+/* Kartların Üzerine Gelindiğinde Tribün Patlaması */
+body.tema-football .card:hover,
+body.tema-football .profile-card-premium:hover,
+body.tema-football .magaza-card:hover {
+    transform: translate(-3px, -3px) !important;
+    border-color: #00ff44 !important;
+    box-shadow: 14px 14px 0px #000000, 0 0 20px rgba(0, 255, 68, 0.3) !important;
+}
+
+/* TÜM YAZILAR GÜVENLİK SİGORTASI (KAPKARANLIK SAHADA REKOR OKUNABİLİRLİK) */
+body.tema-football p, body.tema-football span:not(.badge), body.tema-football div:not(.liderlik-header):not(.liderlik-banner), 
+body.tema-football small, body.tema-football b, body.tema-football i, body.tema-football li, 
+body.tema-football label, body.tema-football td, body.tema-football th, body.tema-football .card-text {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.85) !important;
+}
+
+/* BAŞLIK DÜZENLEMELERİ (FOSFORLU YEŞİL) */
+body.tema-football h1, body.tema-football h2, body.tema-football h3, 
+body.tema-football h4, body.tema-football h5, body.tema-football h6,
+body.tema-football .card-title, body.tema-football .modal-title {
+    color: #00ff44 !important;
+    text-transform: uppercase;
+    font-weight: 950 !important;
+    font-style: italic;
+    text-shadow: 0 0 10px rgba(0, 255, 68, 0.5), 2px 2px 0px rgba(0,0,0,0.8) !important;
+}
+body.tema-football .text-muted {
+    color: #4ade80 !important;
+}
+
+/* 🟩 LİDERLİK / HEADER KUTULARI (TRABZON STİLİ SAHA YEŞİLİ) */
+body.tema-football .liderlik-header,
+body.tema-football .liderlik-banner,
+body.tema-football .profile-header-box,
+body.tema-football [class*="header"],
+body.tema-football section.py-5.bg-dark {
+    background-color: #0a4d14 !important;
+    background: linear-gradient(180deg, #0a4d14 0%, #012408 100%) !important;
+    border: 5px solid #ffffff !important;
+    box-shadow: 15px 15px 0px #000000 !important;
+    padding: 50px 20px !important;
+    border-radius: 0px !important;
+}
+body.tema-football .liderlik-header *,
+body.tema-football .liderlik-banner *,
+body.tema-football .profile-header-box *,
+body.tema-football .liderlik-header p,
+body.tema-football .liderlik-header h1 {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background: transparent !important;
+    font-weight: 950 !important;
+    text-shadow: 2px 2px 4px #000000 !important;
+}
+body.tema-football .liderlik-header i, body.tema-football .liderlik-header .trophy-icon, body.tema-football .liderlik-header svg {
+    color: #ffffff !important;
+    filter: drop-shadow(0 0 5px #00ff44) !important;
+}
+
+/* ⏱️ PEERODAK (POMODORO SAYACI) STADIUM ENTEGRASYONU */
+body.tema-football .pomodoro-widget {
+    background: #011a06 !important;
+    border: 2px solid #ffffff !important;
+    border-left: 8px solid #00ff44 !important;
+    box-shadow: 6px 6px 0px #000000 !important;
+    border-radius: 0px !important;
+}
+body.tema-football #customMinutes,
+body.tema-football .timer-display {
+    color: #00ff44 !important;
+    font-weight: 900 !important;
+}
+
+/* 🪙 CÜZDAN & BAKİYE ALANLARI GÜVENCESİ */
+body.tema-football .pill-premium,
+body.tema-football .credit-box,
+body.tema-football .wallet-box {
+    background: #011a06 !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 0px !important;
+}
+body.tema-football .credit-count,
+body.tema-football .wallet-credit,
+body.tema-football .wallet-label {
+    color: #ffffff !important;
+    text-shadow: 0 0 8px rgba(0, 255, 68, 0.4) !important;
+    font-weight: 900 !important;
+}
+
+/* 📊 GRAFİKLER VE BORSA ALANI */
+body.tema-football .stats-card-borsa {
+    background: #011a06 !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* INPUTLAR VE FORMLAR */
+body.tema-football .form-control,
+body.tema-football input,
+body.tema-football textarea,
+body.tema-football select {
+    background: #011a06 !important;
+    border: 2px solid #ffffff !important;
+    color: #00ff44 !important;
+    border-radius: 0px !important;
+}
+body.tema-football .form-control:focus,
+body.tema-football input:focus {
+    border-color: #00ff44 !important;
+    box-shadow: 0 0 12px rgba(0, 255, 68, 0.3) !important;
+}
+
+/* SIRALAMA TABLOSU METİNLERİ */
+body.tema-football .table { color: #ffffff !important; }
+body.tema-football thead th {
+    background: #011a06 !important;
+    color: #00ff44 !important;
+    border-bottom: 3px solid #ffffff !important;
+    font-weight: 900 !important;
+}
+body.tema-football .table td {
+    color: #ffffff !important;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    font-weight: 700 !important;
+}
+
+/* 🟨 BUTONLAR: "MAÇA BAŞLA" STİLİ */
+body.tema-football .btn-primary,
+body.tema-football .btn-purple,
+body.tema-football .btn-update-profile,
+body.tema-football .btn-premium-stats {
+    background: #00ff44 !important;
+    color: #000000 !important;
+    border: 2px solid #ffffff !important;
+    font-weight: 950 !important;
+    border-radius: 5px !important;
+    transition: all 0.2s ease !important;
+}
+body.tema-football .btn-primary:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #00ff44 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 68, 0.5) !important;
+}
+
+/* FOOTER */
+body.tema-football footer {
+    background: #000000 !important;
+    border-top: 4px solid #00ff44 !important;
+}
+
+/* ==========================================================
+   🛠️ SİSTEM ALTI KÜRESEL AYARLAR (HİÇBİR YERİ SIKISTIRMASIN)
+   ========================================================== */
+.nav-link i {
+    margin-right: 5px !important; /* Yazıyla ikon arasına boşluk */
+    font-size: 0.9rem !important;
+    vertical-align: middle !important;
+}
+
+.kredi-badge {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+
+/* 1. ANA ZEMİN: DERİN GECE YEŞİLİ VE PRESTİJ (Göz Yormaz) */
+body.tema-para {
+    /* Ortadan dışa doğru yayılan lüks ve koyu bir yeşil/siyah geçişi */
+    background-color: #020804 !important;
+    background-image: radial-gradient(circle at top, #0a2e16 0%, #020804 80%) !important;
+    color: #ffffff !important;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 2. NAVBAR: KRİPTO BORSASI ŞEFFAFLIĞI */
+body.tema-para .navbar {
+    background: rgba(2, 8, 4, 0.85) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 2px solid #00f260 !important; /* Neon Finans Yeşili Çizgi */
+    box-shadow: 0 10px 30px rgba(0, 242, 96, 0.1) !important;
+}
+
+/* Logo: PEER (ALTIN KÜLÇESİ) LEARN (NEON YEŞİL) */
+body.tema-para .navbar-brand .text-peer { 
+    color: #d4af37 !important; /* Lüks Altın Rengi */
+    font-weight: 950 !important; 
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4) !important;
+}
+body.tema-para .navbar-brand .text-learn { 
+    color: #00f260 !important; /* Borsa Yükseliş Yeşili */
+    font-weight: 950 !important; 
+    text-shadow: 0 0 10px rgba(0, 242, 96, 0.4) !important;
+}
+
+/* Menü Linkleri: Temiz Gümüş ve Yeşil Hover */
+body.tema-para .navbar-nav .nav-link { 
+    color: #e0e0e0 !important; 
+    font-weight: 700 !important; 
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+body.tema-para .navbar-nav .nav-link:hover { 
+    color: #00f260 !important; 
+    text-shadow: 0 0 8px #00f260;
+}
+
+/* 3. KARTLAR: "YATIRIM PORTFÖYÜ" DOKUSU */
+body.tema-para .card, body.tema-para .paket-card, body.tema-para .pro-card {
+    background: rgba(10, 25, 15, 0.6) !important; /* Şeffaf Koyu Yeşil Cam */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 242, 96, 0.2) !important;
+    border-left: 5px solid #00f260 !important; /* Soldan inen kar yükseliş çizgisi */
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+    transition: all 0.4s ease;
+}
+
+body.tema-para .card:hover {
+    transform: translateY(-8px);
+    border-color: #00f260 !important;
+    box-shadow: 0 12px 40px rgba(0, 242, 96, 0.15) !important;
+}
+
+/* Kart Yazıları: %100 OKUNABİLİR (Pırlanta Beyazı ve Altın) */
+body.tema-para .card-title { color: #d4af37 !important; font-weight: 900 !important; }
+body.tema-para .card-text, body.tema-para p { color: #f8f9fa !important; font-weight: 500 !important; }
+body.tema-para .text-muted { color: #a0a0a0 !important; }
+
+/* 4. BAŞLIKLAR VE TABLOLAR (Sıralama Sayfası Lükslüğü) */
+body.tema-para h1, 
+body.tema-para .academic-discover,
+body.tema-para .liderlik-header h1 {
+    color: #ffffff !important;
+    background: transparent !important;
+    border-left: 5px solid #d4af37 !important; /* Altın vurgu */
+    padding-left: 15px !important;
+    font-weight: 900 !important;
+}
+
+body.tema-para .table { color: #ffffff !important; background: transparent !important; }
+body.tema-para .table td, body.tema-para .table th { border-bottom: 1px solid rgba(0, 242, 96, 0.2) !important; }
+
+/* 5. BUTONLAR: "SATIN AL / YATIRIM YAP" (Gradient Yeşil) */
+body.tema-para .btn-primary, body.tema-para .btn-success {
+    background: linear-gradient(45deg, #00b09b, #96c93d) !important; /* Parlak Finans Gradienti */
+    color: #000000 !important;
+    font-weight: 900 !important;
+    border: none !important;
+    border-radius: 6px !important;
+    box-shadow: 0 5px 15px rgba(0, 242, 96, 0.3) !important;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+body.tema-para .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 242, 96, 0.5) !important;
+}
+
+/* 6. ARKADAKİ HAYALET FİNANS SİMGESİ */
+body.tema-para .para-vip-bg {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 60vh; height: 60vh; z-index: -1;
+    /* Şık ve çok hafif bir borsa/para simgesi (Göz yormaz) */
+    background: url('https://cdn-icons-png.flaticon.com/512/2953/2953363.png') no-repeat center !important;
+    background-size: contain !important;
+    opacity: 0.03 !important; 
+    filter: invert(1) drop-shadow(0 0 20px #00f260);
+    pointer-events: none;
+}
+/* ==========================================================
+   MONEY PREMIUM - CASH FLOW (DOLAR & ALTIN)
+   ========================================================== */
+
+/* 1. ANA ZEMİN: KOYU PARA YEŞİLİ VE AKAN DOLARLAR */
+body.tema-money {
+    background-color: #010a05 !important;
+    /* Arkada çok hafif, şık bir para dokusu */
+    background-image: 
+        radial-gradient(circle at 50% 0%, #0a4d28 0%, transparent 70%),
+        url('https://www.transparenttextures.com/patterns/money.png') !important; 
+    color: #ffffff !important;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 2. NAVBAR: ALTIN VE NEON YEŞİL KONTRAST */
+body.tema-money .navbar {
+    background: rgba(0, 0, 0, 0.95) !important;
+    border-bottom: 4px solid #d4af37 !important; /* Altın Çizgi */
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2) !important;
+}
+
+/* Logo: PEER (ALTIN) LEARN (NEON YEŞİL) */
+body.tema-money .text-peer { 
+    color: #d4af37 !important; 
+    font-weight: 950 !important; 
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.6) !important;
+}
+body.tema-money .text-learn { 
+    color: #00ff88 !important; 
+    font-weight: 950 !important;
+}
+
+/* Menü Linkleri: SARI - YEŞİL - SARI */
+body.tema-money .nav-link { font-weight: 900 !important; text-transform: uppercase; }
+body.tema-money .navbar-nav .nav-item:nth-child(1) .nav-link { color: #00ff88 !important; }
+body.tema-money .navbar-nav .nav-item:nth-child(2) .nav-link { color: #d4af37 !important; }
+body.tema-money .navbar-nav .nav-item:nth-child(3) .nav-link { color: #00ff88 !important; }
+
+/* 3. KARTLAR: "HİBRİT BANKNOT" TASARIMI (Maksimum Okunabilirlik) */
+body.tema-money .card, body.tema-money .paket-card, body.tema-money .pro-card {
+    background: #081a0f !important; /* Koyu yeşil-siyah iç zemin */
+    border: 2px solid #00ff88 !important; /* Neon Yeşil Çerçeve */
+    border-radius: 0px !important; 
+    position: relative;
+    box-shadow: 8px 8px 0px #d4af37 !important; /* Altın blok gölge (PRESTİJ) */
+    transition: 0.3s;
+}
+
+/* Kartın köşesine küçük bir "Dolar" ikonu ekleyelim (Benek niyetine) */
+body.tema-money .card::after {
+    content: "$";
+    position: absolute; top: 10px; right: 15px;
+    color: #d4af37; font-size: 1.5rem; font-weight: 900; opacity: 0.3;
+}
+
+body.tema-money .card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 12px 12px 0px #00ff88 !important;
+}
+
+/* Kart Yazıları: BEYAZ VE NET */
+body.tema-money .card-title { color: #00ff88 !important; font-weight: 950 !important; }
+body.tema-money .card-text, body.tema-money p { color: #ffffff !important; font-weight: 600 !important; }
+
+/* 4. BAŞLIKLAR: "DUBAI MİLYONERİ" BANTLARI */
+body.tema-money h1, 
+body.tema-money .academic-discover,
+body.tema-money .liderlik-header h1 {
+    color: #000 !important;
+    background: linear-gradient(90deg, #d4af37, #f1d592) !important; /* Altın Gradient */
+    padding: 10px 25px;
+    font-weight: 950 !important;
+    display: inline-block;
+    box-shadow: 5px 5px 0px #00ff88;
+}
+
+/* 5. BUTONLAR: "KAZANÇ" BUTONU */
+body.tema-money .btn-primary {
+    background: #00ff88 !important;
+    color: #000 !important;
+    font-weight: 900 !important;
+    border: 2px solid #000 !important;
+    border-radius: 0px !important;
+    text-transform: uppercase;
+}
+
+/* 6. ARKADAKİ AKAN DOLARLAR (OÇ FİLİGRAN DEĞİL, KODLA EFEKT) */
+body.tema-money::before {
+    content: "";
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background: url('https://www.transparenttextures.com/patterns/money.png') repeat !important;
+    opacity: 0.08;
+    animation: cashFlow 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes cashFlow {
+    from { background-position: 0 0; }
+    to { background-position: 500px 500px; }
+}
+/* ==========================================================
+   PARA TEMASI - SON OKUNABİLİRLİK RÖTUŞLARI
+   ========================================================== */
+
+/* 1. AKADEMİK KEŞFET VE ALT METNİ */
+body.tema-money h1, 
+body.tema-money .academic-discover {
+    color: #ffffff !important; /* Akademik Keşfet yazısı kar beyazı */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.8) !important;
+}
+
+body.tema-money .liderlik-header p,
+body.tema-money .lead,
+body.tema-money p:contains("Platformun en aktif ve üretken kullanıcıları") {
+    color: #ffffff !important; /* "Platformun en aktif..." yazısı beyaz */
+    font-weight: 700 !important;
+    opacity: 1 !important;
+}
+
+/* 2. PEERMARKET - SADECE PEER YAZISI */
+body.tema-money .navbar-brand .text-peer,
+body.tema-money .peer-text {
+    color: #ffffff !important; /* Sadece Peer yazısı beyaz */
+    font-weight: 950 !important;
+}
+
+/* 3. EKSTRA: TÜM ALT BAŞLIKLAR VE AÇIKLAMALAR İÇİN GARANTİ */
+body.tema-money .section-title,
+body.tema-money .subtitle {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    font-weight: 800 !important;
+}
+
+
+

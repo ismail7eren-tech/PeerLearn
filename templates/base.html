@@ -1,0 +1,588 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeerLearn | Notlarını Paylaş, Geleceği Beraber İnşa Et</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <style>
+       /* ==========================================================
+   PEERLEARN - MASTER THEME ENGINE (PROTECTED)
+========================================================== */
+
+:root {
+    --bg-body: #f8fafc;
+    --bg-surface: #ffffff;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+    --brand-peer: #0066ff;
+    --brand-learn: #00d084;
+    --brand-purple: #6f42c1;
+    --accent-gold: #fbbf24;
+    --border-light: #e2e8f0;
+}
+
+/* ==========================================================
+   THEME VARIABLES
+========================================================== */
+
+body.tema-mars {
+    --bg-body: #1a0a05;
+    --bg-surface: rgba(30, 10, 5, 0.9);
+    --text-dark: #ffffff;
+    --text-muted: #ff9e7d;
+    --border-light: rgba(255, 77, 0, 0.2);
+}
+
+body.tema-ocean {
+    --bg-body: #00050a;
+    --bg-surface: rgba(0, 20, 40, 0.8);
+    --text-dark: #ffffff;
+    --text-muted: #7dd3fc;
+    --border-light: rgba(0, 102, 255, 0.2);
+}
+
+/* ==========================================================
+   BASE BODY
+========================================================== */
+
+body {
+    background-color: var(--bg-body) !important;
+    color: var(--text-dark) !important;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 0;
+}
+
+/* ❌ BURASI MODAL BOZUYORDU: z-index kaldırıldı */
+.content-wrapper, nav, footer {
+    position: relative !important;
+    z-index: auto !important;
+}
+
+/* ==========================================================
+   NAVBAR
+========================================================== */
+
+.navbar {
+    background: var(--bg-surface) !important;
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-light) !important;
+    padding: 1rem 0 !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    transition: all 0.3s ease;
+
+    /* ❌ 1050 modal ile çakışıyordu */
+    z-index: 1000 !important;
+}
+
+.brand-text {
+    font-weight: 900;
+    font-size: 1.7rem;
+    letter-spacing: -1px;
+}
+
+.text-peer { color: var(--brand-peer) !important; }
+.text-learn { color: var(--brand-learn) !important; }
+
+/* ==========================================================
+   SEARCH BOX
+========================================================== */
+
+.search-box {
+    background: #f1f5f9 !important;
+    border-radius: 50px !important;
+    padding: 8px 20px !important;
+    display: flex;
+    align-items: center;
+    width: 260px;
+}
+
+body.tema-mars .search-box,
+body.tema-ocean .search-box {
+    background: rgba(255,255,255,0.1) !important;
+}
+
+.search-input {
+    border: none !important;
+    background: transparent !important;
+    color: var(--text-dark) !important;
+    font-weight: 600;
+    width: 100%;
+    margin-left: 10px;
+}
+
+/* ==========================================================
+   CREDIT BADGE
+========================================================== */
+
+.kredi-badge {
+    background: var(--bg-surface) !important;
+    border: 2px solid var(--accent-gold) !important;
+    border-radius: 50px !important;
+    padding: 6px 18px !important;
+    color: var(--text-dark) !important;
+    font-weight: 800;
+    text-decoration: none;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    white-space: nowrap !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.kredi-badge .divider {
+    width: 2px;
+    height: 16px;
+    background: var(--border-light);
+}
+
+/* ==========================================================
+   TABLE & HEADINGS
+========================================================== */
+
+.table {
+    background: transparent !important;
+    color: var(--text-dark) !important;
+}
+
+.table thead th {
+    color: var(--text-dark) !important;
+    font-weight: 800 !important;
+    border-bottom: 2px solid var(--border-light) !important;
+}
+
+.table td {
+    color: var(--text-dark) !important;
+    font-weight: 600 !important;
+    border-bottom: 1px solid var(--border-light) !important;
+}
+
+h1, h2, h3, .liderlik-header p, .text-muted {
+    color: var(--text-dark) !important;
+    opacity: 1 !important;
+}
+
+/* ==========================================================
+   MARKET
+========================================================== */
+
+.peermarket-title {
+    font-size: 2.2rem !important;
+    font-weight: 900 !important;
+    background: linear-gradient(135deg, #6f42c1 0%, #0066ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn-primary,
+.btn-purple {
+    background: var(--brand-purple) !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================================
+   CARDS
+========================================================== */
+
+.card,
+.paket-card {
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 20px !important;
+}
+
+/* ==========================================================
+   OCEAN WORLD
+========================================================== */
+
+.ocean-world { 
+    display: none !important; 
+}
+
+body.tema-ocean .ocean-world { 
+    display: block !important;
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: -1; 
+}
+
+/* ==========================================================
+   MODERN KREDI
+========================================================== */
+
+.modern-kredi {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 204, 0, 0.3);
+    padding: 6px 14px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+    transition: 0.3s ease;
+}
+
+.kredi-text {
+    font-weight: 800;
+    color: var(--text-dark) !important;
+    font-size: 0.95rem;
+}
+
+.gold-icon {
+    filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5));
+}
+
+/* ==========================================================
+   AVATAR TRIGGER
+========================================================== */
+
+.avatar-trigger {
+    position: relative;
+    display: block;
+    padding: 2px;
+    border-radius: 14px;
+    background: linear-gradient(45deg, var(--brand-peer), var(--brand-learn));
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.avatar-trigger:hover {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0 10px 20px rgba(0, 102, 255, 0.2);
+}
+
+.avatar-trigger:active {
+    transform: scale(0.9);
+}
+
+.nav-avatar-img {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    border: 2px solid var(--bg-surface);
+    object-fit: cover;
+    display: block;
+}
+
+.status-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    background: #00d084;
+    border: 2px solid var(--bg-surface);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 208, 132, 0.5);
+}
+
+/* ==========================================================
+   QUICK LOGOUT BUTTON
+========================================================== */
+
+.quick-logout-btn {
+    background: rgba(239, 68, 68, 0.1) !important;
+    border: 1px solid rgba(239, 68, 68, 0.2) !important;
+    color: #ef4444 !important;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.quick-logout-btn:hover {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================
+   LOGIN / REGISTER BUTTONS
+========================================================== */
+
+.btn-login-modern {
+    color: var(--text-dark) !important;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+    border: 2px solid transparent;
+}
+
+.btn-login-modern:hover {
+    background: rgba(0, 102, 255, 0.1);
+    color: var(--brand-peer) !important;
+}
+
+.btn-register-modern {
+    background: linear-gradient(45deg, var(--brand-peer), var(--brand-learn));
+    color: white !important;
+    font-weight: 800;
+    text-decoration: none;
+    padding: 10px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 102, 255, 0.2);
+    transition: 0.3s;
+}
+
+.btn-register-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
+    color: white !important;
+}
+
+/* ==========================================================
+   DEFAULT AVATAR
+========================================================== */
+
+.default-avatar-svg {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #e2e8f0;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-surface);
+    transition: 0.3s ease;
+}
+
+/* ==========================================================
+   NAV ICON CIRCLE
+========================================================== */
+
+.nav-icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background: rgba(0, 102, 255, 0.08);
+    color: #0066ff;
+}
+
+.nav-link:hover .nav-icon-circle {
+    background: #0066ff;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
+}
+
+.nav-link span {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================
+   BOOTSTRAP MODAL FIX (KRİTİK)
+========================================================== */
+
+.modal {
+    z-index: 999999 !important;
+}
+
+.modal-backdrop {
+    z-index: 999998 !important;
+}
+
+body.modal-open {
+    overflow: hidden !important;
+    padding-right: 0 !important;
+}
+    </style>
+</head>
+
+<body class="
+{% if request.user.is_authenticated %}
+    {% for inv in request.user.envanter_genel.all %}
+        {% if inv.is_active %}{{ inv.item.css_class }}{% endif %}
+    {% endfor %}
+{% endif %}
+">
+
+<div class="pink-background-dynamic">
+    <div class="floating-hearts"></div>
+    <div class="sparkle-overlay"></div>
+</div>
+
+<div class="theme-overlay money-overlay"></div>
+<div class="theme-overlay car-overlay"></div>
+<div class="theme-overlay football-overlay"></div>
+
+<div class="ocean-world">
+    <div class="bubbles"></div><div class="fish fish-1"></div><div class="fish fish-2"></div><div class="fish fish-3"></div><div class="whale"></div>
+</div>
+
+<nav class="navbar navbar-expand-xl sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center text-decoration-none" href="{% url 'ana_sayfa' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 48px;">
+            <div class="ms-3 d-none d-sm-flex flex-column">
+                <span class="brand-text"><span class="text-peer">Peer</span><span class="text-learn">Learn</span></span>
+                <span style="font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">NOTLARINI PAYLAŞ, GELECEĞİ BERABER İNŞA ET</span>
+            </div>
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <form class="d-flex ms-xl-5 my-3 my-xl-0" action="{% url 'search' %}" method="get">
+                <div class="search-box">
+                    <i class="fas fa-search text-muted"></i>
+                    <input class="form-control search-input shadow-none" type="search" name="q" placeholder="Hızlı Ara...">
+                </div>
+            </form>
+
+           <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ana_sayfa' %}"><i class="fas fa-compass"></i> Keşfet</a>
+                </li>
+                <li class="nav-item mx-lg-2">
+                    <a class="nav-link" href="{% url 'liderlik' %}"><i class="fas fa-trophy"></i> Sıralama</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'magaza' %}"><i class="fas fa-store"></i> Mağaza</a>
+                </li>
+                
+                {% if request.user.is_authenticated %}
+                <li class="nav-item px-2">
+                  <a href="{% url 'envanter_goruntule' %}" class="nav-link text-center p-0 border-0 bg-transparent shadow-none" style="line-height: 1.1;">
+                    <i class="fas fa-box-open d-block" style="font-size: 18px; color: #6c757d; margin-bottom: 4px;"></i>
+                    <span style="font-size: 14px; color: #6c757d; font-weight: 400; font-family: 'Public Sans', 'Inter', sans-serif; letter-spacing: -0.2px;">
+                      Envanterim
+                    </span>
+                  </a>
+                </li>
+
+                <li class="nav-item px-2">
+                    <a class="nav-link d-flex align-items-center gap-2 position-relative" href="{% url 'notifications' %}">
+                        <div class="nav-icon-circle bg-soft-primary">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        {% if unread_count > 0 %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger animate__animated animate__heartBeat animate__infinite"
+                                  style="font-size: 8px; margin-left: -15px; margin-top: 5px; border: 1.5px solid var(--bg-surface);">
+                                {{ unread_count }}
+                            </span>
+                        {% endif %}
+                    </a>
+                </li>
+
+                <li class="nav-item px-2">
+                    <a class="nav-link d-flex align-items-center gap-2 position-relative" href="{% url 'mesaj_kutusu' %}" title="PeerMesaj (DM)">
+                        <div class="nav-icon-circle" style="background: rgba(139, 92, 246, 0.10); color: #8b5cf6; border: 1px solid rgba(139, 92, 246, 0.25);">
+                            <i class="fa-regular fa-paper-plane"></i>
+                        </div>
+                        {% if unread_dm_count > 0 %}
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger animate__animated animate__pulse animate__infinite"
+                              style="font-size: 8px; margin-left: -15px; margin-top: 5px; border: 1.5px solid var(--bg-surface); padding: 4px 6px;">
+                            {% if unread_dm_count > 99 %}99+{% else %}{{ unread_dm_count }}{% endif %}
+                        </span>
+                        {% endif %}
+                    </a>
+                </li>
+
+                <li class="nav-item d-flex align-items-center ms-lg-4">
+                    <div class="modern-kredi me-3">
+                        <span class="kredi-text">{{ request.user.kredi }}</span>
+                        <i class="fas fa-coins text-warning ms-1 gold-icon"></i>
+                    </div>
+
+                    <a href="{% url 'profil_self' %}" class="avatar-trigger" style="position: relative; padding: 0;">
+                        {% if request.user.aktif_cerceve %}
+                        <img src="{{ request.user.aktif_cerceve.preview_image.url }}" 
+                             style="position: absolute; top: -4px; left: -4px; width: 50px; height: 50px; z-index: 10; pointer-events: none;">
+                        {% endif %}
+
+                        {% if request.user.profile.profil_resmi %}
+                            <img src="{{ request.user.profile.profil_resmi.url }}" alt="Profil" class="nav-avatar-img" style="width: 42px; height: 42px; object-fit: cover; border-radius: 12px;">
+                        {% elif request.user.profil_resmi %}
+                            <img src="{{ request.user.profil_resmi.url }}" alt="Profil" class="nav-avatar-img" style="width: 42px; height: 42px; object-fit: cover; border-radius: 12px;">
+                        {% else %}
+                            <div class="default-avatar-svg">
+                                 <i class="fas fa-user text-muted"></i>
+                            </div>
+                        {% endif %}
+                        <span class="status-badge" style="z-index: 11;"></span>
+                    </a>
+
+                    <form action="{% url 'logout' %}" method="post" class="ms-3 d-flex align-items-center m-0">
+                        {% csrf_token %}
+                        <button type="button" class="quick-logout-btn" title="Güvenli Çıkış Yap" 
+                                onclick="if(confirm('PeerLearn Uygulamanızdan Çıkış Yapılıyor Çıkış Yapmak İstediğinize emin misiniz?')) { this.form.submit(); }">
+                            <i class="fas fa-power-off"></i>
+                        </button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="nav-item d-flex align-items-center ms-lg-4">
+                    <a href="{% url 'login' %}" class="btn-login-modern me-2">
+                        <i class="fas fa-sign-in-alt me-2"></i> GİRİŞ YAP
+                    </a>
+                    <a href="{% url 'register' %}" class="btn-register-modern">
+                        ÜYE OL
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 pb-5 content-wrapper">
+    {% block content %}{% endblock %}
+</div>
+
+<footer class="py-5 text-center mt-auto" style="background: var(--bg-surface); border-top: 1px solid var(--border-light);">
+    <div class="container">
+        <p class="mb-0 fw-bold small text-uppercase" style="color: var(--text-muted); letter-spacing: 2px;">&copy; 2026 PeerLearn Digital Ecosystem.</p>
+    </div>
+    <div class="forest-background-dynamic">
+    <div class="forest-glow"></div> <div class="tree-layer tree-1"></div>
+    <div class="tree-layer tree-2"></div>
+    <div class="tree-layer tree-3"></div>
+    <div class="firefly-layer"></div>
+</div>
+</footer>
+<div class="tema-ozel-alan">
+    <div class="gs-ozel-bg"></div>
+    <div class="fb-ozel-bg"></div>
+    <div class="bjk-ozel-bg"></div>
+    <div class="para-vip-bg"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+</html>

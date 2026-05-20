@@ -1,0 +1,342 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+    /* ==========================================================
+       NOTIFICATIONS PAGE - PREMIUM CLEAN DESIGN
+       ========================================================== */
+
+    .notif-wrapper {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .notif-card {
+        border-radius: 24px;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    /* HEADER */
+    .notif-header {
+        padding: 26px 26px;
+        background: linear-gradient(135deg, #0066ff 0%, #6f42c1 100%);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .notif-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 900;
+        font-size: 1.35rem;
+        letter-spacing: -0.5px;
+        margin: 0;
+    }
+
+    .notif-title i {
+        font-size: 1.25rem;
+        background: rgba(255,255,255,0.18);
+        padding: 12px;
+        border-radius: 14px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
+    .notif-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    /* BUTTONS */
+    .notif-btn {
+        border: none;
+        border-radius: 14px;
+        padding: 10px 16px;
+        font-weight: 900;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: 0.25s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+    }
+
+    .notif-btn i {
+        font-size: 0.9rem;
+    }
+
+    .notif-btn-clear {
+        background: rgba(255, 255, 255, 0.18);
+        color: white;
+    }
+
+    .notif-btn-clear:hover {
+        background: rgba(255, 255, 255, 0.30);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .notif-btn-delete {
+        background: rgba(239, 68, 68, 0.22);
+        color: white;
+    }
+
+    .notif-btn-delete:hover {
+        background: rgba(239, 68, 68, 0.38);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    /* COUNT BADGE */
+    .notif-count {
+        background: #ffffff;
+        color: #0066ff;
+        font-weight: 900;
+        padding: 10px 16px;
+        border-radius: 14px;
+        font-size: 0.85rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    /* LIST AREA */
+    .notif-list {
+        background: #ffffff;
+    }
+
+    .notif-item {
+        padding: 20px 22px;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        transition: 0.25s ease;
+        position: relative;
+        background: #ffffff;
+    }
+
+    .notif-item:hover {
+        background: rgba(0, 102, 255, 0.04);
+        transform: translateX(4px);
+    }
+
+    /* UNREAD STYLE */
+    .notif-item.unread {
+        background: rgba(111, 66, 193, 0.06);
+    }
+
+    .notif-item.unread::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 6px;
+        background: linear-gradient(180deg, #0066ff 0%, #00d084 100%);
+        border-radius: 0 12px 12px 0;
+    }
+
+    /* ITEM HEADER */
+    .notif-item-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .notif-baslik {
+        font-size: 1rem;
+        font-weight: 900;
+        color: #0066ff;
+        margin: 0;
+        letter-spacing: -0.2px;
+    }
+
+    .notif-time {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: rgba(15, 23, 42, 0.6);
+        white-space: nowrap;
+    }
+
+    .notif-message {
+        margin-top: 8px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: rgba(15, 23, 42, 0.78);
+        line-height: 1.6;
+    }
+
+    /* SINGLE DELETE ICON */
+    .notif-delete-btn {
+        background: rgba(239, 68, 68, 0.12);
+        border: none;
+        border-radius: 12px;
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.25s ease;
+        color: #ef4444;
+        flex-shrink: 0;
+    }
+
+    .notif-delete-btn:hover {
+        background: rgba(239, 68, 68, 0.22);
+        transform: scale(1.06);
+        box-shadow: 0 10px 20px rgba(239, 68, 68, 0.2);
+    }
+
+    /* EMPTY STATE */
+    .notif-empty {
+        padding: 80px 20px;
+        text-align: center;
+        background: #ffffff;
+    }
+
+    .notif-empty-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, #0066ff, #6f42c1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px auto;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+
+    .notif-empty-icon i {
+        font-size: 2rem;
+        color: white;
+    }
+
+    .notif-empty p {
+        font-weight: 900;
+        font-size: 1.05rem;
+        margin-bottom: 5px;
+        color: #0f172a;
+    }
+
+    .notif-empty small {
+        font-weight: 700;
+        color: rgba(15, 23, 42, 0.65);
+    }
+</style>
+
+<div class="container py-5">
+    <div class="notif-wrapper">
+
+        <div class="notif-card">
+
+            <!-- HEADER -->
+            <div class="notif-header">
+
+                <h4 class="notif-title">
+                    <i class="fas fa-bell"></i>
+                    Bildirimler
+                </h4>
+
+                <div class="notif-actions">
+
+                    <!-- OKUNMAMIŞLARI TEMİZLE -->
+                    <form action="{% url 'notifications_mark_all_read' %}" method="post" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="notif-btn notif-btn-clear"
+                            onclick="return confirm('Okunmamış bildirimleri okundu olarak işaretlemek istiyor musun?');">
+                            <i class="fas fa-check-circle"></i> Okunmamışları Temizle
+                        </button>
+                    </form>
+
+                    <!-- TÜMÜNÜ SİL -->
+                    <form action="{% url 'notifications_delete_all' %}" method="post" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="notif-btn notif-btn-delete"
+                            onclick="return confirm('Tüm bildirimleri silmek istediğine emin misin?');">
+                            <i class="fas fa-trash"></i> Tümünü Sil
+                        </button>
+                    </form>
+
+                    <!-- COUNT -->
+                    <div class="notif-count">
+                        {{ bildirimler|length }} Bildirim
+                    </div>
+
+                </div>
+            </div>
+
+<!-- LIST -->
+<div class="notif-list">
+    {% for b in bildirimler %}
+    <div class="notif-item {% if not b.is_read %}unread{% endif %}">
+        <div class="notif-item-top">
+            <div style="flex: 1;">
+                <div class="d-flex justify-content-between align-items-start">
+                    <h6 class="notif-baslik">{{ b.baslik }}</h6>
+                    <span class="notif-time">{{ b.tarih|timesince }} önce</span>
+                </div>
+                <div class="notif-message">
+                    {{ b.mesaj }}
+                </div>
+            </div>
+
+            {% if b.url %}
+    <div class="mt-3">
+        <a href="{{ b.url }}" class="btn btn-sm fw-bold rounded-pill px-4"
+           style="background: linear-gradient(135deg, #0066ff, #00d084); color: white; border: none;">
+            <i class="fas fa-arrow-right me-1"></i> {{ b.action_text|default:"Git" }}
+        </a>
+    </div>
+{% endif %}
+
+            <div class="d-flex align-items-center gap-2">
+                <!-- TEK TIKLA OKUNDU BUTONU -->
+                {% if not b.is_read %}
+                <form action="{% url 'notification_mark_read' b.id %}" method="post" class="m-0">
+                    {% csrf_token %}
+                    <button type="submit" class="notif-btn" 
+                            style="background: rgba(0, 208, 132, 0.15); color: #00d084; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center;" 
+                            title="Okundu İşaretle">
+                        <i class="fas fa-check"></i>
+                    </button>
+                </form>
+                {% endif %}
+
+                <!-- TEK TEK SİLME -->
+                <form action="{% url 'notification_delete' b.id %}" method="post" class="m-0">
+                    {% csrf_token %}
+                    <button type="submit" class="notif-delete-btn"
+                            title="Bildirimi Sil"
+                            onclick="return confirm('Bu bildirimi silmek istiyor musun?');">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <!-- BİLDİRİM YOKSA BURASI ÇALIŞIR -->
+    <div class="notif-empty">
+        <div class="notif-empty-icon">
+            <i class="fas fa-bell-slash"></i>
+        </div>
+        <p>Henüz bildirim yok.</p>
+        <small>Yeni bildirim geldiğinde burada gözükecek.</small>
+    </div>
+    {% endfor %}
+</div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

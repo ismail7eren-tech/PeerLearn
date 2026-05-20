@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="page-wrapper" style="background-color: #f8fafc; min-height: 100vh;">
+    <div class="container py-5 animate__animated animate__fadeIn">
+        
+        <!-- ÜST BAŞLIK VE ÖZET -->
+        <div class="d-flex justify-content-between align-items-end mb-5 border-bottom pb-4">
+            <div>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2" style="font-size: 0.8rem;">
+                        <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Anasayfa</a></li>
+                        <li class="breadcrumb-item active">Arama</li>
+                    </ol>
+                </nav>
+                <h2 class="fw-bolder mb-0 text-dark" style="letter-spacing: -1px;">
+                    <span class="text-muted fw-light">Arama:</span> "{{ query }}"
+                </h2>
+            </div>
+            <div class="text-end">
+                <div class="badge bg-white text-primary border shadow-sm rounded-pill p-2 px-4 fw-bold">
+                    <i class="fas fa-layer-group me-2"></i> {{ kullanicilar.count|add:notlar.count|add:paketler.count }}Toplam Eşleşme
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB NAVİGASYON -->
+        <ul class="nav nav-pills mb-4 bg-white p-1 rounded-pill d-inline-flex border shadow-sm" id="searchTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active rounded-pill px-4 fw-bold" data-bs-toggle="pill" data-bs-target="#userResults">
+                    <i class="fas fa-users me-2"></i>Kullanıcılar ({{ kullanicilar.count }})
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link rounded-pill px-4 fw-bold" data-bs-toggle="pill" data-bs-target="#noteResults">
+                    <i class="fas fa-file-alt me-2"></i>Notlar ({{ notlar.count }})
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link rounded-pill px-4 fw-bold" data-bs-toggle="pill" data-bs-target="#packageResults">
+                    <i class="fas fa-box-open me-2"></i>Paketler ({{ paketler.count }})
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content pt-3">
+            
+            <!-- KULLANICI SONUÇLARI -->
+            <div class="tab-pane fade show active" id="userResults">
+                <div class="row g-4">
+                    {% for u in kullanicilar %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-0 shadow-premium rounded-4 overflow-hidden user-search-card h-100 bg-white">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="position-relative">
+                                        {% if u.profile.profil_resmi %}
+                                            <img src="{{ u.profile.profil_resmi.url }}" class="rounded-circle shadow-sm border border-2 border-white" style="width: 80px; height: 80px; object-fit: cover;">
+                                        {% else %}
+                                            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center text-primary shadow-sm" style="width: 80px; height: 80px;">
+                                                <i class="fas fa-user-graduate fa-2x"></i>
+                                            </div>
+                                        {% endif %}
+                                        <span class="position-absolute bottom-0 end-0 badge rounded-pill bg-success border border-white border-2 p-1" title="Aktif">
+                                            <span class="visually-hidden">Aktif</span>
+                                        </span>
+                                    </div>
+                                    <div class="ms-4">
+                                        <h5 class="fw-bold mb-0 text-dark">@{{ u.username }}</h5>
+                                        <div class="d-flex align-items-center gap-2 mt-1">
+                                            <span class="badge bg-light text-muted fw-bold" style="font-size: 0.65rem;">ID: #{{ u.profile.peer_id|default:"---" }}</span>
+                                            <span class="text-warning small fw-bold"><i class="fas fa-coins me-1"></i>{{ u.kredi }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 d-flex gap-2">
+                                    <a href="{% url 'profil' u.id %}" class="btn btn-primary w-100 rounded-pill fw-bold shadow-sm py-2">
+                                        Profiline Git
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <div class="opacity-25 mb-3"><i class="fas fa-user-slash fa-4x"></i></div>
+                        <p class="text-muted fw-bold">Böyle bir Peer bulamadık. PeerID ile aramayı dene!</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- NOT SONUÇLARI -->
+            <div class="tab-pane fade" id="noteResults">
+                <div class="row g-4">
+                    {% for n in notlar %}
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-premium rounded-4 overflow-hidden note-search-card h-100 bg-white">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-bold" style="font-size: 0.7rem;">
+                                        <i class="fas fa-tag me-1"></i> Ders Notu
+                                    </span>
+                                    <h5 class="fw-bolder text-dark mb-0"><i class="fas fa-coins text-warning me-1"></i>{{ n.fiyat }}</h5>
+                                </div>
+                                <h4 class="fw-bold text-dark mb-2">{{ n.baslik }}</h4>
+                                <p class="text-muted small mb-4 lh-base">{{ n.aciklama|truncatechars:120 }}</p>
+                                
+                                <div class="d-flex align-items-center justify-content-between border-top pt-4">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{% if n.yukleyen.profile.profil_resmi %}{{ n.yukleyen.profile.profil_resmi.url }}{% else %}{% static 'img/default_pp.png' %}{% endif %}" 
+                                             class="rounded-circle me-2" width="24" height="24" style="object-fit: cover;">
+                                        <small class="text-muted fw-bold">@{{ n.yukleyen.username }}</small>
+                                    </div>
+                                    <a href="{% url 'not_detay' n.pk %}" class="btn btn-dark rounded-pill px-4 fw-bold py-2 btn-sm">
+                                        İncele <i class="fas fa-external-link-alt ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <div class="opacity-25 mb-3"><i class="fas fa-search-minus fa-4x"></i></div>
+                        <p class="text-muted fw-bold">Aradığın not henüz kütüphaneye yüklenmemiş.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- PAKET SONUÇLARI -->
+            <div class="tab-pane fade" id="packageResults">
+                <div class="row g-4">
+                    {% for p in paketler %}
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-premium rounded-4 overflow-hidden note-search-card h-100 bg-white">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span class="badge bg-warning-subtle text-warning rounded-pill px-3 py-2 fw-bold" style="font-size: 0.7rem;">
+                                        <i class="fas fa-box me-1"></i> Özel Paket ({{ p.notlar.count }} Not İçerir)
+                                    </span>
+                                    <h5 class="fw-bolder text-dark mb-0"><i class="fas fa-coins text-warning me-1"></i>{{ p.fiyat }}</h5>
+                                </div>
+                                <h4 class="fw-bold text-dark mb-2">{{ p.baslik }}</h4>
+                                <p class="text-muted small mb-4 lh-base">{{ p.aciklama|truncatechars:120 }}</p>
+                                
+                                <div class="d-flex align-items-center justify-content-between border-top pt-4">
+                                    <div class="d-flex align-items-center">
+                                        <small class="text-muted fw-bold">Oluşturan: @{{ p.olusturan.username }}</small>
+                                    </div>
+                                    <a href="{% url 'paket_detay' p.pk %}" class="btn btn-warning text-white rounded-pill px-4 fw-bold py-2 btn-sm">
+                                        Paketi İncele <i class="fas fa-arrow-right ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <div class="opacity-25 mb-3"><i class="fas fa-box-open fa-4x"></i></div>
+                        <p class="text-muted fw-bold">Aradığın isimde bir not paketi bulunamadı.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ========================= STYLE ========================= -->
+<style>
+    .shadow-premium { box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05) !important; }
+    
+    .user-search-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid rgba(0,0,0,0.02) !important; }
+    .user-search-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1) !important; border-color: #4f46e5 !important; }
+    
+    .note-search-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; }
+    .note-search-card:hover { transform: scale(1.02); box-shadow: 0 15px 35px -10px rgba(79, 70, 229, 0.15) !important; }
+
+    .nav-pills .nav-link { color: #64748b; transition: 0.3s; }
+    .nav-pills .nav-link.active { background-color: #4f46e5 !important; color: white !important; }
+    
+    .bg-primary-subtle { background-color: rgba(79, 70, 229, 0.1); }
+</style>
+{% endblock %}
