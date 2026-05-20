@@ -1,10 +1,15 @@
 import os
+import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-senin-keyin-burada-kalsin'
-DEBUG = False
+# Render'da SECRET_KEY'i gizli tutmak için environment variable kullanırız
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-kendi-keyini-buraya-yaz')
+
+# Render'da DEBUG'ı Environment Variables'dan alacağız
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+
 ALLOWED_HOSTS = ['peerlearn-2puj.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
@@ -20,6 +25,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # Statik dosyalar için şart
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -41,7 +47,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # PEERLEARN BİLDİRİM MOTORU BURAYA EKLENDİ
                 'notes.context_processors.unread_notifications_count',
             ],
         },
@@ -50,11 +55,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+# POSTGRESQL AYARI (RENDER İÇİN)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -69,21 +76,17 @@ TIME_ZONE = 'Europe/Istanbul'
 USE_I18N = True
 USE_TZ = True
 
-# --- STATİK VE MEDYA DOSYALARI ---
+# --- STATİK AYARLARI ---
 STATIC_URL = 'static/'
-# Burayı mühürledik; static klasörünü tık diye bulur.
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Render icin eklenen static root ayari
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'ana_sayfa'
 LOGOUT_REDIRECT_URL = 'ana_sayfa'
 LOGIN_URL = 'login'
-
-
