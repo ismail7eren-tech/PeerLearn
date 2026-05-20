@@ -1,7 +1,6 @@
 import os
 import dj_database_url
 from pathlib import Path
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Render'da SECRET_KEY'i gizli tutmak için environment variable kullanırız
